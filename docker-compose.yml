@@ -39,7 +39,7 @@ services:
       DASH4AST_HOST_CONNECTORS: "connectors"
       DASH4AST_PORT_CONNECTORS: 5000
     volumes:
-      - './home/sebas/tmp:/var/log/'
+      - './home/tmp:/var/log/'
     links:
       - db
 volumes:
