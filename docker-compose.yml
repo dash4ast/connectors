@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.3'
 services:
   db:
     image: registry.gitlab.com/dash4ast-community/support/tool/postgre:4.2
