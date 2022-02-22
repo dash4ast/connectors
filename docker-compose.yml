@@ -1,0 +1,46 @@
+version: '3.8'
+services:
+  db:
+    image: registry.gitlab.com/dash4ast/tool/postgre:4.2
+    container_name: dash4ast_db
+    restart: always
+    volumes:
+      - './postgres_data:/var/lib/postgresql/data'
+    environment:
+      POSTGRES_PASSWORD: "q1w2e3r4"
+    ports:
+      - '5432:5432'
+
+  connectors:
+    image: registry.gitlab.com/dash4ast/tool/connectors:4.3
+    container_name: connectors
+    ports: 
+      - 5000:5000
+    environment:
+      DASH4AST_DB_HOST: "dash4ast_db"
+      DASH4AST_DB_PORT: 5432
+      DASH4AST_DB_USER: "root"
+      DASH4AST_DB_PASSWORD: "q1w2e3r4"
+      DASH4AST_DB: "dash4ast"
+    links:
+      - db
+
+  dashboard:
+    image: registry.gitlab.com/dash4ast/tool/ui:4.4
+    container_name: dashboard
+    ports:
+      - 3838:3838
+    environment:
+      DASH4AST_DB_HOST: "dash4ast_db"
+      DASH4AST_DB_PORT: 5432
+      DASH4AST_DB_USER: "root"
+      DASH4AST_DB_PASSWORD: "q1w2e3r4"
+      DASH4AST_DB: "dash4ast"
+      DASH4AST_HOST_CONNECTORS: "connectors"
+      DASH4AST_PORT_CONNECTORS: 5000
+    volumes:
+      - './home/sebas/tmp:/var/log/'
+    links:
+      - db
+volumes:
+  postgres_data:
