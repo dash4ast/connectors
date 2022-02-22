@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   db:
-    image: registry.gitlab.com/dash4ast-community/support/tool/postgre:4.2
+    image: dash4ast/postgre:4.2
     container_name: dash4ast_db
     restart: always
     volumes:
@@ -12,7 +12,7 @@ services:
       - '5432:5432'
 
   connectors:
-    image: registry.gitlab.com/dash4ast-community1/support/tool/connectors:4.3
+    image: dash4ast/connectors:4.3
     container_name: connectors
     ports: 
       - 5000:5000
@@ -26,7 +26,7 @@ services:
       - db
 
   dashboard:
-    image: registry.gitlab.com/dash4ast-community1/support/tool/ui:4.5
+    image: dash4ast/ui:4.5
     container_name: dashboard
     ports:
       - 3838:3838
