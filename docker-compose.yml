@@ -26,7 +26,7 @@ services:
       - db
 
   dashboard:
-    image: dash4ast/ui:4.5
+    image: dash4ast/ui:4.6
     container_name: dashboard
     ports:
       - 3838:3838
