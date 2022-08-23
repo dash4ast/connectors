@@ -12,9 +12,6 @@ def post_request(url, app, path_report, scan):
 
     data = {'dash4ast_application': app, 'report': report}
     r = requests.post(endpoint, json=data, headers=headers)
-
-    ## assertion
-
     print(r.text)
 
 def print_request(path_report):
@@ -43,10 +40,9 @@ if __name__ == "__main__":
         report = sys.argv[6]
         scan = sys.argv[8]
     else:
-        print('--host $HOST')
-        print('--application APPLICATION_NAME')
-        print('--report REPORT_FILE')
-        print('--scan SCAN_TOOL')
+        print('Usage: python3 dash4ast-client.py --host HOST --application APPLICATION_NAME --report REPORT_FILE --scan SCAN_TOOL')
+        print('Example: python3 client/dash4ast-client.py --host http://localhost:5000 --application python-test-project --report examples/test_projects/bandit-output.json --scan bandit')
+        print('Example: python3 client/dash4ast-client.py --host http://localhost:5000 --application java-test-project --report examples/test_projects/coverity-report.json --scan coverity')
         sys.exit()
 
     ## pass args
