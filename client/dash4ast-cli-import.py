@@ -14,6 +14,7 @@ def post_request(url, app, path_report, scan):
     r = requests.post(endpoint, json=data, headers=headers)
     print(r.text)
 
+
 def print_request(path_report):
     report = open(path_report, 'r').read()
     content = json.loads(report)
@@ -35,14 +36,13 @@ if __name__ == "__main__":
 
     if len(sys.argv) == 9:
         url = sys.argv[2]
-        print(url)
         application = sys.argv[4]
         report = sys.argv[6]
         scan = sys.argv[8]
     else:
-        print('Usage: python3 dash4ast-client.py --host HOST --application APPLICATION_NAME --report REPORT_FILE --scan SCAN_TOOL')
-        print('Example: python3 client/dash4ast-client.py --host http://localhost:5000 --application python-test-project --report examples/test_projects/bandit-output.json --scan bandit')
-        print('Example: python3 client/dash4ast-client.py --host http://localhost:5000 --application java-test-project --report examples/test_projects/coverity-report.json --scan coverity')
+        print('Usage: python3 dash4ast-cli-import.py --host HOST --application APPLICATION_NAME --report REPORT_FILE --scan SCAN_TOOL')
+        print('Example: python3 dash4ast-cli-import.py --host http://localhost:5000 --application python-test-project --report examples/test_projects/bandit-output.json --scan bandit')
+        print('Example: python3 dash4ast-cli-import.py --host http://localhost:5000 --application java-test-project --report examples/test_projects/coverity-report.json --scan coverity')
         sys.exit()
 
     ## pass args
