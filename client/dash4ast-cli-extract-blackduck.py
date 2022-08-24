@@ -1,7 +1,5 @@
 import requests
-import json
 import sys
-import hashlib
 
 
 def post_request(url, application_tool, application_dash4ast, url_tool, api_key_tool):
@@ -29,5 +27,4 @@ if __name__ == "__main__":
         print('Example: python3 dash4ast-cli-extract-blackduck.py --host http://localhost:5000 --application-tool dash4ast-connectors --application-dash4ast connectors --url-tool https://xxxx.blackduck.com --api-key-tool xxxx')
         sys.exit()
 
-    ## pass args
     post_request(url, application_tool, application_dash4ast, url_tool, api_key_tool)
