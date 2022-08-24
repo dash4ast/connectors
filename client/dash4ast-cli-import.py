@@ -15,14 +15,20 @@ def post_request(url, app, path_report, scan):
     print(r.text)
 
 
-def print_request(path_report):
+def print_request(path_report, scan):
     report = open(path_report, 'r').read()
     content = json.loads(report)
-    for issue in content['results']:
-        print_vulnerability(issue)
+
+    if (scan == 'bandit'):
+      for issue in content['results']:
+        print_vulnerability_bandit(issue)
+    if (scan == 'safety'):
+      for issue in content['vulnerabilities']:
+        print_vulnerability_safety(issue)
 
 
-def print_vulnerability(issue):
+def print_vulnerability_bandit(issue):
+
     print(str(issue['test_id']))
     print(hashlib.md5(str(issue['test_id']+issue['filename']+str(issue['line_number'])).encode()).hexdigest())
     print(issue['issue_text'])
@@ -30,6 +36,18 @@ def print_vulnerability(issue):
     print(issue['issue_severity'].upper())
     print(issue['filename'])
     print(issue['line_number'])
+
+
+def print_vulnerability_safety(issue):
+
+    print(hashlib.md5(str(issue['vulnerability_id']).encode()).hexdigest())
+    print(issue['advisory'])
+    print(issue['CVE'])
+    print("more_info_url: " + issue['more_info_url'])
+    if (issue['severity'] is None):
+      print('Medium'.upper())
+    print(issue['package_name'])
+    print(issue['analyzed_version'])
 
 
 if __name__ == "__main__":
@@ -48,4 +66,6 @@ if __name__ == "__main__":
     ## pass args
     post_request(url, application, report, scan)
 
-    #print_request(report)
+    ##print_request('./examples/test_projects/safety-output.json','safety')
+
+
