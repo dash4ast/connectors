@@ -67,5 +67,6 @@ if __name__ == "__main__":
     post_request(url, application, report, scan)
 
     ##print_request('./examples/test_projects/safety-output.json','safety')
+    ##print_request('./examples/test_projects/bandit-output.json','bandit')
 
 
