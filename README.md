@@ -1,11 +1,10 @@
 # dash4ast
 
-dash4ast 
-
+dash4ast automatically consolidate, de-duplicate and manage results from commercial and open source SAST, DAST, SCA, IAC and Image Containers. Have all your metrics in one place with dash4ast.
 
 ## Getting started
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+To get started with dash4ast, execute next commands:
 
 ```
 git clone https://gitlab.com/dash4ast-community1/support.git
