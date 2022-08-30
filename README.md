@@ -27,14 +27,18 @@ Access to dash4ast through: http://localhost:3838/dash4ast
 - Use client in the next way:
 
 ```
-python3 dash4ast-cli-import.py --host ${DASH4AST_ENDPOINT_QA} --application YOUR_APP --report bandit-output.json --scan bandit
+python3 dash4ast-cli-import-local-report --host ${DASH4AST_ENDPOINT_QA} --application YOUR_APP --report bandit-output.json --scan bandit
 ```
 
 Where:
 * DASH4AST_ENDPOINT_QA is http://localhost:5000 if installed locally
 * scans can be: bandit, safety, checkov, kiuwan, coverity, trivy, snyk and so on
 
-Note: Blackduck and Sonarqube has direct connection (not needed to specify a report file)
+- Blackduck and Sonarqube has direct connection (not needed to specify a report file)
+
+```
+python3 dash4ast-cli-import-blackduck-report --host ${DASH4AST_ENDPOINT_QA} --application-tool YOUR_APP_IN_BLACKDUCK --application-dash4ast YOUR_APP_IN_DASH4AST --url-tool https://xxxx.blackduck.com --api-key-tool xxxx'
+```
 
 ## Authors & Contact
 
