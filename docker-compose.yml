@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   db:
-    image: dash4ast/postgre:6.2.2
+    image: dash4ast/postgre:6.2.3
     container_name: dash4ast_db
     restart: always
     volumes:
@@ -9,10 +9,10 @@ services:
     environment:
       POSTGRES_PASSWORD: "q1w2e3r4"
     ports:
-      - '5432:5432'
+      - '5433:5432'
 
   connectors:
-    image: dash4ast/connectors:6.2.2
+    image: dash4ast/connectors:6.2.3
     container_name: connectors
     ports: 
       - 5000:5000
@@ -26,7 +26,7 @@ services:
       - db
 
   dashboard:
-    image: dash4ast/frontend-shiny:6.2.2
+    image: dash4ast/frontend-shiny:6.2.3
     container_name: dashboard
     ports:
       - 3838:3838
