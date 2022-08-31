@@ -20,7 +20,7 @@ Access to dash4ast through: http://localhost:3838/dash4ast
 * Docker
 * Docker-compose
 * Git
-* Open Ports: 3838, 5000
+* Open Ports: 3838, 5000, 5433
 
 ## Integration with your security tools in a CI/CD pipeline
 
