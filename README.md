@@ -1,6 +1,9 @@
-# dash4ast
+![alt text](https://securingsoftware.files.wordpress.com/2021/12/dash4ast-logo-1000x400-1.png)
+
 
 dash4ast automatically consolidates, de-duplicates and manages results from commercial and open source SAST, DAST, SCA, IAC and Image Containers. Have all your metrics in one place with [dash4ast](www.dash4ast.com).
+
+![alt text](https://securingsoftware.files.wordpress.com/2022/08/analytics.png)
 
 ## Getting started
 
@@ -14,6 +17,8 @@ sudo docker-compose up -d (or sudo docker compose up -d)
 
 Then:
 Access to dash4ast through: http://localhost:3838/dash4ast
+
+![alt text](https://securingsoftware.files.wordpress.com/2022/08/login.png)
 
 ## Requirements:
 
@@ -50,6 +55,7 @@ python3 dash4ast-cli-import-blackduck-report --host ${DASH4AST_ENDPOINT_QA} --ap
 ```
 python3 dash4ast-cli-import-sonarqube-report --host ${DASH4AST_ENDPOINT_QA} --application-tool YOUR_APP_IN_SONARQUBE --application-dash4ast YOUR_APP_IN_DASH4AST --url-tool https://xxxx.blackduck.com --user-tool xxxx --pwd-tool xxxx'
 ```
+![alt text](https://securingsoftware.files.wordpress.com/2022/08/connectors.png)
 
 ## Authors & Contact
 
