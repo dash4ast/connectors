@@ -1,5 +1,4 @@
-![alt text](https://securingsoftware.files.wordpress.com/2021/12/dash4ast-logo-1000x400-1.png)
-
+## dash4ast
 
 dash4ast automatically consolidates, de-duplicates and manages results from commercial and open source SAST, DAST, SCA, IAC and Image Containers. Have all your metrics in one place with [dash4ast](www.dash4ast.com).
 
@@ -19,6 +18,8 @@ Then:
 Access to dash4ast through: http://localhost:3838/dash4ast
 
 ![alt text](https://securingsoftware.files.wordpress.com/2022/08/login.png)
+
+Use demo/dash4ast
 
 ## Requirements:
 
