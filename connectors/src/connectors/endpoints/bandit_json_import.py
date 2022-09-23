@@ -147,3 +147,4 @@ def add_vulnerability(db_session, vulnerability):
 
 if __name__ == '__main__':
     extract()
+

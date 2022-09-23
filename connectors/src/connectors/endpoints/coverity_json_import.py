@@ -146,14 +146,30 @@ def add_vulnerability(db_session, vulnerability):
 
 
 def test():
-    report = open('/home/sebas/tas/source/dash4ast-community/support/connectors/test/coverity-report.json', 'r').read()
+    report = open('../../../test/coverity-report.json', 'r').read()
     content = json.loads(report)
     print(len(content['issues']))
+    now = datetime.now()
     for issue in content['issues']:
-        print_vulnerability(issue)
+        print_vulnerability(issue, 'test-app', now)
 
 
-def print_vulnerability(issue):
+def print_vulnerability(issue, application_name, now):
+    # vulnerability = Vulnerability()
+    print(hashlib.md5(str(issue['mergeKey']).encode()).hexdigest())
+    print(issue['checkerProperties']['subcategoryShortDescription'])
+    print('coverity')
+    print('sast')
+    print('OPEN')
+    print(issue['checkerName'])
+    print(issue['checkerProperties']['impact'].upper())
+    print("CWE: " + str(issue['checkerProperties']['cweCategory']))
+    print(issue['strippedMainEventFilePathname'])
+    print(issue['mainEventLineNumber'])
+    print(application_name)
+    print(now)
+    print(now)
+    print('vulnerability')
     print(hashlib.md5(str(issue['mergeKey']).encode()).hexdigest())
     print(issue['checkerProperties']['subcategoryShortDescription'])
     print(issue['checkerName'])
@@ -161,8 +177,9 @@ def print_vulnerability(issue):
     print("CWE: " + str(issue['checkerProperties']['cweCategory']))
     print(issue['strippedMainEventFilePathname'])
     print(issue['mainEventLineNumber'])
+    # return vulnerability
 
 
 if __name__ == '__main__':
-    extract()
-    #test()
+    #extract()
+    test()
