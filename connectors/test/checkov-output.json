@@ -1,0 +1,3890 @@
+[
+    {
+        "check_type": "terraform_plan",
+        "results": {
+            "passed_checks": [],
+            "failed_checks": [],
+            "skipped_checks": [],
+            "parsing_errors": [
+                "checkov-output.json",
+                "chess-trivy.json",
+                "tsconfig.json",
+                "tsconfig.spec.json",
+                "tsconfig.app.json"
+            ]
+        },
+        "summary": {
+            "passed": 0,
+            "failed": 0,
+            "skipped": 0,
+            "parsing_errors": 5,
+            "resource_count": 0,
+            "checkov_version": "2.1.160"
+        },
+        "url": "Add an api key '--bc-api-key <api-key>' to see more detailed insights via https://bridgecrew.cloud"
+    },
+    {
+        "check_type": "dockerfile",
+        "results": {
+            "passed_checks": [
+                {
+                    "check_id": "CKV_DOCKER_11",
+                    "bc_check_id": null,
+                    "check_name": "Ensure From Alias are unique for multistage builds.",
+                    "check_result": {
+                        "result": "PASSED",
+                        "results_configuration": null
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "FROM postgres:latest\n"
+                        ],
+                        [
+                            2,
+                            "ENV POSTGRES_USER root\n"
+                        ],
+                        [
+                            3,
+                            "ENV POSTGRES_PASSWORD q1w2e3r4\n"
+                        ],
+                        [
+                            4,
+                            "ENV POSTGRES_DB dash4ast\n"
+                        ],
+                        [
+                            5,
+                            "COPY dash4ast.sql /docker-entrypoint-initdb.d/\n"
+                        ],
+                        [
+                            6,
+                            "\n"
+                        ],
+                        [
+                            7,
+                            "EXPOSE 5432\n"
+                        ]
+                    ],
+                    "file_path": "/db/Dockerfile",
+                    "file_abs_path": "/src/db/Dockerfile",
+                    "repo_file_path": "/db/Dockerfile",
+                    "file_line_range": [
+                        1,
+                        7
+                    ],
+                    "resource": "/db/Dockerfile.",
+                    "evaluations": null,
+                    "check_class": "checkov.dockerfile.checks.AliasIsUnique",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": null,
+                    "details": []
+                },
+                {
+                    "check_id": "CKV_DOCKER_1",
+                    "bc_check_id": "BC_DKR_1",
+                    "check_name": "Ensure port 22 is not exposed",
+                    "check_result": {
+                        "result": "PASSED",
+                        "results_configuration": null
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "FROM postgres:latest\n"
+                        ],
+                        [
+                            2,
+                            "ENV POSTGRES_USER root\n"
+                        ],
+                        [
+                            3,
+                            "ENV POSTGRES_PASSWORD q1w2e3r4\n"
+                        ],
+                        [
+                            4,
+                            "ENV POSTGRES_DB dash4ast\n"
+                        ],
+                        [
+                            5,
+                            "COPY dash4ast.sql /docker-entrypoint-initdb.d/\n"
+                        ],
+                        [
+                            6,
+                            "\n"
+                        ],
+                        [
+                            7,
+                            "EXPOSE 5432\n"
+                        ]
+                    ],
+                    "file_path": "/db/Dockerfile",
+                    "file_abs_path": "/src/db/Dockerfile",
+                    "repo_file_path": "/db/Dockerfile",
+                    "file_line_range": [
+                        1,
+                        7
+                    ],
+                    "resource": "/db/Dockerfile.",
+                    "evaluations": null,
+                    "check_class": "checkov.dockerfile.checks.ExposePort22",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.bridgecrew.io/docs/ensure-port-22-is-not-exposed",
+                    "details": []
+                },
+                {
+                    "check_id": "CKV_DOCKER_9",
+                    "bc_check_id": null,
+                    "check_name": "Ensure that APT isn't used",
+                    "check_result": {
+                        "result": "PASSED",
+                        "results_configuration": null
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "# Install R version 3.6\n"
+                        ],
+                        [
+                            2,
+                            "FROM r-base:3.6.3\n"
+                        ],
+                        [
+                            3,
+                            "\n"
+                        ],
+                        [
+                            4,
+                            "# Install Ubuntu packages\n"
+                        ],
+                        [
+                            5,
+                            "RUN apt-get update && apt-get install -y \\\n"
+                        ],
+                        [
+                            6,
+                            "    sudo \\\n"
+                        ],
+                        [
+                            7,
+                            "    gdebi-core \\\n"
+                        ],
+                        [
+                            8,
+                            "    pandoc \\\n"
+                        ],
+                        [
+                            9,
+                            "    pandoc-citeproc \\\n"
+                        ],
+                        [
+                            10,
+                            "    libcurl4-gnutls-dev \\\n"
+                        ],
+                        [
+                            11,
+                            "    libcairo2-dev/unstable \\\n"
+                        ],
+                        [
+                            12,
+                            "    libxt-dev \\\n"
+                        ],
+                        [
+                            13,
+                            "    libmariadb-dev \\\n"
+                        ],
+                        [
+                            14,
+                            "    libssl-dev \\\n"
+                        ],
+                        [
+                            15,
+                            "    libpq-dev \\\n"
+                        ],
+                        [
+                            16,
+                            "    comerr-dev \\\n"
+                        ],
+                        [
+                            17,
+                            "    krb5-multidev \\\n"
+                        ],
+                        [
+                            18,
+                            "    libc6 \\\n"
+                        ],
+                        [
+                            19,
+                            "    libpq5\n"
+                        ],
+                        [
+                            20,
+                            "\n"
+                        ],
+                        [
+                            21,
+                            "# Download and install ShinyServer (latest version)\n"
+                        ],
+                        [
+                            22,
+                            "RUN wget --no-verbose https://s3.amazonaws.com/rstudio-shiny-server-os-build/ubuntu-12.04/x86_64/VERSION -O \"version.txt\" && \\\n"
+                        ],
+                        [
+                            23,
+                            "    VERSION=$(cat version.txt)  && \\\n"
+                        ],
+                        [
+                            24,
+                            "    wget --no-verbose \"https://s3.amazonaws.com/rstudio-shiny-server-os-build/ubuntu-12.04/x86_64/shiny-server-$VERSION-amd64.deb\" -O ss-latest.deb && \\\n"
+                        ],
+                        [
+                            25,
+                            "    gdebi -n ss-latest.deb && \\\n"
+                        ],
+                        [
+                            26,
+                            "    rm -f version.txt ss-latest.deb\n"
+                        ],
+                        [
+                            27,
+                            "\n"
+                        ],
+                        [
+                            28,
+                            "# Install R packages that are required\n"
+                        ],
+                        [
+                            29,
+                            "# TODO: add further package if you need!\n"
+                        ],
+                        [
+                            30,
+                            "RUN R -e \"install.packages('shiny', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            31,
+                            "RUN R -e \"install.packages('shinydashboard', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            32,
+                            "RUN R -e \"install.packages('shinyjs', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            33,
+                            "RUN R -e \"install.packages('shinyalert', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            34,
+                            "RUN R -e \"install.packages('plyr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            35,
+                            "RUN R -e \"install.packages('jsonlite', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            36,
+                            "RUN R -e \"install.packages('lubridate', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            37,
+                            "RUN R -e \"install.packages('readr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            38,
+                            "RUN R -e \"install.packages('fmsb', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            39,
+                            "RUN R -e \"install.packages('methods', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            40,
+                            "RUN R -e \"install.packages('DT', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            41,
+                            "RUN R -e \"install.packages('forcats', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            42,
+                            "RUN R -e \"install.packages('ggplot2', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            43,
+                            "RUN R -e \"install.packages('stringr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            44,
+                            "RUN R -e \"install.packages('openxlsx', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            45,
+                            "RUN R -e \"install.packages('roxygen2', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            46,
+                            "RUN R -e \"install.packages('rversions', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            47,
+                            "RUN R -e \"install.packages('xml2', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            48,
+                            "RUN R -e \"install.packages('devtools', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            49,
+                            "RUN R -e \"install.packages('wesanderson', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            50,
+                            "RUN R -e \"install.packages('RPostgres', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            51,
+                            "RUN R -e \"install.packages('RPostgreSQL', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            52,
+                            "RUN R -e \"install.packages('DBI', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            53,
+                            "RUN R -e \"install.packages('httr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            54,
+                            "RUN R -e \"remotes::install_github('ricardo-bion/ggradar')\"\n"
+                        ],
+                        [
+                            55,
+                            "RUN R -e \"install.packages('dplyr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            56,
+                            "RUN R -e \"install.packages('tidyr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            57,
+                            "RUN R -e \"install.packages('digest', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            58,
+                            "RUN R -e \"install.packages('data.table', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            59,
+                            "RUN R -e \"install.packages('scales', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            60,
+                            "RUN R -e \"install.packages('PKI', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            61,
+                            "RUN R -e \"install.packages('hexView', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            62,
+                            "RUN R -e \"install.packages('shinyWidgets', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            63,
+                            "RUN R -e \"install.packages('shinymanager', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            64,
+                            "\n"
+                        ],
+                        [
+                            65,
+                            "# Copy configuration files into the Docker image\n"
+                        ],
+                        [
+                            66,
+                            "RUN mkdir /srv/shiny-server/dash4ast\n"
+                        ],
+                        [
+                            67,
+                            "RUN mkdir /srv/shiny-server/dash4ast/reports\n"
+                        ],
+                        [
+                            68,
+                            "RUN mkdir /srv/shiny-server/dash4ast/images\n"
+                        ],
+                        [
+                            69,
+                            "RUN mkdir /srv/shiny-server/dash4ast/www\n"
+                        ],
+                        [
+                            70,
+                            "COPY shiny-server.conf  /etc/shiny-server/shiny-server.conf\n"
+                        ],
+                        [
+                            71,
+                            "COPY reports/demo/** /srv/shiny-server/dash4ast/reports/\n"
+                        ],
+                        [
+                            72,
+                            "COPY images/*.png /srv/shiny-server/dash4ast/images/\n"
+                        ],
+                        [
+                            73,
+                            "COPY constants.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            74,
+                            "COPY graphs.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            75,
+                            "COPY calculation.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            76,
+                            "COPY connectors.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            77,
+                            "COPY utilities.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            78,
+                            "COPY app.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            79,
+                            "COPY validations.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            80,
+                            "COPY www/favicon.ico /srv/shiny-server/dash4ast/www/\n"
+                        ],
+                        [
+                            81,
+                            "COPY www/*.png /srv/shiny-server/dash4ast/www/\n"
+                        ],
+                        [
+                            82,
+                            "COPY www/site.webmanifest /srv/shiny-server/dash4ast/www/\n"
+                        ],
+                        [
+                            83,
+                            "\n"
+                        ],
+                        [
+                            84,
+                            "# Make the ShinyApp available at port 3838\n"
+                        ],
+                        [
+                            85,
+                            "EXPOSE 3838\n"
+                        ],
+                        [
+                            86,
+                            "\n"
+                        ],
+                        [
+                            87,
+                            "# Copy further configuration files into the Docker image\n"
+                        ],
+                        [
+                            88,
+                            "COPY shiny-server.sh /usr/bin/shiny-server.sh\n"
+                        ],
+                        [
+                            89,
+                            "\n"
+                        ],
+                        [
+                            90,
+                            "CMD [\"/usr/bin/shiny-server.sh\"]\n"
+                        ]
+                    ],
+                    "file_path": "/frontend-shiny/Dockerfile",
+                    "file_abs_path": "/src/frontend-shiny/Dockerfile",
+                    "repo_file_path": "/frontend-shiny/Dockerfile",
+                    "file_line_range": [
+                        1,
+                        90
+                    ],
+                    "resource": "/frontend-shiny/Dockerfile.",
+                    "evaluations": null,
+                    "check_class": "checkov.dockerfile.checks.RunUsingAPT",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": null,
+                    "details": []
+                },
+                {
+                    "check_id": "CKV_DOCKER_5",
+                    "bc_check_id": "BC_DKR_4",
+                    "check_name": "Ensure update instructions are not use alone in the Dockerfile",
+                    "check_result": {
+                        "result": "PASSED",
+                        "results_configuration": null
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "# Install R version 3.6\n"
+                        ],
+                        [
+                            2,
+                            "FROM r-base:3.6.3\n"
+                        ],
+                        [
+                            3,
+                            "\n"
+                        ],
+                        [
+                            4,
+                            "# Install Ubuntu packages\n"
+                        ],
+                        [
+                            5,
+                            "RUN apt-get update && apt-get install -y \\\n"
+                        ],
+                        [
+                            6,
+                            "    sudo \\\n"
+                        ],
+                        [
+                            7,
+                            "    gdebi-core \\\n"
+                        ],
+                        [
+                            8,
+                            "    pandoc \\\n"
+                        ],
+                        [
+                            9,
+                            "    pandoc-citeproc \\\n"
+                        ],
+                        [
+                            10,
+                            "    libcurl4-gnutls-dev \\\n"
+                        ],
+                        [
+                            11,
+                            "    libcairo2-dev/unstable \\\n"
+                        ],
+                        [
+                            12,
+                            "    libxt-dev \\\n"
+                        ],
+                        [
+                            13,
+                            "    libmariadb-dev \\\n"
+                        ],
+                        [
+                            14,
+                            "    libssl-dev \\\n"
+                        ],
+                        [
+                            15,
+                            "    libpq-dev \\\n"
+                        ],
+                        [
+                            16,
+                            "    comerr-dev \\\n"
+                        ],
+                        [
+                            17,
+                            "    krb5-multidev \\\n"
+                        ],
+                        [
+                            18,
+                            "    libc6 \\\n"
+                        ],
+                        [
+                            19,
+                            "    libpq5\n"
+                        ],
+                        [
+                            20,
+                            "\n"
+                        ],
+                        [
+                            21,
+                            "# Download and install ShinyServer (latest version)\n"
+                        ],
+                        [
+                            22,
+                            "RUN wget --no-verbose https://s3.amazonaws.com/rstudio-shiny-server-os-build/ubuntu-12.04/x86_64/VERSION -O \"version.txt\" && \\\n"
+                        ],
+                        [
+                            23,
+                            "    VERSION=$(cat version.txt)  && \\\n"
+                        ],
+                        [
+                            24,
+                            "    wget --no-verbose \"https://s3.amazonaws.com/rstudio-shiny-server-os-build/ubuntu-12.04/x86_64/shiny-server-$VERSION-amd64.deb\" -O ss-latest.deb && \\\n"
+                        ],
+                        [
+                            25,
+                            "    gdebi -n ss-latest.deb && \\\n"
+                        ],
+                        [
+                            26,
+                            "    rm -f version.txt ss-latest.deb\n"
+                        ],
+                        [
+                            27,
+                            "\n"
+                        ],
+                        [
+                            28,
+                            "# Install R packages that are required\n"
+                        ],
+                        [
+                            29,
+                            "# TODO: add further package if you need!\n"
+                        ],
+                        [
+                            30,
+                            "RUN R -e \"install.packages('shiny', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            31,
+                            "RUN R -e \"install.packages('shinydashboard', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            32,
+                            "RUN R -e \"install.packages('shinyjs', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            33,
+                            "RUN R -e \"install.packages('shinyalert', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            34,
+                            "RUN R -e \"install.packages('plyr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            35,
+                            "RUN R -e \"install.packages('jsonlite', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            36,
+                            "RUN R -e \"install.packages('lubridate', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            37,
+                            "RUN R -e \"install.packages('readr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            38,
+                            "RUN R -e \"install.packages('fmsb', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            39,
+                            "RUN R -e \"install.packages('methods', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            40,
+                            "RUN R -e \"install.packages('DT', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            41,
+                            "RUN R -e \"install.packages('forcats', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            42,
+                            "RUN R -e \"install.packages('ggplot2', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            43,
+                            "RUN R -e \"install.packages('stringr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            44,
+                            "RUN R -e \"install.packages('openxlsx', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            45,
+                            "RUN R -e \"install.packages('roxygen2', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            46,
+                            "RUN R -e \"install.packages('rversions', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            47,
+                            "RUN R -e \"install.packages('xml2', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            48,
+                            "RUN R -e \"install.packages('devtools', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            49,
+                            "RUN R -e \"install.packages('wesanderson', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            50,
+                            "RUN R -e \"install.packages('RPostgres', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            51,
+                            "RUN R -e \"install.packages('RPostgreSQL', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            52,
+                            "RUN R -e \"install.packages('DBI', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            53,
+                            "RUN R -e \"install.packages('httr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            54,
+                            "RUN R -e \"remotes::install_github('ricardo-bion/ggradar')\"\n"
+                        ],
+                        [
+                            55,
+                            "RUN R -e \"install.packages('dplyr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            56,
+                            "RUN R -e \"install.packages('tidyr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            57,
+                            "RUN R -e \"install.packages('digest', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            58,
+                            "RUN R -e \"install.packages('data.table', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            59,
+                            "RUN R -e \"install.packages('scales', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            60,
+                            "RUN R -e \"install.packages('PKI', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            61,
+                            "RUN R -e \"install.packages('hexView', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            62,
+                            "RUN R -e \"install.packages('shinyWidgets', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            63,
+                            "RUN R -e \"install.packages('shinymanager', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            64,
+                            "\n"
+                        ],
+                        [
+                            65,
+                            "# Copy configuration files into the Docker image\n"
+                        ],
+                        [
+                            66,
+                            "RUN mkdir /srv/shiny-server/dash4ast\n"
+                        ],
+                        [
+                            67,
+                            "RUN mkdir /srv/shiny-server/dash4ast/reports\n"
+                        ],
+                        [
+                            68,
+                            "RUN mkdir /srv/shiny-server/dash4ast/images\n"
+                        ],
+                        [
+                            69,
+                            "RUN mkdir /srv/shiny-server/dash4ast/www\n"
+                        ],
+                        [
+                            70,
+                            "COPY shiny-server.conf  /etc/shiny-server/shiny-server.conf\n"
+                        ],
+                        [
+                            71,
+                            "COPY reports/demo/** /srv/shiny-server/dash4ast/reports/\n"
+                        ],
+                        [
+                            72,
+                            "COPY images/*.png /srv/shiny-server/dash4ast/images/\n"
+                        ],
+                        [
+                            73,
+                            "COPY constants.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            74,
+                            "COPY graphs.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            75,
+                            "COPY calculation.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            76,
+                            "COPY connectors.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            77,
+                            "COPY utilities.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            78,
+                            "COPY app.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            79,
+                            "COPY validations.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            80,
+                            "COPY www/favicon.ico /srv/shiny-server/dash4ast/www/\n"
+                        ],
+                        [
+                            81,
+                            "COPY www/*.png /srv/shiny-server/dash4ast/www/\n"
+                        ],
+                        [
+                            82,
+                            "COPY www/site.webmanifest /srv/shiny-server/dash4ast/www/\n"
+                        ],
+                        [
+                            83,
+                            "\n"
+                        ],
+                        [
+                            84,
+                            "# Make the ShinyApp available at port 3838\n"
+                        ],
+                        [
+                            85,
+                            "EXPOSE 3838\n"
+                        ],
+                        [
+                            86,
+                            "\n"
+                        ],
+                        [
+                            87,
+                            "# Copy further configuration files into the Docker image\n"
+                        ],
+                        [
+                            88,
+                            "COPY shiny-server.sh /usr/bin/shiny-server.sh\n"
+                        ],
+                        [
+                            89,
+                            "\n"
+                        ],
+                        [
+                            90,
+                            "CMD [\"/usr/bin/shiny-server.sh\"]\n"
+                        ]
+                    ],
+                    "file_path": "/frontend-shiny/Dockerfile",
+                    "file_abs_path": "/src/frontend-shiny/Dockerfile",
+                    "repo_file_path": "/frontend-shiny/Dockerfile",
+                    "file_line_range": [
+                        1,
+                        90
+                    ],
+                    "resource": "/frontend-shiny/Dockerfile.",
+                    "evaluations": null,
+                    "check_class": "checkov.dockerfile.checks.UpdateNotAlone",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.bridgecrew.io/docs/ensure-update-instructions-are-not-used-alone-in-the-dockerfile",
+                    "details": []
+                },
+                {
+                    "check_id": "CKV_DOCKER_7",
+                    "bc_check_id": "BC_DKR_7",
+                    "check_name": "Ensure the base image uses a non latest version tag",
+                    "check_result": {
+                        "result": "PASSED",
+                        "results_configuration": null
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "# Install R version 3.6\n"
+                        ],
+                        [
+                            2,
+                            "FROM r-base:3.6.3\n"
+                        ],
+                        [
+                            3,
+                            "\n"
+                        ],
+                        [
+                            4,
+                            "# Install Ubuntu packages\n"
+                        ],
+                        [
+                            5,
+                            "RUN apt-get update && apt-get install -y \\\n"
+                        ],
+                        [
+                            6,
+                            "    sudo \\\n"
+                        ],
+                        [
+                            7,
+                            "    gdebi-core \\\n"
+                        ],
+                        [
+                            8,
+                            "    pandoc \\\n"
+                        ],
+                        [
+                            9,
+                            "    pandoc-citeproc \\\n"
+                        ],
+                        [
+                            10,
+                            "    libcurl4-gnutls-dev \\\n"
+                        ],
+                        [
+                            11,
+                            "    libcairo2-dev/unstable \\\n"
+                        ],
+                        [
+                            12,
+                            "    libxt-dev \\\n"
+                        ],
+                        [
+                            13,
+                            "    libmariadb-dev \\\n"
+                        ],
+                        [
+                            14,
+                            "    libssl-dev \\\n"
+                        ],
+                        [
+                            15,
+                            "    libpq-dev \\\n"
+                        ],
+                        [
+                            16,
+                            "    comerr-dev \\\n"
+                        ],
+                        [
+                            17,
+                            "    krb5-multidev \\\n"
+                        ],
+                        [
+                            18,
+                            "    libc6 \\\n"
+                        ],
+                        [
+                            19,
+                            "    libpq5\n"
+                        ],
+                        [
+                            20,
+                            "\n"
+                        ],
+                        [
+                            21,
+                            "# Download and install ShinyServer (latest version)\n"
+                        ],
+                        [
+                            22,
+                            "RUN wget --no-verbose https://s3.amazonaws.com/rstudio-shiny-server-os-build/ubuntu-12.04/x86_64/VERSION -O \"version.txt\" && \\\n"
+                        ],
+                        [
+                            23,
+                            "    VERSION=$(cat version.txt)  && \\\n"
+                        ],
+                        [
+                            24,
+                            "    wget --no-verbose \"https://s3.amazonaws.com/rstudio-shiny-server-os-build/ubuntu-12.04/x86_64/shiny-server-$VERSION-amd64.deb\" -O ss-latest.deb && \\\n"
+                        ],
+                        [
+                            25,
+                            "    gdebi -n ss-latest.deb && \\\n"
+                        ],
+                        [
+                            26,
+                            "    rm -f version.txt ss-latest.deb\n"
+                        ],
+                        [
+                            27,
+                            "\n"
+                        ],
+                        [
+                            28,
+                            "# Install R packages that are required\n"
+                        ],
+                        [
+                            29,
+                            "# TODO: add further package if you need!\n"
+                        ],
+                        [
+                            30,
+                            "RUN R -e \"install.packages('shiny', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            31,
+                            "RUN R -e \"install.packages('shinydashboard', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            32,
+                            "RUN R -e \"install.packages('shinyjs', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            33,
+                            "RUN R -e \"install.packages('shinyalert', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            34,
+                            "RUN R -e \"install.packages('plyr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            35,
+                            "RUN R -e \"install.packages('jsonlite', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            36,
+                            "RUN R -e \"install.packages('lubridate', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            37,
+                            "RUN R -e \"install.packages('readr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            38,
+                            "RUN R -e \"install.packages('fmsb', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            39,
+                            "RUN R -e \"install.packages('methods', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            40,
+                            "RUN R -e \"install.packages('DT', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            41,
+                            "RUN R -e \"install.packages('forcats', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            42,
+                            "RUN R -e \"install.packages('ggplot2', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            43,
+                            "RUN R -e \"install.packages('stringr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            44,
+                            "RUN R -e \"install.packages('openxlsx', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            45,
+                            "RUN R -e \"install.packages('roxygen2', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            46,
+                            "RUN R -e \"install.packages('rversions', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            47,
+                            "RUN R -e \"install.packages('xml2', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            48,
+                            "RUN R -e \"install.packages('devtools', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            49,
+                            "RUN R -e \"install.packages('wesanderson', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            50,
+                            "RUN R -e \"install.packages('RPostgres', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            51,
+                            "RUN R -e \"install.packages('RPostgreSQL', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            52,
+                            "RUN R -e \"install.packages('DBI', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            53,
+                            "RUN R -e \"install.packages('httr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            54,
+                            "RUN R -e \"remotes::install_github('ricardo-bion/ggradar')\"\n"
+                        ],
+                        [
+                            55,
+                            "RUN R -e \"install.packages('dplyr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            56,
+                            "RUN R -e \"install.packages('tidyr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            57,
+                            "RUN R -e \"install.packages('digest', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            58,
+                            "RUN R -e \"install.packages('data.table', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            59,
+                            "RUN R -e \"install.packages('scales', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            60,
+                            "RUN R -e \"install.packages('PKI', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            61,
+                            "RUN R -e \"install.packages('hexView', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            62,
+                            "RUN R -e \"install.packages('shinyWidgets', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            63,
+                            "RUN R -e \"install.packages('shinymanager', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            64,
+                            "\n"
+                        ],
+                        [
+                            65,
+                            "# Copy configuration files into the Docker image\n"
+                        ],
+                        [
+                            66,
+                            "RUN mkdir /srv/shiny-server/dash4ast\n"
+                        ],
+                        [
+                            67,
+                            "RUN mkdir /srv/shiny-server/dash4ast/reports\n"
+                        ],
+                        [
+                            68,
+                            "RUN mkdir /srv/shiny-server/dash4ast/images\n"
+                        ],
+                        [
+                            69,
+                            "RUN mkdir /srv/shiny-server/dash4ast/www\n"
+                        ],
+                        [
+                            70,
+                            "COPY shiny-server.conf  /etc/shiny-server/shiny-server.conf\n"
+                        ],
+                        [
+                            71,
+                            "COPY reports/demo/** /srv/shiny-server/dash4ast/reports/\n"
+                        ],
+                        [
+                            72,
+                            "COPY images/*.png /srv/shiny-server/dash4ast/images/\n"
+                        ],
+                        [
+                            73,
+                            "COPY constants.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            74,
+                            "COPY graphs.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            75,
+                            "COPY calculation.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            76,
+                            "COPY connectors.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            77,
+                            "COPY utilities.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            78,
+                            "COPY app.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            79,
+                            "COPY validations.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            80,
+                            "COPY www/favicon.ico /srv/shiny-server/dash4ast/www/\n"
+                        ],
+                        [
+                            81,
+                            "COPY www/*.png /srv/shiny-server/dash4ast/www/\n"
+                        ],
+                        [
+                            82,
+                            "COPY www/site.webmanifest /srv/shiny-server/dash4ast/www/\n"
+                        ],
+                        [
+                            83,
+                            "\n"
+                        ],
+                        [
+                            84,
+                            "# Make the ShinyApp available at port 3838\n"
+                        ],
+                        [
+                            85,
+                            "EXPOSE 3838\n"
+                        ],
+                        [
+                            86,
+                            "\n"
+                        ],
+                        [
+                            87,
+                            "# Copy further configuration files into the Docker image\n"
+                        ],
+                        [
+                            88,
+                            "COPY shiny-server.sh /usr/bin/shiny-server.sh\n"
+                        ],
+                        [
+                            89,
+                            "\n"
+                        ],
+                        [
+                            90,
+                            "CMD [\"/usr/bin/shiny-server.sh\"]\n"
+                        ]
+                    ],
+                    "file_path": "/frontend-shiny/Dockerfile",
+                    "file_abs_path": "/src/frontend-shiny/Dockerfile",
+                    "repo_file_path": "/frontend-shiny/Dockerfile",
+                    "file_line_range": [
+                        1,
+                        90
+                    ],
+                    "resource": "/frontend-shiny/Dockerfile.",
+                    "evaluations": null,
+                    "check_class": "checkov.dockerfile.checks.ReferenceLatestTag",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.bridgecrew.io/docs/ensure-the-base-image-uses-a-non-latest-version-tag",
+                    "details": []
+                },
+                {
+                    "check_id": "CKV_DOCKER_11",
+                    "bc_check_id": null,
+                    "check_name": "Ensure From Alias are unique for multistage builds.",
+                    "check_result": {
+                        "result": "PASSED",
+                        "results_configuration": null
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "# Install R version 3.6\n"
+                        ],
+                        [
+                            2,
+                            "FROM r-base:3.6.3\n"
+                        ],
+                        [
+                            3,
+                            "\n"
+                        ],
+                        [
+                            4,
+                            "# Install Ubuntu packages\n"
+                        ],
+                        [
+                            5,
+                            "RUN apt-get update && apt-get install -y \\\n"
+                        ],
+                        [
+                            6,
+                            "    sudo \\\n"
+                        ],
+                        [
+                            7,
+                            "    gdebi-core \\\n"
+                        ],
+                        [
+                            8,
+                            "    pandoc \\\n"
+                        ],
+                        [
+                            9,
+                            "    pandoc-citeproc \\\n"
+                        ],
+                        [
+                            10,
+                            "    libcurl4-gnutls-dev \\\n"
+                        ],
+                        [
+                            11,
+                            "    libcairo2-dev/unstable \\\n"
+                        ],
+                        [
+                            12,
+                            "    libxt-dev \\\n"
+                        ],
+                        [
+                            13,
+                            "    libmariadb-dev \\\n"
+                        ],
+                        [
+                            14,
+                            "    libssl-dev \\\n"
+                        ],
+                        [
+                            15,
+                            "    libpq-dev \\\n"
+                        ],
+                        [
+                            16,
+                            "    comerr-dev \\\n"
+                        ],
+                        [
+                            17,
+                            "    krb5-multidev \\\n"
+                        ],
+                        [
+                            18,
+                            "    libc6 \\\n"
+                        ],
+                        [
+                            19,
+                            "    libpq5\n"
+                        ],
+                        [
+                            20,
+                            "\n"
+                        ],
+                        [
+                            21,
+                            "# Download and install ShinyServer (latest version)\n"
+                        ],
+                        [
+                            22,
+                            "RUN wget --no-verbose https://s3.amazonaws.com/rstudio-shiny-server-os-build/ubuntu-12.04/x86_64/VERSION -O \"version.txt\" && \\\n"
+                        ],
+                        [
+                            23,
+                            "    VERSION=$(cat version.txt)  && \\\n"
+                        ],
+                        [
+                            24,
+                            "    wget --no-verbose \"https://s3.amazonaws.com/rstudio-shiny-server-os-build/ubuntu-12.04/x86_64/shiny-server-$VERSION-amd64.deb\" -O ss-latest.deb && \\\n"
+                        ],
+                        [
+                            25,
+                            "    gdebi -n ss-latest.deb && \\\n"
+                        ],
+                        [
+                            26,
+                            "    rm -f version.txt ss-latest.deb\n"
+                        ],
+                        [
+                            27,
+                            "\n"
+                        ],
+                        [
+                            28,
+                            "# Install R packages that are required\n"
+                        ],
+                        [
+                            29,
+                            "# TODO: add further package if you need!\n"
+                        ],
+                        [
+                            30,
+                            "RUN R -e \"install.packages('shiny', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            31,
+                            "RUN R -e \"install.packages('shinydashboard', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            32,
+                            "RUN R -e \"install.packages('shinyjs', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            33,
+                            "RUN R -e \"install.packages('shinyalert', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            34,
+                            "RUN R -e \"install.packages('plyr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            35,
+                            "RUN R -e \"install.packages('jsonlite', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            36,
+                            "RUN R -e \"install.packages('lubridate', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            37,
+                            "RUN R -e \"install.packages('readr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            38,
+                            "RUN R -e \"install.packages('fmsb', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            39,
+                            "RUN R -e \"install.packages('methods', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            40,
+                            "RUN R -e \"install.packages('DT', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            41,
+                            "RUN R -e \"install.packages('forcats', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            42,
+                            "RUN R -e \"install.packages('ggplot2', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            43,
+                            "RUN R -e \"install.packages('stringr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            44,
+                            "RUN R -e \"install.packages('openxlsx', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            45,
+                            "RUN R -e \"install.packages('roxygen2', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            46,
+                            "RUN R -e \"install.packages('rversions', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            47,
+                            "RUN R -e \"install.packages('xml2', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            48,
+                            "RUN R -e \"install.packages('devtools', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            49,
+                            "RUN R -e \"install.packages('wesanderson', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            50,
+                            "RUN R -e \"install.packages('RPostgres', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            51,
+                            "RUN R -e \"install.packages('RPostgreSQL', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            52,
+                            "RUN R -e \"install.packages('DBI', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            53,
+                            "RUN R -e \"install.packages('httr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            54,
+                            "RUN R -e \"remotes::install_github('ricardo-bion/ggradar')\"\n"
+                        ],
+                        [
+                            55,
+                            "RUN R -e \"install.packages('dplyr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            56,
+                            "RUN R -e \"install.packages('tidyr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            57,
+                            "RUN R -e \"install.packages('digest', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            58,
+                            "RUN R -e \"install.packages('data.table', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            59,
+                            "RUN R -e \"install.packages('scales', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            60,
+                            "RUN R -e \"install.packages('PKI', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            61,
+                            "RUN R -e \"install.packages('hexView', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            62,
+                            "RUN R -e \"install.packages('shinyWidgets', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            63,
+                            "RUN R -e \"install.packages('shinymanager', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            64,
+                            "\n"
+                        ],
+                        [
+                            65,
+                            "# Copy configuration files into the Docker image\n"
+                        ],
+                        [
+                            66,
+                            "RUN mkdir /srv/shiny-server/dash4ast\n"
+                        ],
+                        [
+                            67,
+                            "RUN mkdir /srv/shiny-server/dash4ast/reports\n"
+                        ],
+                        [
+                            68,
+                            "RUN mkdir /srv/shiny-server/dash4ast/images\n"
+                        ],
+                        [
+                            69,
+                            "RUN mkdir /srv/shiny-server/dash4ast/www\n"
+                        ],
+                        [
+                            70,
+                            "COPY shiny-server.conf  /etc/shiny-server/shiny-server.conf\n"
+                        ],
+                        [
+                            71,
+                            "COPY reports/demo/** /srv/shiny-server/dash4ast/reports/\n"
+                        ],
+                        [
+                            72,
+                            "COPY images/*.png /srv/shiny-server/dash4ast/images/\n"
+                        ],
+                        [
+                            73,
+                            "COPY constants.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            74,
+                            "COPY graphs.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            75,
+                            "COPY calculation.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            76,
+                            "COPY connectors.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            77,
+                            "COPY utilities.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            78,
+                            "COPY app.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            79,
+                            "COPY validations.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            80,
+                            "COPY www/favicon.ico /srv/shiny-server/dash4ast/www/\n"
+                        ],
+                        [
+                            81,
+                            "COPY www/*.png /srv/shiny-server/dash4ast/www/\n"
+                        ],
+                        [
+                            82,
+                            "COPY www/site.webmanifest /srv/shiny-server/dash4ast/www/\n"
+                        ],
+                        [
+                            83,
+                            "\n"
+                        ],
+                        [
+                            84,
+                            "# Make the ShinyApp available at port 3838\n"
+                        ],
+                        [
+                            85,
+                            "EXPOSE 3838\n"
+                        ],
+                        [
+                            86,
+                            "\n"
+                        ],
+                        [
+                            87,
+                            "# Copy further configuration files into the Docker image\n"
+                        ],
+                        [
+                            88,
+                            "COPY shiny-server.sh /usr/bin/shiny-server.sh\n"
+                        ],
+                        [
+                            89,
+                            "\n"
+                        ],
+                        [
+                            90,
+                            "CMD [\"/usr/bin/shiny-server.sh\"]\n"
+                        ]
+                    ],
+                    "file_path": "/frontend-shiny/Dockerfile",
+                    "file_abs_path": "/src/frontend-shiny/Dockerfile",
+                    "repo_file_path": "/frontend-shiny/Dockerfile",
+                    "file_line_range": [
+                        1,
+                        90
+                    ],
+                    "resource": "/frontend-shiny/Dockerfile.",
+                    "evaluations": null,
+                    "check_class": "checkov.dockerfile.checks.AliasIsUnique",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": null,
+                    "details": []
+                },
+                {
+                    "check_id": "CKV_DOCKER_1",
+                    "bc_check_id": "BC_DKR_1",
+                    "check_name": "Ensure port 22 is not exposed",
+                    "check_result": {
+                        "result": "PASSED",
+                        "results_configuration": null
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "# Install R version 3.6\n"
+                        ],
+                        [
+                            2,
+                            "FROM r-base:3.6.3\n"
+                        ],
+                        [
+                            3,
+                            "\n"
+                        ],
+                        [
+                            4,
+                            "# Install Ubuntu packages\n"
+                        ],
+                        [
+                            5,
+                            "RUN apt-get update && apt-get install -y \\\n"
+                        ],
+                        [
+                            6,
+                            "    sudo \\\n"
+                        ],
+                        [
+                            7,
+                            "    gdebi-core \\\n"
+                        ],
+                        [
+                            8,
+                            "    pandoc \\\n"
+                        ],
+                        [
+                            9,
+                            "    pandoc-citeproc \\\n"
+                        ],
+                        [
+                            10,
+                            "    libcurl4-gnutls-dev \\\n"
+                        ],
+                        [
+                            11,
+                            "    libcairo2-dev/unstable \\\n"
+                        ],
+                        [
+                            12,
+                            "    libxt-dev \\\n"
+                        ],
+                        [
+                            13,
+                            "    libmariadb-dev \\\n"
+                        ],
+                        [
+                            14,
+                            "    libssl-dev \\\n"
+                        ],
+                        [
+                            15,
+                            "    libpq-dev \\\n"
+                        ],
+                        [
+                            16,
+                            "    comerr-dev \\\n"
+                        ],
+                        [
+                            17,
+                            "    krb5-multidev \\\n"
+                        ],
+                        [
+                            18,
+                            "    libc6 \\\n"
+                        ],
+                        [
+                            19,
+                            "    libpq5\n"
+                        ],
+                        [
+                            20,
+                            "\n"
+                        ],
+                        [
+                            21,
+                            "# Download and install ShinyServer (latest version)\n"
+                        ],
+                        [
+                            22,
+                            "RUN wget --no-verbose https://s3.amazonaws.com/rstudio-shiny-server-os-build/ubuntu-12.04/x86_64/VERSION -O \"version.txt\" && \\\n"
+                        ],
+                        [
+                            23,
+                            "    VERSION=$(cat version.txt)  && \\\n"
+                        ],
+                        [
+                            24,
+                            "    wget --no-verbose \"https://s3.amazonaws.com/rstudio-shiny-server-os-build/ubuntu-12.04/x86_64/shiny-server-$VERSION-amd64.deb\" -O ss-latest.deb && \\\n"
+                        ],
+                        [
+                            25,
+                            "    gdebi -n ss-latest.deb && \\\n"
+                        ],
+                        [
+                            26,
+                            "    rm -f version.txt ss-latest.deb\n"
+                        ],
+                        [
+                            27,
+                            "\n"
+                        ],
+                        [
+                            28,
+                            "# Install R packages that are required\n"
+                        ],
+                        [
+                            29,
+                            "# TODO: add further package if you need!\n"
+                        ],
+                        [
+                            30,
+                            "RUN R -e \"install.packages('shiny', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            31,
+                            "RUN R -e \"install.packages('shinydashboard', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            32,
+                            "RUN R -e \"install.packages('shinyjs', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            33,
+                            "RUN R -e \"install.packages('shinyalert', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            34,
+                            "RUN R -e \"install.packages('plyr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            35,
+                            "RUN R -e \"install.packages('jsonlite', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            36,
+                            "RUN R -e \"install.packages('lubridate', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            37,
+                            "RUN R -e \"install.packages('readr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            38,
+                            "RUN R -e \"install.packages('fmsb', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            39,
+                            "RUN R -e \"install.packages('methods', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            40,
+                            "RUN R -e \"install.packages('DT', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            41,
+                            "RUN R -e \"install.packages('forcats', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            42,
+                            "RUN R -e \"install.packages('ggplot2', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            43,
+                            "RUN R -e \"install.packages('stringr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            44,
+                            "RUN R -e \"install.packages('openxlsx', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            45,
+                            "RUN R -e \"install.packages('roxygen2', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            46,
+                            "RUN R -e \"install.packages('rversions', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            47,
+                            "RUN R -e \"install.packages('xml2', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            48,
+                            "RUN R -e \"install.packages('devtools', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            49,
+                            "RUN R -e \"install.packages('wesanderson', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            50,
+                            "RUN R -e \"install.packages('RPostgres', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            51,
+                            "RUN R -e \"install.packages('RPostgreSQL', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            52,
+                            "RUN R -e \"install.packages('DBI', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            53,
+                            "RUN R -e \"install.packages('httr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            54,
+                            "RUN R -e \"remotes::install_github('ricardo-bion/ggradar')\"\n"
+                        ],
+                        [
+                            55,
+                            "RUN R -e \"install.packages('dplyr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            56,
+                            "RUN R -e \"install.packages('tidyr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            57,
+                            "RUN R -e \"install.packages('digest', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            58,
+                            "RUN R -e \"install.packages('data.table', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            59,
+                            "RUN R -e \"install.packages('scales', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            60,
+                            "RUN R -e \"install.packages('PKI', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            61,
+                            "RUN R -e \"install.packages('hexView', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            62,
+                            "RUN R -e \"install.packages('shinyWidgets', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            63,
+                            "RUN R -e \"install.packages('shinymanager', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            64,
+                            "\n"
+                        ],
+                        [
+                            65,
+                            "# Copy configuration files into the Docker image\n"
+                        ],
+                        [
+                            66,
+                            "RUN mkdir /srv/shiny-server/dash4ast\n"
+                        ],
+                        [
+                            67,
+                            "RUN mkdir /srv/shiny-server/dash4ast/reports\n"
+                        ],
+                        [
+                            68,
+                            "RUN mkdir /srv/shiny-server/dash4ast/images\n"
+                        ],
+                        [
+                            69,
+                            "RUN mkdir /srv/shiny-server/dash4ast/www\n"
+                        ],
+                        [
+                            70,
+                            "COPY shiny-server.conf  /etc/shiny-server/shiny-server.conf\n"
+                        ],
+                        [
+                            71,
+                            "COPY reports/demo/** /srv/shiny-server/dash4ast/reports/\n"
+                        ],
+                        [
+                            72,
+                            "COPY images/*.png /srv/shiny-server/dash4ast/images/\n"
+                        ],
+                        [
+                            73,
+                            "COPY constants.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            74,
+                            "COPY graphs.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            75,
+                            "COPY calculation.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            76,
+                            "COPY connectors.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            77,
+                            "COPY utilities.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            78,
+                            "COPY app.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            79,
+                            "COPY validations.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            80,
+                            "COPY www/favicon.ico /srv/shiny-server/dash4ast/www/\n"
+                        ],
+                        [
+                            81,
+                            "COPY www/*.png /srv/shiny-server/dash4ast/www/\n"
+                        ],
+                        [
+                            82,
+                            "COPY www/site.webmanifest /srv/shiny-server/dash4ast/www/\n"
+                        ],
+                        [
+                            83,
+                            "\n"
+                        ],
+                        [
+                            84,
+                            "# Make the ShinyApp available at port 3838\n"
+                        ],
+                        [
+                            85,
+                            "EXPOSE 3838\n"
+                        ],
+                        [
+                            86,
+                            "\n"
+                        ],
+                        [
+                            87,
+                            "# Copy further configuration files into the Docker image\n"
+                        ],
+                        [
+                            88,
+                            "COPY shiny-server.sh /usr/bin/shiny-server.sh\n"
+                        ],
+                        [
+                            89,
+                            "\n"
+                        ],
+                        [
+                            90,
+                            "CMD [\"/usr/bin/shiny-server.sh\"]\n"
+                        ]
+                    ],
+                    "file_path": "/frontend-shiny/Dockerfile",
+                    "file_abs_path": "/src/frontend-shiny/Dockerfile",
+                    "repo_file_path": "/frontend-shiny/Dockerfile",
+                    "file_line_range": [
+                        1,
+                        90
+                    ],
+                    "resource": "/frontend-shiny/Dockerfile.",
+                    "evaluations": null,
+                    "check_class": "checkov.dockerfile.checks.ExposePort22",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.bridgecrew.io/docs/ensure-port-22-is-not-exposed",
+                    "details": []
+                },
+                {
+                    "check_id": "CKV_DOCKER_9",
+                    "bc_check_id": null,
+                    "check_name": "Ensure that APT isn't used",
+                    "check_result": {
+                        "result": "PASSED",
+                        "results_configuration": null
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "FROM python:3.9.6 AS builder\n"
+                        ],
+                        [
+                            2,
+                            "WORKDIR /build\n"
+                        ],
+                        [
+                            3,
+                            "COPY setup.py /build/\n"
+                        ],
+                        [
+                            4,
+                            "COPY src /build/src\n"
+                        ],
+                        [
+                            5,
+                            "RUN pip3 install .\n"
+                        ],
+                        [
+                            6,
+                            "\n"
+                        ],
+                        [
+                            7,
+                            "RUN rm -rf /build\n"
+                        ],
+                        [
+                            8,
+                            "WORKDIR /\n"
+                        ],
+                        [
+                            9,
+                            "ENTRYPOINT [\"python3\", \"-m\", \"connectors\"]"
+                        ]
+                    ],
+                    "file_path": "/connectors/Dockerfile",
+                    "file_abs_path": "/src/connectors/Dockerfile",
+                    "repo_file_path": "/connectors/Dockerfile",
+                    "file_line_range": [
+                        1,
+                        9
+                    ],
+                    "resource": "/connectors/Dockerfile.",
+                    "evaluations": null,
+                    "check_class": "checkov.dockerfile.checks.RunUsingAPT",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": null,
+                    "details": []
+                },
+                {
+                    "check_id": "CKV_DOCKER_5",
+                    "bc_check_id": "BC_DKR_4",
+                    "check_name": "Ensure update instructions are not use alone in the Dockerfile",
+                    "check_result": {
+                        "result": "PASSED",
+                        "results_configuration": null
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "FROM python:3.9.6 AS builder\n"
+                        ],
+                        [
+                            2,
+                            "WORKDIR /build\n"
+                        ],
+                        [
+                            3,
+                            "COPY setup.py /build/\n"
+                        ],
+                        [
+                            4,
+                            "COPY src /build/src\n"
+                        ],
+                        [
+                            5,
+                            "RUN pip3 install .\n"
+                        ],
+                        [
+                            6,
+                            "\n"
+                        ],
+                        [
+                            7,
+                            "RUN rm -rf /build\n"
+                        ],
+                        [
+                            8,
+                            "WORKDIR /\n"
+                        ],
+                        [
+                            9,
+                            "ENTRYPOINT [\"python3\", \"-m\", \"connectors\"]"
+                        ]
+                    ],
+                    "file_path": "/connectors/Dockerfile",
+                    "file_abs_path": "/src/connectors/Dockerfile",
+                    "repo_file_path": "/connectors/Dockerfile",
+                    "file_line_range": [
+                        1,
+                        9
+                    ],
+                    "resource": "/connectors/Dockerfile.",
+                    "evaluations": null,
+                    "check_class": "checkov.dockerfile.checks.UpdateNotAlone",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.bridgecrew.io/docs/ensure-update-instructions-are-not-used-alone-in-the-dockerfile",
+                    "details": []
+                },
+                {
+                    "check_id": "CKV_DOCKER_7",
+                    "bc_check_id": "BC_DKR_7",
+                    "check_name": "Ensure the base image uses a non latest version tag",
+                    "check_result": {
+                        "result": "PASSED",
+                        "results_configuration": null
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "FROM python:3.9.6 AS builder\n"
+                        ],
+                        [
+                            2,
+                            "WORKDIR /build\n"
+                        ],
+                        [
+                            3,
+                            "COPY setup.py /build/\n"
+                        ],
+                        [
+                            4,
+                            "COPY src /build/src\n"
+                        ],
+                        [
+                            5,
+                            "RUN pip3 install .\n"
+                        ],
+                        [
+                            6,
+                            "\n"
+                        ],
+                        [
+                            7,
+                            "RUN rm -rf /build\n"
+                        ],
+                        [
+                            8,
+                            "WORKDIR /\n"
+                        ],
+                        [
+                            9,
+                            "ENTRYPOINT [\"python3\", \"-m\", \"connectors\"]"
+                        ]
+                    ],
+                    "file_path": "/connectors/Dockerfile",
+                    "file_abs_path": "/src/connectors/Dockerfile",
+                    "repo_file_path": "/connectors/Dockerfile",
+                    "file_line_range": [
+                        1,
+                        9
+                    ],
+                    "resource": "/connectors/Dockerfile.",
+                    "evaluations": null,
+                    "check_class": "checkov.dockerfile.checks.ReferenceLatestTag",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.bridgecrew.io/docs/ensure-the-base-image-uses-a-non-latest-version-tag",
+                    "details": []
+                },
+                {
+                    "check_id": "CKV_DOCKER_11",
+                    "bc_check_id": null,
+                    "check_name": "Ensure From Alias are unique for multistage builds.",
+                    "check_result": {
+                        "result": "PASSED",
+                        "results_configuration": null
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "FROM python:3.9.6 AS builder\n"
+                        ],
+                        [
+                            2,
+                            "WORKDIR /build\n"
+                        ],
+                        [
+                            3,
+                            "COPY setup.py /build/\n"
+                        ],
+                        [
+                            4,
+                            "COPY src /build/src\n"
+                        ],
+                        [
+                            5,
+                            "RUN pip3 install .\n"
+                        ],
+                        [
+                            6,
+                            "\n"
+                        ],
+                        [
+                            7,
+                            "RUN rm -rf /build\n"
+                        ],
+                        [
+                            8,
+                            "WORKDIR /\n"
+                        ],
+                        [
+                            9,
+                            "ENTRYPOINT [\"python3\", \"-m\", \"connectors\"]"
+                        ]
+                    ],
+                    "file_path": "/connectors/Dockerfile",
+                    "file_abs_path": "/src/connectors/Dockerfile",
+                    "repo_file_path": "/connectors/Dockerfile",
+                    "file_line_range": [
+                        1,
+                        9
+                    ],
+                    "resource": "/connectors/Dockerfile.",
+                    "evaluations": null,
+                    "check_class": "checkov.dockerfile.checks.AliasIsUnique",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": null,
+                    "details": []
+                },
+                {
+                    "check_id": "CKV_DOCKER_10",
+                    "bc_check_id": null,
+                    "check_name": "Ensure that WORKDIR values are absolute paths",
+                    "check_result": {
+                        "result": "PASSED",
+                        "results_configuration": null
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "FROM python:3.9.6 AS builder\n"
+                        ],
+                        [
+                            2,
+                            "WORKDIR /build\n"
+                        ],
+                        [
+                            3,
+                            "COPY setup.py /build/\n"
+                        ],
+                        [
+                            4,
+                            "COPY src /build/src\n"
+                        ],
+                        [
+                            5,
+                            "RUN pip3 install .\n"
+                        ],
+                        [
+                            6,
+                            "\n"
+                        ],
+                        [
+                            7,
+                            "RUN rm -rf /build\n"
+                        ],
+                        [
+                            8,
+                            "WORKDIR /\n"
+                        ],
+                        [
+                            9,
+                            "ENTRYPOINT [\"python3\", \"-m\", \"connectors\"]"
+                        ]
+                    ],
+                    "file_path": "/connectors/Dockerfile",
+                    "file_abs_path": "/src/connectors/Dockerfile",
+                    "repo_file_path": "/connectors/Dockerfile",
+                    "file_line_range": [
+                        1,
+                        9
+                    ],
+                    "resource": "/connectors/Dockerfile.",
+                    "evaluations": null,
+                    "check_class": "checkov.dockerfile.checks.WorkdirIsAbsolute",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": null,
+                    "details": []
+                }
+            ],
+            "failed_checks": [
+                {
+                    "check_id": "CKV_DOCKER_7",
+                    "bc_check_id": "BC_DKR_7",
+                    "check_name": "Ensure the base image uses a non latest version tag",
+                    "check_result": {
+                        "result": "FAILED",
+                        "results_configuration": {
+                            "instruction": "FROM",
+                            "startline": 0,
+                            "endline": 0,
+                            "content": "FROM postgres:latest\n",
+                            "value": "postgres:latest"
+                        }
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "FROM postgres:latest\n"
+                        ]
+                    ],
+                    "file_path": "/db/Dockerfile",
+                    "file_abs_path": "/src/db/Dockerfile",
+                    "repo_file_path": "/db/Dockerfile",
+                    "file_line_range": [
+                        1,
+                        1
+                    ],
+                    "resource": "/db/Dockerfile.FROM",
+                    "evaluations": null,
+                    "check_class": "checkov.dockerfile.checks.ReferenceLatestTag",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.bridgecrew.io/docs/ensure-the-base-image-uses-a-non-latest-version-tag",
+                    "details": []
+                },
+                {
+                    "check_id": "CKV_DOCKER_3",
+                    "bc_check_id": "BC_DKR_3",
+                    "check_name": "Ensure that a user for the container has been created",
+                    "check_result": {
+                        "result": "FAILED",
+                        "results_configuration": null
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "FROM postgres:latest\n"
+                        ],
+                        [
+                            2,
+                            "ENV POSTGRES_USER root\n"
+                        ],
+                        [
+                            3,
+                            "ENV POSTGRES_PASSWORD q1w2e3r4\n"
+                        ],
+                        [
+                            4,
+                            "ENV POSTGRES_DB dash4ast\n"
+                        ],
+                        [
+                            5,
+                            "COPY dash4ast.sql /docker-entrypoint-initdb.d/\n"
+                        ],
+                        [
+                            6,
+                            "\n"
+                        ],
+                        [
+                            7,
+                            "EXPOSE 5432\n"
+                        ]
+                    ],
+                    "file_path": "/db/Dockerfile",
+                    "file_abs_path": "/src/db/Dockerfile",
+                    "repo_file_path": "/db/Dockerfile",
+                    "file_line_range": [
+                        1,
+                        7
+                    ],
+                    "resource": "/db/Dockerfile.",
+                    "evaluations": null,
+                    "check_class": "checkov.dockerfile.checks.UserExists",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.bridgecrew.io/docs/ensure-that-a-user-for-the-container-has-been-created",
+                    "details": []
+                },
+                {
+                    "check_id": "CKV_DOCKER_2",
+                    "bc_check_id": "BC_DKR_2",
+                    "check_name": "Ensure that HEALTHCHECK instructions have been added to container images",
+                    "check_result": {
+                        "result": "FAILED",
+                        "results_configuration": null
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "FROM postgres:latest\n"
+                        ],
+                        [
+                            2,
+                            "ENV POSTGRES_USER root\n"
+                        ],
+                        [
+                            3,
+                            "ENV POSTGRES_PASSWORD q1w2e3r4\n"
+                        ],
+                        [
+                            4,
+                            "ENV POSTGRES_DB dash4ast\n"
+                        ],
+                        [
+                            5,
+                            "COPY dash4ast.sql /docker-entrypoint-initdb.d/\n"
+                        ],
+                        [
+                            6,
+                            "\n"
+                        ],
+                        [
+                            7,
+                            "EXPOSE 5432\n"
+                        ]
+                    ],
+                    "file_path": "/db/Dockerfile",
+                    "file_abs_path": "/src/db/Dockerfile",
+                    "repo_file_path": "/db/Dockerfile",
+                    "file_line_range": [
+                        1,
+                        7
+                    ],
+                    "resource": "/db/Dockerfile.",
+                    "evaluations": null,
+                    "check_class": "checkov.dockerfile.checks.HealthcheckExists",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.bridgecrew.io/docs/ensure-that-healthcheck-instructions-have-been-added-to-container-images",
+                    "details": []
+                },
+                {
+                    "check_id": "CKV_DOCKER_3",
+                    "bc_check_id": "BC_DKR_3",
+                    "check_name": "Ensure that a user for the container has been created",
+                    "check_result": {
+                        "result": "FAILED",
+                        "results_configuration": null
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "# Install R version 3.6\n"
+                        ],
+                        [
+                            2,
+                            "FROM r-base:3.6.3\n"
+                        ],
+                        [
+                            3,
+                            "\n"
+                        ],
+                        [
+                            4,
+                            "# Install Ubuntu packages\n"
+                        ],
+                        [
+                            5,
+                            "RUN apt-get update && apt-get install -y \\\n"
+                        ],
+                        [
+                            6,
+                            "    sudo \\\n"
+                        ],
+                        [
+                            7,
+                            "    gdebi-core \\\n"
+                        ],
+                        [
+                            8,
+                            "    pandoc \\\n"
+                        ],
+                        [
+                            9,
+                            "    pandoc-citeproc \\\n"
+                        ],
+                        [
+                            10,
+                            "    libcurl4-gnutls-dev \\\n"
+                        ],
+                        [
+                            11,
+                            "    libcairo2-dev/unstable \\\n"
+                        ],
+                        [
+                            12,
+                            "    libxt-dev \\\n"
+                        ],
+                        [
+                            13,
+                            "    libmariadb-dev \\\n"
+                        ],
+                        [
+                            14,
+                            "    libssl-dev \\\n"
+                        ],
+                        [
+                            15,
+                            "    libpq-dev \\\n"
+                        ],
+                        [
+                            16,
+                            "    comerr-dev \\\n"
+                        ],
+                        [
+                            17,
+                            "    krb5-multidev \\\n"
+                        ],
+                        [
+                            18,
+                            "    libc6 \\\n"
+                        ],
+                        [
+                            19,
+                            "    libpq5\n"
+                        ],
+                        [
+                            20,
+                            "\n"
+                        ],
+                        [
+                            21,
+                            "# Download and install ShinyServer (latest version)\n"
+                        ],
+                        [
+                            22,
+                            "RUN wget --no-verbose https://s3.amazonaws.com/rstudio-shiny-server-os-build/ubuntu-12.04/x86_64/VERSION -O \"version.txt\" && \\\n"
+                        ],
+                        [
+                            23,
+                            "    VERSION=$(cat version.txt)  && \\\n"
+                        ],
+                        [
+                            24,
+                            "    wget --no-verbose \"https://s3.amazonaws.com/rstudio-shiny-server-os-build/ubuntu-12.04/x86_64/shiny-server-$VERSION-amd64.deb\" -O ss-latest.deb && \\\n"
+                        ],
+                        [
+                            25,
+                            "    gdebi -n ss-latest.deb && \\\n"
+                        ],
+                        [
+                            26,
+                            "    rm -f version.txt ss-latest.deb\n"
+                        ],
+                        [
+                            27,
+                            "\n"
+                        ],
+                        [
+                            28,
+                            "# Install R packages that are required\n"
+                        ],
+                        [
+                            29,
+                            "# TODO: add further package if you need!\n"
+                        ],
+                        [
+                            30,
+                            "RUN R -e \"install.packages('shiny', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            31,
+                            "RUN R -e \"install.packages('shinydashboard', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            32,
+                            "RUN R -e \"install.packages('shinyjs', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            33,
+                            "RUN R -e \"install.packages('shinyalert', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            34,
+                            "RUN R -e \"install.packages('plyr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            35,
+                            "RUN R -e \"install.packages('jsonlite', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            36,
+                            "RUN R -e \"install.packages('lubridate', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            37,
+                            "RUN R -e \"install.packages('readr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            38,
+                            "RUN R -e \"install.packages('fmsb', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            39,
+                            "RUN R -e \"install.packages('methods', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            40,
+                            "RUN R -e \"install.packages('DT', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            41,
+                            "RUN R -e \"install.packages('forcats', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            42,
+                            "RUN R -e \"install.packages('ggplot2', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            43,
+                            "RUN R -e \"install.packages('stringr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            44,
+                            "RUN R -e \"install.packages('openxlsx', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            45,
+                            "RUN R -e \"install.packages('roxygen2', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            46,
+                            "RUN R -e \"install.packages('rversions', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            47,
+                            "RUN R -e \"install.packages('xml2', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            48,
+                            "RUN R -e \"install.packages('devtools', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            49,
+                            "RUN R -e \"install.packages('wesanderson', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            50,
+                            "RUN R -e \"install.packages('RPostgres', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            51,
+                            "RUN R -e \"install.packages('RPostgreSQL', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            52,
+                            "RUN R -e \"install.packages('DBI', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            53,
+                            "RUN R -e \"install.packages('httr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            54,
+                            "RUN R -e \"remotes::install_github('ricardo-bion/ggradar')\"\n"
+                        ],
+                        [
+                            55,
+                            "RUN R -e \"install.packages('dplyr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            56,
+                            "RUN R -e \"install.packages('tidyr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            57,
+                            "RUN R -e \"install.packages('digest', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            58,
+                            "RUN R -e \"install.packages('data.table', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            59,
+                            "RUN R -e \"install.packages('scales', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            60,
+                            "RUN R -e \"install.packages('PKI', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            61,
+                            "RUN R -e \"install.packages('hexView', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            62,
+                            "RUN R -e \"install.packages('shinyWidgets', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            63,
+                            "RUN R -e \"install.packages('shinymanager', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            64,
+                            "\n"
+                        ],
+                        [
+                            65,
+                            "# Copy configuration files into the Docker image\n"
+                        ],
+                        [
+                            66,
+                            "RUN mkdir /srv/shiny-server/dash4ast\n"
+                        ],
+                        [
+                            67,
+                            "RUN mkdir /srv/shiny-server/dash4ast/reports\n"
+                        ],
+                        [
+                            68,
+                            "RUN mkdir /srv/shiny-server/dash4ast/images\n"
+                        ],
+                        [
+                            69,
+                            "RUN mkdir /srv/shiny-server/dash4ast/www\n"
+                        ],
+                        [
+                            70,
+                            "COPY shiny-server.conf  /etc/shiny-server/shiny-server.conf\n"
+                        ],
+                        [
+                            71,
+                            "COPY reports/demo/** /srv/shiny-server/dash4ast/reports/\n"
+                        ],
+                        [
+                            72,
+                            "COPY images/*.png /srv/shiny-server/dash4ast/images/\n"
+                        ],
+                        [
+                            73,
+                            "COPY constants.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            74,
+                            "COPY graphs.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            75,
+                            "COPY calculation.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            76,
+                            "COPY connectors.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            77,
+                            "COPY utilities.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            78,
+                            "COPY app.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            79,
+                            "COPY validations.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            80,
+                            "COPY www/favicon.ico /srv/shiny-server/dash4ast/www/\n"
+                        ],
+                        [
+                            81,
+                            "COPY www/*.png /srv/shiny-server/dash4ast/www/\n"
+                        ],
+                        [
+                            82,
+                            "COPY www/site.webmanifest /srv/shiny-server/dash4ast/www/\n"
+                        ],
+                        [
+                            83,
+                            "\n"
+                        ],
+                        [
+                            84,
+                            "# Make the ShinyApp available at port 3838\n"
+                        ],
+                        [
+                            85,
+                            "EXPOSE 3838\n"
+                        ],
+                        [
+                            86,
+                            "\n"
+                        ],
+                        [
+                            87,
+                            "# Copy further configuration files into the Docker image\n"
+                        ],
+                        [
+                            88,
+                            "COPY shiny-server.sh /usr/bin/shiny-server.sh\n"
+                        ],
+                        [
+                            89,
+                            "\n"
+                        ],
+                        [
+                            90,
+                            "CMD [\"/usr/bin/shiny-server.sh\"]\n"
+                        ]
+                    ],
+                    "file_path": "/frontend-shiny/Dockerfile",
+                    "file_abs_path": "/src/frontend-shiny/Dockerfile",
+                    "repo_file_path": "/frontend-shiny/Dockerfile",
+                    "file_line_range": [
+                        1,
+                        90
+                    ],
+                    "resource": "/frontend-shiny/Dockerfile.",
+                    "evaluations": null,
+                    "check_class": "checkov.dockerfile.checks.UserExists",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.bridgecrew.io/docs/ensure-that-a-user-for-the-container-has-been-created",
+                    "details": []
+                },
+                {
+                    "check_id": "CKV_DOCKER_2",
+                    "bc_check_id": "BC_DKR_2",
+                    "check_name": "Ensure that HEALTHCHECK instructions have been added to container images",
+                    "check_result": {
+                        "result": "FAILED",
+                        "results_configuration": null
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "# Install R version 3.6\n"
+                        ],
+                        [
+                            2,
+                            "FROM r-base:3.6.3\n"
+                        ],
+                        [
+                            3,
+                            "\n"
+                        ],
+                        [
+                            4,
+                            "# Install Ubuntu packages\n"
+                        ],
+                        [
+                            5,
+                            "RUN apt-get update && apt-get install -y \\\n"
+                        ],
+                        [
+                            6,
+                            "    sudo \\\n"
+                        ],
+                        [
+                            7,
+                            "    gdebi-core \\\n"
+                        ],
+                        [
+                            8,
+                            "    pandoc \\\n"
+                        ],
+                        [
+                            9,
+                            "    pandoc-citeproc \\\n"
+                        ],
+                        [
+                            10,
+                            "    libcurl4-gnutls-dev \\\n"
+                        ],
+                        [
+                            11,
+                            "    libcairo2-dev/unstable \\\n"
+                        ],
+                        [
+                            12,
+                            "    libxt-dev \\\n"
+                        ],
+                        [
+                            13,
+                            "    libmariadb-dev \\\n"
+                        ],
+                        [
+                            14,
+                            "    libssl-dev \\\n"
+                        ],
+                        [
+                            15,
+                            "    libpq-dev \\\n"
+                        ],
+                        [
+                            16,
+                            "    comerr-dev \\\n"
+                        ],
+                        [
+                            17,
+                            "    krb5-multidev \\\n"
+                        ],
+                        [
+                            18,
+                            "    libc6 \\\n"
+                        ],
+                        [
+                            19,
+                            "    libpq5\n"
+                        ],
+                        [
+                            20,
+                            "\n"
+                        ],
+                        [
+                            21,
+                            "# Download and install ShinyServer (latest version)\n"
+                        ],
+                        [
+                            22,
+                            "RUN wget --no-verbose https://s3.amazonaws.com/rstudio-shiny-server-os-build/ubuntu-12.04/x86_64/VERSION -O \"version.txt\" && \\\n"
+                        ],
+                        [
+                            23,
+                            "    VERSION=$(cat version.txt)  && \\\n"
+                        ],
+                        [
+                            24,
+                            "    wget --no-verbose \"https://s3.amazonaws.com/rstudio-shiny-server-os-build/ubuntu-12.04/x86_64/shiny-server-$VERSION-amd64.deb\" -O ss-latest.deb && \\\n"
+                        ],
+                        [
+                            25,
+                            "    gdebi -n ss-latest.deb && \\\n"
+                        ],
+                        [
+                            26,
+                            "    rm -f version.txt ss-latest.deb\n"
+                        ],
+                        [
+                            27,
+                            "\n"
+                        ],
+                        [
+                            28,
+                            "# Install R packages that are required\n"
+                        ],
+                        [
+                            29,
+                            "# TODO: add further package if you need!\n"
+                        ],
+                        [
+                            30,
+                            "RUN R -e \"install.packages('shiny', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            31,
+                            "RUN R -e \"install.packages('shinydashboard', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            32,
+                            "RUN R -e \"install.packages('shinyjs', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            33,
+                            "RUN R -e \"install.packages('shinyalert', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            34,
+                            "RUN R -e \"install.packages('plyr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            35,
+                            "RUN R -e \"install.packages('jsonlite', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            36,
+                            "RUN R -e \"install.packages('lubridate', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            37,
+                            "RUN R -e \"install.packages('readr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            38,
+                            "RUN R -e \"install.packages('fmsb', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            39,
+                            "RUN R -e \"install.packages('methods', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            40,
+                            "RUN R -e \"install.packages('DT', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            41,
+                            "RUN R -e \"install.packages('forcats', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            42,
+                            "RUN R -e \"install.packages('ggplot2', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            43,
+                            "RUN R -e \"install.packages('stringr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            44,
+                            "RUN R -e \"install.packages('openxlsx', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            45,
+                            "RUN R -e \"install.packages('roxygen2', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            46,
+                            "RUN R -e \"install.packages('rversions', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            47,
+                            "RUN R -e \"install.packages('xml2', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            48,
+                            "RUN R -e \"install.packages('devtools', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            49,
+                            "RUN R -e \"install.packages('wesanderson', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            50,
+                            "RUN R -e \"install.packages('RPostgres', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            51,
+                            "RUN R -e \"install.packages('RPostgreSQL', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            52,
+                            "RUN R -e \"install.packages('DBI', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            53,
+                            "RUN R -e \"install.packages('httr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            54,
+                            "RUN R -e \"remotes::install_github('ricardo-bion/ggradar')\"\n"
+                        ],
+                        [
+                            55,
+                            "RUN R -e \"install.packages('dplyr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            56,
+                            "RUN R -e \"install.packages('tidyr', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            57,
+                            "RUN R -e \"install.packages('digest', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            58,
+                            "RUN R -e \"install.packages('data.table', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            59,
+                            "RUN R -e \"install.packages('scales', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            60,
+                            "RUN R -e \"install.packages('PKI', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            61,
+                            "RUN R -e \"install.packages('hexView', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            62,
+                            "RUN R -e \"install.packages('shinyWidgets', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            63,
+                            "RUN R -e \"install.packages('shinymanager', repos = 'http://cran.us.r-project.org')\"\n"
+                        ],
+                        [
+                            64,
+                            "\n"
+                        ],
+                        [
+                            65,
+                            "# Copy configuration files into the Docker image\n"
+                        ],
+                        [
+                            66,
+                            "RUN mkdir /srv/shiny-server/dash4ast\n"
+                        ],
+                        [
+                            67,
+                            "RUN mkdir /srv/shiny-server/dash4ast/reports\n"
+                        ],
+                        [
+                            68,
+                            "RUN mkdir /srv/shiny-server/dash4ast/images\n"
+                        ],
+                        [
+                            69,
+                            "RUN mkdir /srv/shiny-server/dash4ast/www\n"
+                        ],
+                        [
+                            70,
+                            "COPY shiny-server.conf  /etc/shiny-server/shiny-server.conf\n"
+                        ],
+                        [
+                            71,
+                            "COPY reports/demo/** /srv/shiny-server/dash4ast/reports/\n"
+                        ],
+                        [
+                            72,
+                            "COPY images/*.png /srv/shiny-server/dash4ast/images/\n"
+                        ],
+                        [
+                            73,
+                            "COPY constants.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            74,
+                            "COPY graphs.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            75,
+                            "COPY calculation.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            76,
+                            "COPY connectors.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            77,
+                            "COPY utilities.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            78,
+                            "COPY app.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            79,
+                            "COPY validations.R /srv/shiny-server/dash4ast/\n"
+                        ],
+                        [
+                            80,
+                            "COPY www/favicon.ico /srv/shiny-server/dash4ast/www/\n"
+                        ],
+                        [
+                            81,
+                            "COPY www/*.png /srv/shiny-server/dash4ast/www/\n"
+                        ],
+                        [
+                            82,
+                            "COPY www/site.webmanifest /srv/shiny-server/dash4ast/www/\n"
+                        ],
+                        [
+                            83,
+                            "\n"
+                        ],
+                        [
+                            84,
+                            "# Make the ShinyApp available at port 3838\n"
+                        ],
+                        [
+                            85,
+                            "EXPOSE 3838\n"
+                        ],
+                        [
+                            86,
+                            "\n"
+                        ],
+                        [
+                            87,
+                            "# Copy further configuration files into the Docker image\n"
+                        ],
+                        [
+                            88,
+                            "COPY shiny-server.sh /usr/bin/shiny-server.sh\n"
+                        ],
+                        [
+                            89,
+                            "\n"
+                        ],
+                        [
+                            90,
+                            "CMD [\"/usr/bin/shiny-server.sh\"]\n"
+                        ]
+                    ],
+                    "file_path": "/frontend-shiny/Dockerfile",
+                    "file_abs_path": "/src/frontend-shiny/Dockerfile",
+                    "repo_file_path": "/frontend-shiny/Dockerfile",
+                    "file_line_range": [
+                        1,
+                        90
+                    ],
+                    "resource": "/frontend-shiny/Dockerfile.",
+                    "evaluations": null,
+                    "check_class": "checkov.dockerfile.checks.HealthcheckExists",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.bridgecrew.io/docs/ensure-that-healthcheck-instructions-have-been-added-to-container-images",
+                    "details": []
+                },
+                {
+                    "check_id": "CKV_DOCKER_3",
+                    "bc_check_id": "BC_DKR_3",
+                    "check_name": "Ensure that a user for the container has been created",
+                    "check_result": {
+                        "result": "FAILED",
+                        "results_configuration": null
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "FROM python:3.9.6 AS builder\n"
+                        ],
+                        [
+                            2,
+                            "WORKDIR /build\n"
+                        ],
+                        [
+                            3,
+                            "COPY setup.py /build/\n"
+                        ],
+                        [
+                            4,
+                            "COPY src /build/src\n"
+                        ],
+                        [
+                            5,
+                            "RUN pip3 install .\n"
+                        ],
+                        [
+                            6,
+                            "\n"
+                        ],
+                        [
+                            7,
+                            "RUN rm -rf /build\n"
+                        ],
+                        [
+                            8,
+                            "WORKDIR /\n"
+                        ],
+                        [
+                            9,
+                            "ENTRYPOINT [\"python3\", \"-m\", \"connectors\"]"
+                        ]
+                    ],
+                    "file_path": "/connectors/Dockerfile",
+                    "file_abs_path": "/src/connectors/Dockerfile",
+                    "repo_file_path": "/connectors/Dockerfile",
+                    "file_line_range": [
+                        1,
+                        9
+                    ],
+                    "resource": "/connectors/Dockerfile.",
+                    "evaluations": null,
+                    "check_class": "checkov.dockerfile.checks.UserExists",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.bridgecrew.io/docs/ensure-that-a-user-for-the-container-has-been-created",
+                    "details": []
+                },
+                {
+                    "check_id": "CKV_DOCKER_2",
+                    "bc_check_id": "BC_DKR_2",
+                    "check_name": "Ensure that HEALTHCHECK instructions have been added to container images",
+                    "check_result": {
+                        "result": "FAILED",
+                        "results_configuration": null
+                    },
+                    "code_block": [
+                        [
+                            1,
+                            "FROM python:3.9.6 AS builder\n"
+                        ],
+                        [
+                            2,
+                            "WORKDIR /build\n"
+                        ],
+                        [
+                            3,
+                            "COPY setup.py /build/\n"
+                        ],
+                        [
+                            4,
+                            "COPY src /build/src\n"
+                        ],
+                        [
+                            5,
+                            "RUN pip3 install .\n"
+                        ],
+                        [
+                            6,
+                            "\n"
+                        ],
+                        [
+                            7,
+                            "RUN rm -rf /build\n"
+                        ],
+                        [
+                            8,
+                            "WORKDIR /\n"
+                        ],
+                        [
+                            9,
+                            "ENTRYPOINT [\"python3\", \"-m\", \"connectors\"]"
+                        ]
+                    ],
+                    "file_path": "/connectors/Dockerfile",
+                    "file_abs_path": "/src/connectors/Dockerfile",
+                    "repo_file_path": "/connectors/Dockerfile",
+                    "file_line_range": [
+                        1,
+                        9
+                    ],
+                    "resource": "/connectors/Dockerfile.",
+                    "evaluations": null,
+                    "check_class": "checkov.dockerfile.checks.HealthcheckExists",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": "https://docs.bridgecrew.io/docs/ensure-that-healthcheck-instructions-have-been-added-to-container-images",
+                    "details": []
+                }
+            ],
+            "skipped_checks": [],
+            "parsing_errors": []
+        },
+        "summary": {
+            "passed": 12,
+            "failed": 7,
+            "skipped": 0,
+            "parsing_errors": 0,
+            "resource_count": 3,
+            "checkov_version": "2.1.160"
+        },
+        "url": "Add an api key '--bc-api-key <api-key>' to see more detailed insights via https://bridgecrew.cloud"
+    },
+    {
+        "check_type": "gitlab_ci",
+        "results": {
+            "passed_checks": [
+                {
+                    "check_id": "CKV_GITLABCI_1",
+                    "bc_check_id": null,
+                    "check_name": "Suspicious use of curl with CI environment variables in script",
+                    "check_result": {
+                        "result": "PASSED",
+                        "results_configuration": "ansible-galaxy install dev-sec.os-hardening"
+                    },
+                    "code_block": [],
+                    "file_path": "/.gitlab-ci.yml",
+                    "file_abs_path": "/src/.gitlab-ci.yml",
+                    "repo_file_path": "/.gitlab-ci.yml",
+                    "file_line_range": [
+                        0,
+                        1
+                    ],
+                    "resource": "./.gitlab-ci.yml.*.script[].*.script[].CKV_GITLABCI_1",
+                    "evaluations": null,
+                    "check_class": "checkov.gitlab_ci.checks.job.SuspectCurlInScript",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": null,
+                    "details": []
+                },
+                {
+                    "check_id": "CKV_GITLABCI_1",
+                    "bc_check_id": null,
+                    "check_name": "Suspicious use of curl with CI environment variables in script",
+                    "check_result": {
+                        "result": "PASSED",
+                        "results_configuration": "docker push $CI_REGISTRY/postgre:$VERSION"
+                    },
+                    "code_block": [],
+                    "file_path": "/db/.gitlab-ci.yml",
+                    "file_abs_path": "/src/db/.gitlab-ci.yml",
+                    "repo_file_path": "/db/.gitlab-ci.yml",
+                    "file_line_range": [
+                        0,
+                        1
+                    ],
+                    "resource": "./db/.gitlab-ci.yml.*.script[].*.script[].CKV_GITLABCI_1",
+                    "evaluations": null,
+                    "check_class": "checkov.gitlab_ci.checks.job.SuspectCurlInScript",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": null,
+                    "details": []
+                },
+                {
+                    "check_id": "CKV_GITLABCI_2",
+                    "bc_check_id": null,
+                    "check_name": "Avoid creating rules that generate double pipelines",
+                    "check_result": {
+                        "result": "PASSED",
+                        "results_configuration": [
+                            {
+                                "if": "$CI_PIPELINE_SOURCE == \"merge_request_event\"",
+                                "when": "manual",
+                                "__startline__": 25,
+                                "__endline__": 27
+                            }
+                        ]
+                    },
+                    "code_block": [
+                        [
+                            24,
+                            "  rules:\n"
+                        ],
+                        [
+                            25,
+                            "    - if: $CI_PIPELINE_SOURCE == \"merge_request_event\"\n"
+                        ],
+                        [
+                            26,
+                            "      when: manual\n"
+                        ],
+                        [
+                            27,
+                            "  script:\n"
+                        ],
+                        [
+                            28,
+                            "    - echo \"Pushing postgre docker images to registry\"\n"
+                        ]
+                    ],
+                    "file_path": "/db/.gitlab-ci.yml",
+                    "file_abs_path": "/src/db/.gitlab-ci.yml",
+                    "repo_file_path": "/db/.gitlab-ci.yml",
+                    "file_line_range": [
+                        24,
+                        28
+                    ],
+                    "resource": "./db/.gitlab-ci.yml.*.rules.*.rules.CKV_GITLABCI_2[25:27]",
+                    "evaluations": null,
+                    "check_class": "checkov.gitlab_ci.checks.job.AvoidDoublePipelines",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": null,
+                    "details": []
+                },
+                {
+                    "check_id": "CKV_GITLABCI_1",
+                    "bc_check_id": null,
+                    "check_name": "Suspicious use of curl with CI environment variables in script",
+                    "check_result": {
+                        "result": "PASSED",
+                        "results_configuration": "docker push dash4ast/frontend-shiny:$VERSION"
+                    },
+                    "code_block": [],
+                    "file_path": "/frontend-shiny/.gitlab-ci.yml",
+                    "file_abs_path": "/src/frontend-shiny/.gitlab-ci.yml",
+                    "repo_file_path": "/frontend-shiny/.gitlab-ci.yml",
+                    "file_line_range": [
+                        0,
+                        1
+                    ],
+                    "resource": "./frontend-shiny/.gitlab-ci.yml.*.script[].*.script[].CKV_GITLABCI_1",
+                    "evaluations": null,
+                    "check_class": "checkov.gitlab_ci.checks.job.SuspectCurlInScript",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": null,
+                    "details": []
+                },
+                {
+                    "check_id": "CKV_GITLABCI_1",
+                    "bc_check_id": null,
+                    "check_name": "Suspicious use of curl with CI environment variables in script",
+                    "check_result": {
+                        "result": "PASSED",
+                        "results_configuration": "python3 dash4ast-cli-extract-sonarqube.py --host ${DASH4AST_ENDPOINT_QA} --application-tool dash4ast-frontend-angular --application-dash4ast dash4ast-frontend-angular --url-tool ${SONAR_HOST_URL} --user-tool ${SONAR_USER} --pwd-tool ${SONAR_PWD}"
+                    },
+                    "code_block": [],
+                    "file_path": "/frontend-angular/.gitlab-ci.yml",
+                    "file_abs_path": "/src/frontend-angular/.gitlab-ci.yml",
+                    "repo_file_path": "/frontend-angular/.gitlab-ci.yml",
+                    "file_line_range": [
+                        0,
+                        1
+                    ],
+                    "resource": "./frontend-angular/.gitlab-ci.yml.*.script[].*.script[].CKV_GITLABCI_1",
+                    "evaluations": null,
+                    "check_class": "checkov.gitlab_ci.checks.job.SuspectCurlInScript",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": null,
+                    "details": []
+                },
+                {
+                    "check_id": "CKV_GITLABCI_1",
+                    "bc_check_id": null,
+                    "check_name": "Suspicious use of curl with CI environment variables in script",
+                    "check_result": {
+                        "result": "PASSED",
+                        "results_configuration": "docker run --rm -w /src -v $(pwd):/src bridgecrew/checkov -d ./connectors -o json | tee checkov-output.json"
+                    },
+                    "code_block": [],
+                    "file_path": "/connectors/.gitlab-ci.yml",
+                    "file_abs_path": "/src/connectors/.gitlab-ci.yml",
+                    "repo_file_path": "/connectors/.gitlab-ci.yml",
+                    "file_line_range": [
+                        0,
+                        1
+                    ],
+                    "resource": "./connectors/.gitlab-ci.yml.*.script[].*.script[].CKV_GITLABCI_1",
+                    "evaluations": null,
+                    "check_class": "checkov.gitlab_ci.checks.job.SuspectCurlInScript",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": null,
+                    "details": []
+                },
+                {
+                    "check_id": "CKV_GITLABCI_1",
+                    "bc_check_id": null,
+                    "check_name": "Suspicious use of curl with CI environment variables in script",
+                    "check_result": {
+                        "result": "PASSED",
+                        "results_configuration": "python3 dash4ast-cli-extract-blackduck.py --host ${DASH4AST_ENDPOINT_QA} --application-tool demo/dash4ast/tests --application-dash4ast dash4ast-tests --url-tool ${BLACKDUCK_URL} --api-key-tool ${BLACKDUCK_API_TOKEN}"
+                    },
+                    "code_block": [],
+                    "file_path": "/tests/.gitlab-ci.yml",
+                    "file_abs_path": "/src/tests/.gitlab-ci.yml",
+                    "repo_file_path": "/tests/.gitlab-ci.yml",
+                    "file_line_range": [
+                        0,
+                        1
+                    ],
+                    "resource": "./tests/.gitlab-ci.yml.*.script[].*.script[].CKV_GITLABCI_1",
+                    "evaluations": null,
+                    "check_class": "checkov.gitlab_ci.checks.job.SuspectCurlInScript",
+                    "fixed_definition": null,
+                    "entity_tags": null,
+                    "caller_file_path": null,
+                    "caller_file_line_range": null,
+                    "resource_address": null,
+                    "severity": null,
+                    "bc_category": null,
+                    "benchmarks": null,
+                    "description": null,
+                    "short_description": null,
+                    "vulnerability_details": null,
+                    "connected_node": null,
+                    "guideline": null,
+                    "details": []
+                }
+            ],
+            "failed_checks": [],
+            "skipped_checks": [],
+            "parsing_errors": []
+        },
+        "summary": {
+            "passed": 7,
+            "failed": 0,
+            "skipped": 0,
+            "parsing_errors": 0,
+            "resource_count": 0,
+            "checkov_version": "2.1.160"
+        },
+        "url": "Add an api key '--bc-api-key <api-key>' to see more detailed insights via https://bridgecrew.cloud"
+    }
+]
