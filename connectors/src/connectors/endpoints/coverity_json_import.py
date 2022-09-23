@@ -145,5 +145,24 @@ def add_vulnerability(db_session, vulnerability):
     db_session.flush()
 
 
+def test():
+    report = open('/home/sebas/tas/source/dash4ast-community/support/connectors/test/coverity-report.json', 'r').read()
+    content = json.loads(report)
+    print(len(content['issues']))
+    for issue in content['issues']:
+        print_vulnerability(issue)
+
+
+def print_vulnerability(issue):
+    print(hashlib.md5(str(issue['mergeKey']).encode()).hexdigest())
+    print(issue['checkerProperties']['subcategoryShortDescription'])
+    print(issue['checkerName'])
+    print(issue['checkerProperties']['impact'].upper())
+    print("CWE: " + str(issue['checkerProperties']['cweCategory']))
+    print(issue['strippedMainEventFilePathname'])
+    print(issue['mainEventLineNumber'])
+
+
 if __name__ == '__main__':
     extract()
+    #test()
