@@ -26,14 +26,14 @@ Use demo/dash4ast
 * Docker
 * Docker-compose
 * Git
-* Open Ports: 3838, 5000, 5433
+* Open Ports: 3838, 5000
 
 ## Integration with your security tools in a CI/CD pipeline
 
 - Use dash4ast client in the next way:
 
 ```
-python3 dash4ast-cli-import-local-report --host ${DASH4AST_ENDPOINT_QA} --application YOUR_APP --report REPORT_PATH --scan SCAN_TOOL
+python3 client/dash4ast-cli-import-local-report.py --host ${DASH4AST_ENDPOINT_QA} --application YOUR_APP --report REPORT_PATH --scan SCAN_TOOL
 ```
 
 Where:
