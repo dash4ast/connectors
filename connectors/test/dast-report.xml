@@ -1,0 +1,788 @@
+<?xml version="1.0"?>
+<OWASPZAPReport version="D-2022-08-08" generated="Thu, 22 Sep 2022 07:59:04">
+	
+		<site name="https://mergereq.sathound.labengers.net" host="mergereq.sathound.labengers.net" port="443" ssl="true">
+			<alerts>
+				<alertitem>
+						<pluginid>10095</pluginid>
+						<alertRef>10095</alertRef>
+						<alert>Backup File Disclosure</alert>
+						<name>Backup File Disclosure</name>
+						<riskcode>2</riskcode>
+						<confidence>2</confidence>
+						<riskdesc>Medium (Medium)</riskdesc>
+						<confidencedesc>Medium</confidencedesc>
+						<desc>&lt;p&gt;A backup of the file was disclosed by the web server&lt;/p&gt;</desc>
+						<instances>
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/Copy%20(2)%20of%20login.do</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>https://mergereq.sathound.labengers.net/authenticationendpoint/Copy%20(2)%20of%20login.do</attack>
+									<evidence>A backup of [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do?client_id=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;commonAuthCallerPath=%252Foauth2%252Fauthorize&amp;forceAuth=false&amp;nonce=a945e4c9879199692d81aafbe67fc34a&amp;passiveAuth=false&amp;redirect_uri=https%253A%252F%252Fmergereq.sathound.labengers.net%252Fcallback&amp;response_type=code&amp;scope=openid+email+profile&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;tenantDomain=carbon.super&amp;sessionDataKey=604b43f5-3d18-40d6-87eb-6f8b97c92cd9&amp;relyingParty=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;type=oidc&amp;sp=DeeperVision+Self-Trained+AI&amp;isSaaSApp=false&amp;authenticators=BasicAuthenticator%253ALOCAL] is available at [https://mergereq.sathound.labengers.net/authenticationendpoint/Copy%20(2)%20of%20login.do]</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/Copy%20(3)%20of%20login.do</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>https://mergereq.sathound.labengers.net/authenticationendpoint/Copy%20(3)%20of%20login.do</attack>
+									<evidence>A backup of [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do?client_id=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;commonAuthCallerPath=%252Foauth2%252Fauthorize&amp;forceAuth=false&amp;nonce=a945e4c9879199692d81aafbe67fc34a&amp;passiveAuth=false&amp;redirect_uri=https%253A%252F%252Fmergereq.sathound.labengers.net%252Fcallback&amp;response_type=code&amp;scope=openid+email+profile&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;tenantDomain=carbon.super&amp;sessionDataKey=604b43f5-3d18-40d6-87eb-6f8b97c92cd9&amp;relyingParty=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;type=oidc&amp;sp=DeeperVision+Self-Trained+AI&amp;isSaaSApp=false&amp;authenticators=BasicAuthenticator%253ALOCAL] is available at [https://mergereq.sathound.labengers.net/authenticationendpoint/Copy%20(3)%20of%20login.do]</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/Copy%20of%20login.do</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>https://mergereq.sathound.labengers.net/authenticationendpoint/Copy%20of%20login.do</attack>
+									<evidence>A backup of [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do?client_id=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;commonAuthCallerPath=%252Foauth2%252Fauthorize&amp;forceAuth=false&amp;nonce=a945e4c9879199692d81aafbe67fc34a&amp;passiveAuth=false&amp;redirect_uri=https%253A%252F%252Fmergereq.sathound.labengers.net%252Fcallback&amp;response_type=code&amp;scope=openid+email+profile&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;tenantDomain=carbon.super&amp;sessionDataKey=604b43f5-3d18-40d6-87eb-6f8b97c92cd9&amp;relyingParty=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;type=oidc&amp;sp=DeeperVision+Self-Trained+AI&amp;isSaaSApp=false&amp;authenticators=BasicAuthenticator%253ALOCAL] is available at [https://mergereq.sathound.labengers.net/authenticationendpoint/Copy%20of%20login.do]</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.bac</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.bac</attack>
+									<evidence>A backup of [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do?client_id=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;commonAuthCallerPath=%252Foauth2%252Fauthorize&amp;forceAuth=false&amp;nonce=a945e4c9879199692d81aafbe67fc34a&amp;passiveAuth=false&amp;redirect_uri=https%253A%252F%252Fmergereq.sathound.labengers.net%252Fcallback&amp;response_type=code&amp;scope=openid+email+profile&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;tenantDomain=carbon.super&amp;sessionDataKey=604b43f5-3d18-40d6-87eb-6f8b97c92cd9&amp;relyingParty=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;type=oidc&amp;sp=DeeperVision+Self-Trained+AI&amp;isSaaSApp=false&amp;authenticators=BasicAuthenticator%253ALOCAL] is available at [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.bac]</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.backup</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.backup</attack>
+									<evidence>A backup of [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do?client_id=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;commonAuthCallerPath=%252Foauth2%252Fauthorize&amp;forceAuth=false&amp;nonce=a945e4c9879199692d81aafbe67fc34a&amp;passiveAuth=false&amp;redirect_uri=https%253A%252F%252Fmergereq.sathound.labengers.net%252Fcallback&amp;response_type=code&amp;scope=openid+email+profile&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;tenantDomain=carbon.super&amp;sessionDataKey=604b43f5-3d18-40d6-87eb-6f8b97c92cd9&amp;relyingParty=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;type=oidc&amp;sp=DeeperVision+Self-Trained+AI&amp;isSaaSApp=false&amp;authenticators=BasicAuthenticator%253ALOCAL] is available at [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.backup]</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.bak</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.bak</attack>
+									<evidence>A backup of [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do?client_id=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;commonAuthCallerPath=%252Foauth2%252Fauthorize&amp;forceAuth=false&amp;nonce=a945e4c9879199692d81aafbe67fc34a&amp;passiveAuth=false&amp;redirect_uri=https%253A%252F%252Fmergereq.sathound.labengers.net%252Fcallback&amp;response_type=code&amp;scope=openid+email+profile&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;tenantDomain=carbon.super&amp;sessionDataKey=604b43f5-3d18-40d6-87eb-6f8b97c92cd9&amp;relyingParty=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;type=oidc&amp;sp=DeeperVision+Self-Trained+AI&amp;isSaaSApp=false&amp;authenticators=BasicAuthenticator%253ALOCAL] is available at [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.bak]</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.jar</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.jar</attack>
+									<evidence>A backup of [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do?client_id=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;commonAuthCallerPath=%252Foauth2%252Fauthorize&amp;forceAuth=false&amp;nonce=a945e4c9879199692d81aafbe67fc34a&amp;passiveAuth=false&amp;redirect_uri=https%253A%252F%252Fmergereq.sathound.labengers.net%252Fcallback&amp;response_type=code&amp;scope=openid+email+profile&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;tenantDomain=carbon.super&amp;sessionDataKey=604b43f5-3d18-40d6-87eb-6f8b97c92cd9&amp;relyingParty=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;type=oidc&amp;sp=DeeperVision+Self-Trained+AI&amp;isSaaSApp=false&amp;authenticators=BasicAuthenticator%253ALOCAL] is available at [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.jar]</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.log</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.log</attack>
+									<evidence>A backup of [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do?client_id=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;commonAuthCallerPath=%252Foauth2%252Fauthorize&amp;forceAuth=false&amp;nonce=a945e4c9879199692d81aafbe67fc34a&amp;passiveAuth=false&amp;redirect_uri=https%253A%252F%252Fmergereq.sathound.labengers.net%252Fcallback&amp;response_type=code&amp;scope=openid+email+profile&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;tenantDomain=carbon.super&amp;sessionDataKey=604b43f5-3d18-40d6-87eb-6f8b97c92cd9&amp;relyingParty=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;type=oidc&amp;sp=DeeperVision+Self-Trained+AI&amp;isSaaSApp=false&amp;authenticators=BasicAuthenticator%253ALOCAL] is available at [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.log]</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.old</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.old</attack>
+									<evidence>A backup of [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do?client_id=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;commonAuthCallerPath=%252Foauth2%252Fauthorize&amp;forceAuth=false&amp;nonce=a945e4c9879199692d81aafbe67fc34a&amp;passiveAuth=false&amp;redirect_uri=https%253A%252F%252Fmergereq.sathound.labengers.net%252Fcallback&amp;response_type=code&amp;scope=openid+email+profile&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;tenantDomain=carbon.super&amp;sessionDataKey=604b43f5-3d18-40d6-87eb-6f8b97c92cd9&amp;relyingParty=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;type=oidc&amp;sp=DeeperVision+Self-Trained+AI&amp;isSaaSApp=false&amp;authenticators=BasicAuthenticator%253ALOCAL] is available at [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.old]</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.swp</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.swp</attack>
+									<evidence>A backup of [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do?client_id=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;commonAuthCallerPath=%252Foauth2%252Fauthorize&amp;forceAuth=false&amp;nonce=a945e4c9879199692d81aafbe67fc34a&amp;passiveAuth=false&amp;redirect_uri=https%253A%252F%252Fmergereq.sathound.labengers.net%252Fcallback&amp;response_type=code&amp;scope=openid+email+profile&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;tenantDomain=carbon.super&amp;sessionDataKey=604b43f5-3d18-40d6-87eb-6f8b97c92cd9&amp;relyingParty=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;type=oidc&amp;sp=DeeperVision+Self-Trained+AI&amp;isSaaSApp=false&amp;authenticators=BasicAuthenticator%253ALOCAL] is available at [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.swp]</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.tar</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.tar</attack>
+									<evidence>A backup of [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do?client_id=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;commonAuthCallerPath=%252Foauth2%252Fauthorize&amp;forceAuth=false&amp;nonce=a945e4c9879199692d81aafbe67fc34a&amp;passiveAuth=false&amp;redirect_uri=https%253A%252F%252Fmergereq.sathound.labengers.net%252Fcallback&amp;response_type=code&amp;scope=openid+email+profile&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;tenantDomain=carbon.super&amp;sessionDataKey=604b43f5-3d18-40d6-87eb-6f8b97c92cd9&amp;relyingParty=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;type=oidc&amp;sp=DeeperVision+Self-Trained+AI&amp;isSaaSApp=false&amp;authenticators=BasicAuthenticator%253ALOCAL] is available at [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.tar]</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.zip</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.zip</attack>
+									<evidence>A backup of [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do?client_id=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;commonAuthCallerPath=%252Foauth2%252Fauthorize&amp;forceAuth=false&amp;nonce=a945e4c9879199692d81aafbe67fc34a&amp;passiveAuth=false&amp;redirect_uri=https%253A%252F%252Fmergereq.sathound.labengers.net%252Fcallback&amp;response_type=code&amp;scope=openid+email+profile&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;tenantDomain=carbon.super&amp;sessionDataKey=604b43f5-3d18-40d6-87eb-6f8b97c92cd9&amp;relyingParty=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;type=oidc&amp;sp=DeeperVision+Self-Trained+AI&amp;isSaaSApp=false&amp;authenticators=BasicAuthenticator%253ALOCAL] is available at [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.zip]</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.~bk</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.~bk</attack>
+									<evidence>A backup of [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do?client_id=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;commonAuthCallerPath=%252Foauth2%252Fauthorize&amp;forceAuth=false&amp;nonce=a945e4c9879199692d81aafbe67fc34a&amp;passiveAuth=false&amp;redirect_uri=https%253A%252F%252Fmergereq.sathound.labengers.net%252Fcallback&amp;response_type=code&amp;scope=openid+email+profile&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;tenantDomain=carbon.super&amp;sessionDataKey=604b43f5-3d18-40d6-87eb-6f8b97c92cd9&amp;relyingParty=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;type=oidc&amp;sp=DeeperVision+Self-Trained+AI&amp;isSaaSApp=false&amp;authenticators=BasicAuthenticator%253ALOCAL] is available at [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do.~bk]</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do~</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do~</attack>
+									<evidence>A backup of [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do?client_id=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;commonAuthCallerPath=%252Foauth2%252Fauthorize&amp;forceAuth=false&amp;nonce=a945e4c9879199692d81aafbe67fc34a&amp;passiveAuth=false&amp;redirect_uri=https%253A%252F%252Fmergereq.sathound.labengers.net%252Fcallback&amp;response_type=code&amp;scope=openid+email+profile&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;tenantDomain=carbon.super&amp;sessionDataKey=604b43f5-3d18-40d6-87eb-6f8b97c92cd9&amp;relyingParty=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;type=oidc&amp;sp=DeeperVision+Self-Trained+AI&amp;isSaaSApp=false&amp;authenticators=BasicAuthenticator%253ALOCAL] is available at [https://mergereq.sathound.labengers.net/authenticationendpoint/login.do~]</evidence>
+								</instance>
+							
+						</instances>
+						<count>14</count>
+						<solution>&lt;p&gt;Do not edit files in-situ on the web server, and ensure that un-necessary files (including hidden files) are removed from the web server.&lt;/p&gt;</solution>
+						<otherinfo>&lt;p&gt;https://mergereq.sathound.labengers.net/authenticationendpoint/login.do?client_id=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;commonAuthCallerPath=%252Foauth2%252Fauthorize&amp;forceAuth=false&amp;nonce=a945e4c9879199692d81aafbe67fc34a&amp;passiveAuth=false&amp;redirect_uri=https%253A%252F%252Fmergereq.sathound.labengers.net%252Fcallback&amp;response_type=code&amp;scope=openid+email+profile&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;tenantDomain=carbon.super&amp;sessionDataKey=604b43f5-3d18-40d6-87eb-6f8b97c92cd9&amp;relyingParty=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;type=oidc&amp;sp=DeeperVision+Self-Trained+AI&amp;isSaaSApp=false&amp;authenticators=BasicAuthenticator%253ALOCAL&lt;/p&gt;</otherinfo>
+						<reference>&lt;p&gt;https://cwe.mitre.org/data/definitions/530.html&lt;/p&gt;&lt;p&gt;https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/02-Configuration_and_Deployment_Management_Testing/04-Review_Old_Backup_and_Unreferenced_Files_for_Sensitive_Information.html&lt;/p&gt;</reference>
+						<cweid>530</cweid>
+						<wascid>34</wascid>
+						<sourceid>6452</sourceid>
+					</alertitem>
+				
+				
+					<alertitem>
+						<pluginid>10098</pluginid>
+						<alertRef>10098</alertRef>
+						<alert>Cross-Domain Misconfiguration</alert>
+						<name>Cross-Domain Misconfiguration</name>
+						<riskcode>2</riskcode>
+						<confidence>2</confidence>
+						<riskdesc>Medium (Medium)</riskdesc>
+						<confidencedesc>Medium</confidencedesc>
+						<desc>&lt;p&gt;Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server&lt;/p&gt;</desc>
+						<instances>
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/</uri>
+									<method>GET</method>
+									<param></param>
+									<attack></attack>
+									<evidence>Access-Control-Allow-Origin: *</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/callback?code=d9841933-becb-3e5e-b6d5-55c80447e540&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;session_state=b3e6804e586ac5d049ca9c6b20ec2c68f2ccd36c64eb76e38a4ebbe583c0dd02.N5u_QTPdHWDnshjmUHPuwg</uri>
+									<method>GET</method>
+									<param></param>
+									<attack></attack>
+									<evidence>Access-Control-Allow-Origin: *</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/catalogue-service/info/catalogues</uri>
+									<method>GET</method>
+									<param></param>
+									<attack></attack>
+									<evidence>Access-Control-Allow-Origin: *</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/main.5c4dfcd98861b3ec57f4.js</uri>
+									<method>GET</method>
+									<param></param>
+									<attack></attack>
+									<evidence>Access-Control-Allow-Origin: *</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/ngsw-worker.js</uri>
+									<method>GET</method>
+									<param></param>
+									<attack></attack>
+									<evidence>Access-Control-Allow-Origin: *</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/oauth2/authorize?client_id=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;nonce=a945e4c9879199692d81aafbe67fc34a&amp;response_type=code&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;scope=openid%2520email%2520profile&amp;redirect_uri=https%253A%252F%252Fmergereq.sathound.labengers.net%252Fcallback</uri>
+									<method>GET</method>
+									<param></param>
+									<attack></attack>
+									<evidence>Access-Control-Allow-Origin: *</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/polyfills.d4db535b68facc9e987e.js</uri>
+									<method>GET</method>
+									<param></param>
+									<attack></attack>
+									<evidence>Access-Control-Allow-Origin: *</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/runtime.b6fb874239e967878dd2.js</uri>
+									<method>GET</method>
+									<param></param>
+									<attack></attack>
+									<evidence>Access-Control-Allow-Origin: *</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/scripts.6be5d727e89810ffdec6.js</uri>
+									<method>GET</method>
+									<param></param>
+									<attack></attack>
+									<evidence>Access-Control-Allow-Origin: *</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/styles.45a48a32c17fc6ff65c4.css</uri>
+									<method>GET</method>
+									<param></param>
+									<attack></attack>
+									<evidence>Access-Control-Allow-Origin: *</evidence>
+								</instance>
+							
+						</instances>
+						<count>10</count>
+						<solution>&lt;p&gt;Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).&lt;/p&gt;&lt;p&gt;Configure the &quot;Access-Control-Allow-Origin&quot; HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.&lt;/p&gt;</solution>
+						<otherinfo>&lt;p&gt;The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing.&lt;/p&gt;</otherinfo>
+						<reference>&lt;p&gt;https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.html5_overly_permissive_cors_policy&lt;/p&gt;</reference>
+						<cweid>264</cweid>
+						<wascid>14</wascid>
+						<sourceid>1</sourceid>
+					</alertitem>
+				
+				
+					<alertitem>
+						<pluginid>40025</pluginid>
+						<alertRef>40025</alertRef>
+						<alert>Proxy Disclosure</alert>
+						<name>Proxy Disclosure</name>
+						<riskcode>2</riskcode>
+						<confidence>2</confidence>
+						<riskdesc>Medium (Medium)</riskdesc>
+						<confidencedesc>Medium</confidencedesc>
+						<desc>&lt;p&gt;1 proxy server(s) were detected or fingerprinted. This information helps a potential attacker to determine &lt;/p&gt;&lt;p&gt; - A list of targets for an attack against the application.&lt;/p&gt;&lt;p&gt; - Potential vulnerabilities on the proxy servers that service the application.&lt;/p&gt;&lt;p&gt; - The presence or absence of any proxy-based components that might cause attacks against the application to be detected, prevented, or mitigated. &lt;/p&gt;</desc>
+						<instances>
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/includes</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/includes/header-auth.css</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/libs</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/libs/jquery_3.4.1</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/libs/jquery_3.4.1/jquery-3.4.1.js</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/libs/theme</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/libs/theme/assets</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/libs/theme/assets/fonts</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/libs/theme/assets/fonts/icons.woff2</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/libs/theme/wso2-default.min.css</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do?client_id=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;commonAuthCallerPath=%252Foauth2%252Fauthorize&amp;forceAuth=false&amp;nonce=a945e4c9879199692d81aafbe67fc34a&amp;passiveAuth=false&amp;redirect_uri=https%253A%252F%252Fmergereq.sathound.labengers.net%252Fcallback&amp;response_type=code&amp;scope=openid+email+profile&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;tenantDomain=carbon.super&amp;sessionDataKey=604b43f5-3d18-40d6-87eb-6f8b97c92cd9&amp;relyingParty=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;type=oidc&amp;sp=DeeperVision+Self-Trained+AI&amp;isSaaSApp=false&amp;authenticators=BasicAuthenticator%253ALOCAL</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/Thales-Alenia-Space-logo-white.png</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/callback?code=d9841933-becb-3e5e-b6d5-55c80447e540&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;session_state=b3e6804e586ac5d049ca9c6b20ec2c68f2ccd36c64eb76e38a4ebbe583c0dd02.N5u_QTPdHWDnshjmUHPuwg</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/catalogue-service</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/catalogue-service/info</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/catalogue-service/info/catalogues</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/commonauth</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/logincontext?sessionDataKey=604b43f5-3d18-40d6-87eb-6f8b97c92cd9&amp;relyingParty=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;tenantDomain=carbon.super&amp;_=1663832605234</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/main.5c4dfcd98861b3ec57f4.js</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/ngsw-worker.js</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/oauth2</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/oauth2/authorize?client_id=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;nonce=a945e4c9879199692d81aafbe67fc34a&amp;response_type=code&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;scope=openid%2520email%2520profile&amp;redirect_uri=https%253A%252F%252Fmergereq.sathound.labengers.net%252Fcallback</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/oauth2/authorize?sessionDataKey=7a477ecd-1890-4a84-b706-13ada15fda5d</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/polyfills.d4db535b68facc9e987e.js</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/runtime.b6fb874239e967878dd2.js</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/scripts.6be5d727e89810ffdec6.js</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/styles.45a48a32c17fc6ff65c4.css</uri>
+									<method>GET</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/commonauth</uri>
+									<method>POST</method>
+									<param></param>
+									<attack>TRACE, OPTIONS methods with &apos;Max-Forwards&apos; header. TRACK method.</attack>
+									<evidence></evidence>
+								</instance>
+							
+						</instances>
+						<count>31</count>
+						<solution>&lt;p&gt;Disable the &apos;TRACE&apos; method on the proxy servers, as well as the origin web/application server.&lt;/p&gt;&lt;p&gt;Disable the &apos;OPTIONS&apos; method on the proxy servers, as well as the origin web/application server, if it is not required for other purposes, such as &apos;CORS&apos; (Cross Origin Resource Sharing).&lt;/p&gt;&lt;p&gt;Configure the web and application servers with custom error pages, to prevent &apos;fingerprintable&apos; product-specific error pages being leaked to the user in the event of HTTP errors, such as &apos;TRACK&apos; requests for non-existent pages.&lt;/p&gt;&lt;p&gt;Configure all proxies, application servers, and web servers to prevent disclosure of the technology and version information in the &apos;Server&apos; and &apos;X-Powered-By&apos; HTTP response headers.&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</solution>
+						<otherinfo>&lt;p&gt;Using the TRACE, OPTIONS, and TRACK methods, the following proxy servers have been identified between OWASP ZAP and the application/web server: &lt;/p&gt;&lt;p&gt;- Unknown&lt;/p&gt;&lt;p&gt;The following web/application server has been identified: &lt;/p&gt;&lt;p&gt;- Unknown&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</otherinfo>
+						<reference>&lt;p&gt;https://tools.ietf.org/html/rfc7231#section-5.1.2&lt;/p&gt;</reference>
+						<cweid>200</cweid>
+						<wascid>45</wascid>
+						<sourceid>6836</sourceid>
+					</alertitem>
+				
+				
+					<alertitem>
+						<pluginid>10003</pluginid>
+						<alertRef>10003</alertRef>
+						<alert>Vulnerable JS Library</alert>
+						<name>Vulnerable JS Library</name>
+						<riskcode>2</riskcode>
+						<confidence>2</confidence>
+						<riskdesc>Medium (Medium)</riskdesc>
+						<confidencedesc>Medium</confidencedesc>
+						<desc>&lt;p&gt;The identified library jquery, version 3.4.1 is vulnerable.&lt;/p&gt;</desc>
+						<instances>
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/libs/jquery_3.4.1/jquery-3.4.1.js</uri>
+									<method>GET</method>
+									<param></param>
+									<attack></attack>
+									<evidence>jquery-3.4.1.js</evidence>
+								</instance>
+							
+						</instances>
+						<count>1</count>
+						<solution>&lt;p&gt;Please upgrade to the latest version of jquery.&lt;/p&gt;</solution>
+						<otherinfo>&lt;p&gt;CVE-2020-11023&lt;/p&gt;&lt;p&gt;CVE-2020-11022&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</otherinfo>
+						<reference>&lt;p&gt;https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</reference>
+						<cweid>829</cweid>
+						<wascid>-1</wascid>
+						<sourceid>9</sourceid>
+					</alertitem>
+				
+				
+					<alertitem>
+						<pluginid>10054</pluginid>
+						<alertRef>10054</alertRef>
+						<alert>Cookie without SameSite Attribute</alert>
+						<name>Cookie without SameSite Attribute</name>
+						<riskcode>1</riskcode>
+						<confidence>2</confidence>
+						<riskdesc>Low (Medium)</riskdesc>
+						<confidencedesc>Medium</confidencedesc>
+						<desc>&lt;p&gt;A cookie has been set without the SameSite attribute, which means that the cookie can be sent as a result of a &apos;cross-site&apos; request. The SameSite attribute is an effective counter measure to cross-site request forgery, cross-site script inclusion, and timing attacks.&lt;/p&gt;</desc>
+						<instances>
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/</uri>
+									<method>GET</method>
+									<param>nginx_session</param>
+									<attack></attack>
+									<evidence>Set-Cookie: nginx_session</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do?client_id=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;commonAuthCallerPath=%252Foauth2%252Fauthorize&amp;forceAuth=false&amp;nonce=a945e4c9879199692d81aafbe67fc34a&amp;passiveAuth=false&amp;redirect_uri=https%253A%252F%252Fmergereq.sathound.labengers.net%252Fcallback&amp;response_type=code&amp;scope=openid+email+profile&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;tenantDomain=carbon.super&amp;sessionDataKey=604b43f5-3d18-40d6-87eb-6f8b97c92cd9&amp;relyingParty=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;type=oidc&amp;sp=DeeperVision+Self-Trained+AI&amp;isSaaSApp=false&amp;authenticators=BasicAuthenticator%253ALOCAL</uri>
+									<method>GET</method>
+									<param>JSESSIONID</param>
+									<attack></attack>
+									<evidence>Set-Cookie: JSESSIONID</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do?client_id=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;commonAuthCallerPath=%2Foauth2%2Fauthorize&amp;forceAuth=false&amp;nonce=a945e4c9879199692d81aafbe67fc34a&amp;passiveAuth=false&amp;redirect_uri=https%3A%2F%2Fmergereq.sathound.labengers.net%2Fcallback&amp;response_type=code&amp;scope=openid+email+profile&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;tenantDomain=carbon.super&amp;sessionDataKey=604b43f5-3d18-40d6-87eb-6f8b97c92cd9&amp;relyingParty=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;type=oidc&amp;sp=DeeperVision+Self-Trained+AI&amp;isSaaSApp=false&amp;authenticators=BasicAuthenticator%3ALOCAL</uri>
+									<method>GET</method>
+									<param>JSESSIONID</param>
+									<attack></attack>
+									<evidence>Set-Cookie: JSESSIONID</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/callback?code=d9841933-becb-3e5e-b6d5-55c80447e540&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;session_state=b3e6804e586ac5d049ca9c6b20ec2c68f2ccd36c64eb76e38a4ebbe583c0dd02.N5u_QTPdHWDnshjmUHPuwg</uri>
+									<method>GET</method>
+									<param>nginx_session</param>
+									<attack></attack>
+									<evidence>Set-Cookie: nginx_session</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/catalogue-service/info/catalogues</uri>
+									<method>GET</method>
+									<param>nginx_session</param>
+									<attack></attack>
+									<evidence>Set-Cookie: nginx_session</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/commonauth</uri>
+									<method>GET</method>
+									<param>JSESSIONID</param>
+									<attack></attack>
+									<evidence>Set-Cookie: JSESSIONID</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/main.5c4dfcd98861b3ec57f4.js</uri>
+									<method>GET</method>
+									<param>nginx_session</param>
+									<attack></attack>
+									<evidence>Set-Cookie: nginx_session</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/ngsw-worker.js</uri>
+									<method>GET</method>
+									<param>nginx_session</param>
+									<attack></attack>
+									<evidence>Set-Cookie: nginx_session</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/oauth2/authorize?sessionDataKey=7a477ecd-1890-4a84-b706-13ada15fda5d</uri>
+									<method>GET</method>
+									<param>opbs</param>
+									<attack></attack>
+									<evidence>Set-Cookie: opbs</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/polyfills.d4db535b68facc9e987e.js</uri>
+									<method>GET</method>
+									<param>nginx_session</param>
+									<attack></attack>
+									<evidence>Set-Cookie: nginx_session</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/runtime.b6fb874239e967878dd2.js</uri>
+									<method>GET</method>
+									<param>nginx_session</param>
+									<attack></attack>
+									<evidence>Set-Cookie: nginx_session</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/scripts.6be5d727e89810ffdec6.js</uri>
+									<method>GET</method>
+									<param>nginx_session</param>
+									<attack></attack>
+									<evidence>Set-Cookie: nginx_session</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/styles.45a48a32c17fc6ff65c4.css</uri>
+									<method>GET</method>
+									<param>nginx_session</param>
+									<attack></attack>
+									<evidence>Set-Cookie: nginx_session</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/commonauth</uri>
+									<method>POST</method>
+									<param>commonAuthId</param>
+									<attack></attack>
+									<evidence>Set-Cookie: commonAuthId</evidence>
+								</instance>
+							
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/commonauth</uri>
+									<method>POST</method>
+									<param>pastr-604b43f5-3d18-40d6-87eb-6f8b97c92cd9</param>
+									<attack></attack>
+									<evidence>Set-Cookie: pastr-604b43f5-3d18-40d6-87eb-6f8b97c92cd9</evidence>
+								</instance>
+							
+						</instances>
+						<count>15</count>
+						<solution>&lt;p&gt;Ensure that the SameSite attribute is set to either &apos;lax&apos; or ideally &apos;strict&apos; for all cookies.&lt;/p&gt;</solution>
+						<otherinfo></otherinfo>
+						<reference>&lt;p&gt;https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site&lt;/p&gt;</reference>
+						<cweid>1275</cweid>
+						<wascid>13</wascid>
+						<sourceid>1</sourceid>
+					</alertitem>
+				
+				
+					<alertitem>
+						<pluginid>10031</pluginid>
+						<alertRef>10031</alertRef>
+						<alert>User Controllable HTML Element Attribute (Potential XSS)</alert>
+						<name>User Controllable HTML Element Attribute (Potential XSS)</name>
+						<riskcode>0</riskcode>
+						<confidence>1</confidence>
+						<riskdesc>Informational (Low)</riskdesc>
+						<confidencedesc>Low</confidencedesc>
+						<desc>&lt;p&gt;This check looks at user-supplied input in query string parameters and POST data to identify where certain HTML attribute values might be controlled. This provides hot-spot detection for XSS (cross-site scripting) that will require further review by a security analyst to determine exploitability.&lt;/p&gt;</desc>
+						<instances>
+							
+								<instance>
+									<uri>https://mergereq.sathound.labengers.net/authenticationendpoint/login.do?client_id=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;commonAuthCallerPath=%2Foauth2%2Fauthorize&amp;forceAuth=false&amp;nonce=a945e4c9879199692d81aafbe67fc34a&amp;passiveAuth=false&amp;redirect_uri=https%3A%2F%2Fmergereq.sathound.labengers.net%2Fcallback&amp;response_type=code&amp;scope=openid+email+profile&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;tenantDomain=carbon.super&amp;sessionDataKey=604b43f5-3d18-40d6-87eb-6f8b97c92cd9&amp;relyingParty=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;type=oidc&amp;sp=DeeperVision+Self-Trained+AI&amp;isSaaSApp=false&amp;authenticators=BasicAuthenticator%3ALOCAL</uri>
+									<method>GET</method>
+									<param>sessionDataKey</param>
+									<attack></attack>
+									<evidence></evidence>
+								</instance>
+							
+						</instances>
+						<count>1</count>
+						<solution>&lt;p&gt;Validate all input and sanitize output it before writing to any HTML attributes.&lt;/p&gt;</solution>
+						<otherinfo>&lt;p&gt;User-controlled HTML attribute values were found. Try injecting special characters to see if XSS might be possible. The page at the following URL:&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;https://mergereq.sathound.labengers.net/authenticationendpoint/login.do?client_id=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;commonAuthCallerPath=%2Foauth2%2Fauthorize&amp;forceAuth=false&amp;nonce=a945e4c9879199692d81aafbe67fc34a&amp;passiveAuth=false&amp;redirect_uri=https%3A%2F%2Fmergereq.sathound.labengers.net%2Fcallback&amp;response_type=code&amp;scope=openid+email+profile&amp;state=a6a2b1a503c3eacc86a380242b5607a5&amp;tenantDomain=carbon.super&amp;sessionDataKey=604b43f5-3d18-40d6-87eb-6f8b97c92cd9&amp;relyingParty=4jUGO4_VwJnzHNBffcxVgnYj4fwa&amp;type=oidc&amp;sp=DeeperVision+Self-Trained+AI&amp;isSaaSApp=false&amp;authenticators=BasicAuthenticator%3ALOCAL&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;appears to include user input in: &lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;a(n) [input] tag [value] attribute &lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;The user input found was:&lt;/p&gt;&lt;p&gt;sessionDataKey=604b43f5-3d18-40d6-87eb-6f8b97c92cd9&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;The user-controlled value was:&lt;/p&gt;&lt;p&gt;604b43f5-3d18-40d6-87eb-6f8b97c92cd9&lt;/p&gt;</otherinfo>
+						<reference>&lt;p&gt;http://websecuritytool.codeplex.com/wikipage?title=Checks#user-controlled-html-attribute&lt;/p&gt;</reference>
+						<cweid>20</cweid>
+						<wascid>20</wascid>
+						<sourceid>5</sourceid>
+					</alertitem>
+				
+			</alerts>
+		</site>
+	
+</OWASPZAPReport>

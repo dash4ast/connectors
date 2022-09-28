@@ -122,7 +122,8 @@ def extract():
 
 def create_vulnerability(issue, application_name, now):
     vulnerability = Vulnerability()
-    vulnerability.vulnerability_id = hashlib.md5(str(issue['test_id']+issue['filename']+str(issue['line_number'])).encode()).hexdigest()
+    vulnerability.vulnerability_id = hashlib.md5(str(issue['test_id']+issue['filename']
+                                                     + str(issue['line_number'])).encode()).hexdigest()
     vulnerability.description = issue['issue_text']
     vulnerability.tool = 'bandit'
     vulnerability.analysis_type = 'sast'

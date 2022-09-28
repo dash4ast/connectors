@@ -9,6 +9,7 @@ import connectors.endpoints.coverity_json_import
 import connectors.endpoints.bandit_json_import
 import connectors.endpoints.safety_json_import
 import connectors.endpoints.checkov_json_import
+import connectors.endpoints.owaspzap_xml_import
 import connectors.endpoints.health
 
 # Logging
@@ -27,6 +28,7 @@ app.register_blueprint(connectors.endpoints.coverity_json_import.extract_bluepri
 app.register_blueprint(connectors.endpoints.bandit_json_import.extract_blueprint)
 app.register_blueprint(connectors.endpoints.checkov_json_import.extract_blueprint)
 app.register_blueprint(connectors.endpoints.safety_json_import.extract_blueprint)
+app.register_blueprint(connectors.endpoints.owaspzap_xml_import.extract_blueprint)
 app.register_blueprint(connectors.endpoints.health.health_blueprint)
 
 # CORS config
