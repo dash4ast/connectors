@@ -122,7 +122,8 @@ def extract():
 
 def create_vulnerability(issue, application_name, now):
     vulnerability = Vulnerability()
-    vulnerability.vulnerability_id = hashlib.md5(str(issue['mergeKey']).encode()).hexdigest()
+    vulnerability.vulnerability_id = hashlib.md5(str(issue['mergeKey']+issue['strippedMainEventFilePathname']+
+                                                     str(issue['mainEventLineNumber'])).encode()).hexdigest()
     vulnerability.description = issue['checkerProperties']['subcategoryShortDescription']
     vulnerability.tool = 'coverity'
     vulnerability.analysis_type = 'sast'
@@ -150,13 +151,16 @@ def test():
     content = json.loads(report)
     print(len(content['issues']))
     now = datetime.now()
+    counter = 0
     for issue in content['issues']:
+        counter = counter + 1
+        print(counter)
         print_vulnerability(issue, 'test-app', now)
 
 
 def print_vulnerability(issue, application_name, now):
-    # vulnerability = Vulnerability()
-    print(hashlib.md5(str(issue['mergeKey']).encode()).hexdigest())
+    vulnerability = Vulnerability()
+    print(hashlib.md5(str(issue['mergeKey']+issue['strippedMainEventFilePathname']+str(issue['mainEventLineNumber'])).encode()).hexdigest())
     print(issue['checkerProperties']['subcategoryShortDescription'])
     print('coverity')
     print('sast')
@@ -177,9 +181,9 @@ def print_vulnerability(issue, application_name, now):
     print("CWE: " + str(issue['checkerProperties']['cweCategory']))
     print(issue['strippedMainEventFilePathname'])
     print(issue['mainEventLineNumber'])
-    # return vulnerability
+    return vulnerability
 
 
 if __name__ == '__main__':
-    #extract()
-    test()
+    extract()
+    # test()
