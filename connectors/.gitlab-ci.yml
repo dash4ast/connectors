@@ -68,7 +68,6 @@ sast-git-secrets:
     expire_in: one week
   allow_failure: true
 
-
 sca-safety:
   stage: test
   image: 
@@ -100,7 +99,6 @@ sca-scanoss:
       - ${CI_PROJECT_DIR}/connectors/scanoss-output.json
     when: always 
     expire_in: one week
-    - sca
 
 sca-snyk:
   stage: test
