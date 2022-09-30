@@ -29,7 +29,7 @@ if __name__ == "__main__":
         print(
             'Example: python3 dash4ast-cli-import-local-report.py --host http://localhost:5000 --application java-test-project --report examples/test_projects/coverity-report.json --scan coverity')
         print(
-            'Check full list of available connectors here: https://gitlab.com/dash4ast-community1/support#connectors'
+            'Check full list of available connectors here: https://gitlab.com/dash4ast-community1/support#connectors')
         sys.exit()
 
     post_request(url, app, report, scan)
