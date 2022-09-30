@@ -1,0 +1,197 @@
+build-connectors:
+  stage: build
+  script:
+    - echo "Setup python connectors projects"
+
+sast-bandit:
+  stage: test
+  image: 
+    name: python:3.9-bullseye
+  before_script:
+    - pip3 install bandit
+  script:
+    - cd ${CI_PROJECT_DIR}/connectors
+    - bandit -r -f json -o bandit-output.json src/
+  artifacts:
+    paths: 
+      - ${CI_PROJECT_DIR}/connectors/bandit-output.json
+    when: always 
+    expire_in: one week
+  allow_failure: true
+
+sast-semgrep:
+  stage: test
+  image: 
+    name: python:3.9-bullseye
+  before_script:
+    - pip3 install semgrep
+  script:
+    - cd ${CI_PROJECT_DIR}/connectors
+    - semgrep scan --config=auto src --json > ${CI_PROJECT_DIR}/connectors/semgrep-output.json
+  artifacts:
+    paths: 
+      - ${CI_PROJECT_DIR}/connectors/semgrep-output.json
+    when: always 
+    expire_in: one week
+  allow_failure: true
+
+sast-sonarqube:
+  stage: test
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
+  image: 
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: [""]
+  variables:
+    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
+    GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task 
+  cache:
+    key: "${CI_JOB_NAME}"
+    paths:
+      - .sonar/cache
+  script: 
+    - sonar-scanner -Dsonar.projectKey=dash4ast-connectors -Dsonar.sources="${CI_PROJECT_DIR}/connectors"
+  allow_failure: true
+  tags: 
+    - sast
+
+sast-git-secrets:
+  stage: test
+  script:
+    - cd ${CI_PROJECT_DIR}/connectors/
+    - docker run -v $(pwd):/src --rm trufflesecurity/trufflehog:latest filesystem --directory=/src --json | tee trufflehog-output.json
+  artifacts:
+    paths: 
+      - ${CI_PROJECT_DIR}/connectors/trufflehog-output.json
+    when: always 
+    expire_in: one week
+  allow_failure: true
+
+
+sca-safety:
+  stage: test
+  image: 
+    name: python:3.9-bullseye
+  before_script:
+    - pip3 install safety
+  script:
+    - cd ${CI_PROJECT_DIR}/connectors/
+    - safety check -r requirements.txt --json > safety-output.json
+  allow_failure: true
+  artifacts:
+    paths: 
+      - ${CI_PROJECT_DIR}/connectors/safety-output.json
+    when: always 
+    expire_in: one week
+
+sca-scanoss:
+  stage: test
+  image: 
+    name: python:3.9-bullseye
+  before_script:
+    - pip3 install scanoss
+  script:
+    - cd ${CI_PROJECT_DIR}/connectors/
+    - scanoss-py scan . > scanoss-output.json
+  allow_failure: true
+  artifacts:
+    paths: 
+      - ${CI_PROJECT_DIR}/connectors/scanoss-output.json
+    when: always 
+    expire_in: one week
+    - sca
+
+sca-snyk:
+  stage: test
+  image: node:latest
+  before_script:
+    - wget -O snyk https://github.com/snyk/cli/releases/download/v1.984.0/snyk-linux
+    - chmod +x snyk
+    - mv snyk /usr/local/bin/
+  script:
+    - echo ${SNYK_TOKEN}
+    - snyk auth ${SNYK_TOKEN}
+    - snyk test ${CI_PROJECT_DIR}/connectors/ --json > ${CI_PROJECT_DIR}/connectors/snyk-results.json
+  artifacts:
+    paths:
+      - ${CI_PROJECT_DIR}/connectors/snyk-results.json
+    expire_in: one week
+  allow_failure: true
+
+sast-bandit-import-dash4ast:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
+  stage: integration
+  image: 
+    name: python:3.9-bullseye
+  script:
+    - pip3 install requests
+    - wget https://gitlab.com/dash4ast-community1/support/-/raw/main/client/dash4ast-cli-import-local-report.py
+    - echo ${DASH4AST_CLI_IMPORT_LOCAL_REPORT_SHA256_CHECKSUM} > sha256-import.tmp
+    - sha256sum -c sha256-import.tmp
+    - python3 dash4ast-cli-import-local-report.py --host ${DASH4AST_ENDPOINT_QA} --application dash4ast-connectors --report ${CI_PROJECT_DIR}/connectors/bandit-output.json --scan bandit
+  allow_failure: true
+  tags: 
+    - sast
+
+sca-safety-import-dash4ast:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
+  stage: integration
+  image: 
+    name: python:3.9-bullseye
+  script:
+    - pip3 install requests
+    - wget https://gitlab.com/dash4ast-community1/support/-/raw/main/client/dash4ast-cli-import-local-report.py
+    - echo ${DASH4AST_CLI_IMPORT_LOCAL_REPORT_SHA256_CHECKSUM} > sha256-import.tmp
+    - sha256sum -c sha256-import.tmp
+    - python3 dash4ast-cli-import-local-report.py --host ${DASH4AST_ENDPOINT_QA} --application dash4ast-connectors --report ${CI_PROJECT_DIR}/connectors/safety-output.json --scan safety
+  allow_failure: true
+  tags: 
+    - sca
+
+sast-sonarqube-extract-dash4ast:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
+  stage: integration
+  image: 
+    name: python:3.9-bullseye
+  script:
+    - pip3 install requests
+    - wget https://gitlab.com/dash4ast-community1/support/-/raw/main/client/dash4ast-cli-import-sonarqube-report.py
+    - echo ${DASH4AST_CLI_IMPORT_SONARQUBE_REPORT_SHA256_CHECKSUM} > sha256-sq-export.tmp
+    - sha256sum -c sha256-sq-export.tmp
+    - python3 dash4ast-cli-import-sonarqube-report.py --host ${DASH4AST_ENDPOINT_QA} --application-tool dash4ast-connectors --application-dash4ast dash4ast-connectors --url-tool ${SONAR_HOST_URL} --user-tool ${SONAR_USER} --pwd-tool ${SONAR_PWD}
+  allow_failure: true
+  tags: 
+    - sca
+
+sca-blackduck-extract-dash4ast:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
+  stage: integration
+  image: 
+    name: python:3.9-bullseye
+  script:
+    - pip3 install requests
+    - wget https://gitlab.com/dash4ast-community1/support/-/raw/main/client/dash4ast-cli-import-blackduck-report.py
+    - echo ${DASH4AST_CLI_IMPORT_BLACKDUCK_REPORT_SHA256_CHECKSUM} > sha256-bd-export.tmp
+    - sha256sum -c sha256-bd-export.tmp
+    - python3 dash4ast-cli-import-blackduck-report.py --host ${DASH4AST_ENDPOINT_QA} --application-tool demo/dash4ast/connectors --application-dash4ast dash4ast-connectors --url-tool ${BLACKDUCK_URL} --api-key-tool ${BLACKDUCK_API_TOKEN}
+  allow_failure: true
+  tags: 
+    - sca
+
+connectors-push-images-docker-hub:
+  stage: deploy
+  script:
+    - echo "Pushing connectors docker images to docker hub"
+    - cd ${CI_PROJECT_DIR}/connectors
+    - docker build -t dash4ast/connectors:$VERSION .
+    - docker login -u $DOCKER_USER -p $DOCKER_PWD
+    - docker push dash4ast/connectors:$VERSION
