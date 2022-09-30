@@ -193,3 +193,4 @@ connectors-push-images-docker-hub:
     - docker build -t dash4ast/connectors:$VERSION .
     - docker login -u $DOCKER_USER -p $DOCKER_PWD
     - docker push dash4ast/connectors:$VERSION
+  allow_failure: true
