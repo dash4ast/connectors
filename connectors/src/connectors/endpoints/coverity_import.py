@@ -11,7 +11,7 @@ from datetime import datetime
 import hashlib
 import json
 
-extract_blueprint = Blueprint('coverity_json_import', __name__)
+extract_blueprint = Blueprint('coverity_import', __name__)
 
 
 class ExtractionSuccessResponse(Schema):
@@ -50,7 +50,7 @@ def _abort_due_to_application_not_found(messages: Dict) -> None:
     abort(make_response(jsonify(_auth_invalid_input_response_schema.dump({'messages': messages})), 404))
 
 
-@extract_blueprint.route("/coverity_json_import", methods=["POST"])
+@extract_blueprint.route("/coverity_import", methods=["POST"])
 @swag_from(
     {
         'summary': 'Import vulnerabilities from Coverity',

@@ -4,14 +4,13 @@ from flask import Blueprint, request, abort, jsonify, make_response
 from marshmallow import Schema, fields
 from sqlalchemy.exc import IntegrityError
 from connectors.db.PostgreDbClient import PostgreDbClient
-from connectors.persistence.Application import Application
 from connectors.persistence.Vulnerability import Vulnerability
 from typing import Dict
 from datetime import datetime
 import hashlib
-import json
+import xml.etree.ElementTree as ET
 
-extract_blueprint = Blueprint('checkov_json_import', __name__)
+extract_blueprint = Blueprint('owaspzap_import', __name__)
 
 
 class ExtractionSuccessResponse(Schema):
@@ -29,7 +28,7 @@ class GenericInvalidResponse(Schema):
 
 class PostCoverityImportRequestBody(Schema):
     dash4ast_application = fields.String(required=True, description='dash4ast_application')
-    report = fields.String(required=True, description='vulnerabilities in json format')
+    report = fields.String(required=True, description='vulnerabilities in xml format')
 
 
 _response_schema = ExtractionSuccessResponse()
@@ -50,11 +49,11 @@ def _abort_due_to_application_not_found(messages: Dict) -> None:
     abort(make_response(jsonify(_auth_invalid_input_response_schema.dump({'messages': messages})), 404))
 
 
-@extract_blueprint.route("/checkov_json_import", methods=["POST"])
+@extract_blueprint.route("/owaspzap_import", methods=["POST"])
 @swag_from(
     {
-        'summary': 'Import vulnerabilities from Checkov',
-        'description': 'Import vulnerabilities from Checkov',
+        'summary': 'Import vulnerabilities from Owasp ZAP',
+        'description': 'Import vulnerabilities from Owasp ZAP',
         'responses': {
             '200': {
                 'description': 'Extraction successfully fetched',
@@ -92,27 +91,25 @@ def _abort_due_to_application_not_found(messages: Dict) -> None:
     }
 )
 def extract():
-
     parsed_body = _request_body_schema.load(request.get_json())
     dash4ast_application = parsed_body['dash4ast_application']
     report = parsed_body['report']
-    content = json.loads(report)
+    xml_report = ET.fromstring(report)
     now = datetime.now()
+    new_vulnerabilities = 0
 
     db_session = PostgreDbClient().get_client()
     db_session()
     db_session.flush()
-    new_vulnerabilities = 0
 
     try:
-        for check_types in content:
-            for issue in check_types['results']['failed_checks']:
-                if issue['check_result']['result'] == 'FAILED':
-                    vulnerability = create_vulnerability(issue, dash4ast_application, now)
-                    add_vulnerability(db_session, vulnerability)
-                    new_vulnerabilities = new_vulnerabilities + 1
+        for issue in xml_report.find('site/alerts'):
+            for location in issue.find('instances'):
+                vulnerability = create_vulnerability(issue, location, dash4ast_application, now)
+                add_vulnerability(db_session, vulnerability)
+                new_vulnerabilities = new_vulnerabilities + 1
     except IntegrityError:
-        print('IntegrityError key: ' + issue['check_id'])
+        print('IntegrityError key: ' + issue['id'])
     db_session.remove()
 
     print("successfully extraction")
@@ -123,24 +120,60 @@ def extract():
     })
 
 
-def create_vulnerability(issue, application_name, now):
+def test():
+    report = open('../../../test/dast-report.xml', 'r').read()
+    my_data = ET.fromstring(report)
+    now = datetime.now()
+    for issue in my_data.find('site/alerts'):
+        for location in issue.find('instances'):
+            print_vulnerability(issue, location, 'test', now)
+
+
+def print_vulnerability(issue, location, application_name, now):
+    print(hashlib.md5(get_id(issue, location).encode()).hexdigest())
+    print(issue.find('desc').text)
+    print('owaspzap')
+    print('dast')
+    print('OPEN')
+    print(issue.find('name').text)
+    print("CWE: " + issue.find('cweid').text)
+    print(issue.find('confidencedesc').text.upper())
+    print(location.find('uri').text)
+    print(location.find('method').text)
+    print(application_name)
+    print(now)
+    print(now)
+    print('vulnerability')
+
+
+def get_id(issue, location):
+
+    plugin_id = str(issue.find('pluginid').text)
+    param = location.find('param').text
+    evidence = location.find('evidence').text
+    uri = location.find('uri').text
+    method = location.find('method').text
+
+    if param is None:
+        param = '-'
+    if evidence is None:
+        evidence = '-'
+
+    return plugin_id + param + evidence + uri + method
+
+
+def create_vulnerability(issue, location, application_name, now):
     vulnerability = Vulnerability()
-    vulnerability.vulnerability_id = hashlib.md5(str(issue['check_id']+issue['file_abs_path']).encode()).hexdigest()
-    vulnerability.description = issue['check_name']
-    vulnerability.tool = 'checkov'
-    vulnerability.analysis_type = 'iac'
+    vulnerability.vulnerability_id = hashlib.md5(get_id(issue, location).encode()).hexdigest()
+    vulnerability.description = issue.find('desc').text[0:511]
+    vulnerability.tool = 'owaspzap'
+    vulnerability.analysis_type = 'dast'
     vulnerability.status = 'OPEN'
-    vulnerability.name = issue['check_id']
-    if issue['guideline'] is None:
-        vulnerability.tags = "guideline: ----"
-    else:
-        vulnerability.tags = "guideline: " + issue['guideline']
-    if issue['severity'] is None:
-        vulnerability.severity = 'MEDIUM'
-    else:
-        vulnerability.severity = issue['severity'].upper()
-    vulnerability.component = issue['file_abs_path']
-    vulnerability.location = issue['file_line_range']
+    vulnerability.name = issue.find('name').text
+    vulnerability.tags = "CWE: " + issue.find('cweid').text
+    vulnerability.severity = issue.find('confidencedesc').text.upper()
+    vulnerability.component = location.find('uri').text[0:255]
+    vulnerability.location = location.find('method').text
     vulnerability.application = application_name
     vulnerability.detected_date = now
     vulnerability.extraction_date = now
@@ -155,4 +188,5 @@ def add_vulnerability(db_session, vulnerability):
 
 
 if __name__ == '__main__':
-    extract()
+    # extract()
+    test()

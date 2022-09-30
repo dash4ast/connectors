@@ -1,3 +1,4 @@
+import sqlalchemy
 from flasgger import swag_from
 from flask import Blueprint, request, abort, jsonify, make_response
 from marshmallow import Schema, fields
@@ -10,7 +11,7 @@ from datetime import datetime
 import hashlib
 import json
 
-extract_blueprint = Blueprint('safety_json_import', __name__)
+extract_blueprint = Blueprint('bandit_import', __name__)
 
 
 class ExtractionSuccessResponse(Schema):
@@ -49,11 +50,11 @@ def _abort_due_to_application_not_found(messages: Dict) -> None:
     abort(make_response(jsonify(_auth_invalid_input_response_schema.dump({'messages': messages})), 404))
 
 
-@extract_blueprint.route("/safety_json_import", methods=["POST"])
+@extract_blueprint.route("/bandit_import", methods=["POST"])
 @swag_from(
     {
-        'summary': 'Import vulnerabilities from Safety',
-        'description': 'Import vulnerabilities from Safety',
+        'summary': 'Import vulnerabilities from Bandit',
+        'description': 'Import vulnerabilities from Bandit',
         'responses': {
             '200': {
                 'description': 'Extraction successfully fetched',
@@ -102,14 +103,14 @@ def extract():
     db_session()
     db_session.flush()
     try:
-        for issue in content['vulnerabilities']:
+        for issue in content['results']:
             vulnerability = create_vulnerability(issue, dash4ast_application, now)
             add_vulnerability(db_session, vulnerability)
     except IntegrityError:
         print('IntegrityError key: ' + issue['id'])
     db_session.remove()
 
-    new_vulnerabilities = len(content['vulnerabilities'])
+    new_vulnerabilities = len(content['results'])
 
     print("successfully extraction")
 
@@ -121,19 +122,17 @@ def extract():
 
 def create_vulnerability(issue, application_name, now):
     vulnerability = Vulnerability()
-    vulnerability.vulnerability_id = hashlib.md5(str(issue['vulnerability_id']).encode()).hexdigest()
-    vulnerability.description = issue['advisory'][0:511] ## TODO: No trunk
-    vulnerability.tool = 'safety'
-    vulnerability.analysis_type = 'sca'
+    vulnerability.vulnerability_id = hashlib.md5(str(issue['test_id']+issue['filename']
+                                                     + str(issue['line_number'])).encode()).hexdigest()
+    vulnerability.description = issue['issue_text']
+    vulnerability.tool = 'bandit'
+    vulnerability.analysis_type = 'sast'
     vulnerability.status = 'OPEN'
-    vulnerability.name = issue['CVE']
-    vulnerability.tags = "more_info_url: " + issue['more_info_url']
-    if (issue['severity'] is None): ## TODO: Get severity from CVE
-      vulnerability.severity = 'Medium'.upper()
-    else:
-      vulnerability.severity = issue['severity'].upper()
-    vulnerability.component = issue['package_name']
-    vulnerability.location = issue['analyzed_version']
+    vulnerability.name = issue['test_name']
+    vulnerability.tags = "ref: " + issue['test_id']
+    vulnerability.severity = issue['issue_severity'].upper()
+    vulnerability.component = issue['filename']
+    vulnerability.location = issue['line_number']
     vulnerability.application = application_name
     vulnerability.detected_date = now
     vulnerability.extraction_date = now
@@ -149,3 +148,4 @@ def add_vulnerability(db_session, vulnerability):
 
 if __name__ == '__main__':
     extract()
+

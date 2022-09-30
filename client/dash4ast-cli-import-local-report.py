@@ -3,7 +3,7 @@ import sys
 
 
 def post_request(url_dash4ast, app_name, path_report, scan_tool):
-    endpoint = url_dash4ast + '/' + scan_tool + '_json_import'
+    endpoint = url_dash4ast + '/' + scan_tool + '_import'
     headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
     report_content = open(path_report, 'r').read()
 
@@ -25,9 +25,11 @@ if __name__ == "__main__":
         print(
             'Usage: python3 dash4ast-cli-import-local-report.py --host HOST --application APPLICATION_NAME --report REPORT_FILE --scan SCAN_TOOL')
         print(
-            'Example: python3 dash4ast-cli-import-local-report --host http://localhost:5000 --application python-test-project --report examples/test_projects/bandit-output.json --scan bandit')
+            'Example: python3 dash4ast-cli-import-local-report.py --host http://localhost:5000 --application python-test-project --report examples/test_projects/bandit-output.json --scan bandit')
         print(
-            'Example: python3 dash4ast-cli-import-local-report --host http://localhost:5000 --application java-test-project --report examples/test_projects/coverity-report.json --scan coverity')
+            'Example: python3 dash4ast-cli-import-local-report.py --host http://localhost:5000 --application java-test-project --report examples/test_projects/coverity-report.json --scan coverity')
+        print(
+            'Check full list of available connectors here: https://gitlab.com/dash4ast-community1/support#connectors'
         sys.exit()
 
     post_request(url, app, report, scan)
