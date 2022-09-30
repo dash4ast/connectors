@@ -33,7 +33,7 @@ Use demo/dash4ast
 - Use dash4ast client in the next way:
 
 ```
-python3 client/dash4ast-cli-import-local-report.py --host ${DASH4AST_ENDPOINT_QA} --application YOUR_APP --report REPORT_PATH --scan SCAN_TOOL
+python3 client/dash4ast-cli-import-local-report.py --host ${DASH4AST_ENDPOINT_QA} --application YOUR_DASH4AST_APP --report REPORT_PATH --scan SCAN_TOOL
 ```
 
 Where:
@@ -49,14 +49,25 @@ Example:
 * **Blackduck**
 
 ```
-python3 dash4ast-cli-import-blackduck-report --host ${DASH4AST_ENDPOINT_QA} --application-tool YOUR_APP_IN_BLACKDUCK --application-dash4ast YOUR_APP_IN_DASH4AST --url-tool https://xxxx.blackduck.com --api-key-tool xxxx'
+python3 client/dash4ast-cli-import-blackduck-report.py --host ${DASH4AST_ENDPOINT_QA} --application-tool YOUR_APP_IN_BLACKDUCK --application-dash4ast YOUR_APP_IN_DASH4AST --url-tool https://xxxx.blackduck.com --api-key-tool xxxx'
 ```
 
 * **Sonarqube**
 ```
-python3 dash4ast-cli-import-sonarqube-report --host ${DASH4AST_ENDPOINT_QA} --application-tool YOUR_APP_IN_SONARQUBE --application-dash4ast YOUR_APP_IN_DASH4AST --url-tool https://xxxx.blackduck.com --user-tool xxxx --pwd-tool xxxx'
+python3 client/dash4ast-cli-import-sonarqube-report.py --host ${DASH4AST_ENDPOINT_QA} --application-tool YOUR_APP_IN_SONARQUBE --application-dash4ast YOUR_APP_IN_DASH4AST --url-tool https://xxxx.blackduck.com --user-tool xxxx --pwd-tool xxxx'
 ```
 ![alt text](https://securingsoftware.files.wordpress.com/2022/08/connectors.png)
+
+## Connectors
+
+Full list of available connectors:
+* bandit (json report)
+* owaszap (xml report)
+* checkov (json report)
+* coverity (json report)
+* safety (json report)
+* sonarqube (direct connection)
+* blackduck (direct connection)
 
 ## Authors & Contact
 
