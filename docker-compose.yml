@@ -12,9 +12,9 @@ services:
       - '5433:5432'
 
   connectors:
-    image: dash4ast/connectors:6.2.8
+    image: dash4ast/connectors:6.2.9
     container_name: connectors
-    ports: 
+    ports:
       - 5000:5000
     environment:
       DASH4AST_DB_HOST: "dash4ast_db"
@@ -26,7 +26,7 @@ services:
       - db
 
   dashboard:
-    image: dash4ast/frontend-shiny:6.2.8
+    image: dash4ast/frontend-shiny:6.2.9
     container_name: dashboard
     ports:
       - 3838:3838
