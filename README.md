@@ -23,8 +23,8 @@ Use demo/dash4ast
 
 ## Requirements:
 
-* Docker
-* Docker-compose
+* Docker -> https://docs.docker.com/engine/install/
+* Docker-compose -> https://docs.docker.com/compose/install/
 * Git
 * Open Ports: 3838, 5000
 
