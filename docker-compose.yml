@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   db:
-    image: dash4ast/postgre:6.2.9
+    image: dash4ast/db:6.3.0
     container_name: dash4ast_db
     restart: always
     volumes:
