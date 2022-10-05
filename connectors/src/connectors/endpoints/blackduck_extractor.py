@@ -4,6 +4,8 @@ from flasgger import swag_from
 from flask import Blueprint, request, abort, jsonify, make_response
 from marshmallow import Schema, fields
 from sqlalchemy.exc import IntegrityError
+
+from connectors.db import UtilDb
 from connectors.db.PostgreDbClient import PostgreDbClient
 from connectors.persistence.Application import Application
 from connectors.persistence.Vulnerability import Vulnerability
@@ -152,9 +154,7 @@ def extract():
                     if vulnerability is None:
                         new_components += 1
                         vulnerability = create_license_issue(component, dash4ast_application, 'license', now, vuln_id)
-                        db_session.add(vulnerability)
-                        db_session.commit()
-                        db_session.flush()
+                        UtilDb.add_vulnerability(db_session, vulnerability)
                     for link in links:
                         type_link = link['rel']
                         if type_link == 'vulnerabilities':
@@ -167,9 +167,7 @@ def extract():
                                 if vulnerability is None:
                                     new_vulnerabilities += 1
                                     vulnerability = create_vulnerability(component, vuln, dash4ast_application, 'vulnerability', now, vuln_id)
-                                    db_session.add(vulnerability)
-                                    db_session.commit()
-                                    db_session.flush()
+                                    UtilDb.add_vulnerability(db_session, vulnerability)
                 except IntegrityError:
                     message = 'IntegrityError inserting component: ' + component['componentName']
                     _abort_due_to_invalid_input({'messages': [message]})
@@ -177,6 +175,11 @@ def extract():
                     message = 'InvalidRequestError inserting component: ' + component['componentName']
                     _abort_due_to_invalid_input({'messages': [message]})
     db_session.remove()
+
+    # update analysis table
+    analysis = UtilDb.create_analysis(dash4ast_application, 'sca', now)
+    UtilDb.add_analysis(db_session, analysis)
+
     print("successfully extraction")
 
     if not application_found:

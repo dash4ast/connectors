@@ -10,6 +10,7 @@ from marshmallow import Schema, fields
 from typing import Dict
 from datetime import date, datetime
 
+from connectors.db import UtilDb
 from connectors.persistence.Application import Application
 from connectors.db.PostgreDbClient import PostgreDbClient
 from connectors.persistence.Vulnerability import Vulnerability
@@ -147,7 +148,7 @@ def extract():
             for hot_spot in hot_spots:
                 try:
                     vulnerability = create_vulnerability(hot_spot, dash4ast_application, 'HOT_SPOT', now)
-                    add_vulnerability(db_session, vulnerability)
+                    UtilDb.add_vulnerability(db_session, vulnerability)
                     hot_spot_vulnerabilities += 1
                 except IntegrityError:
                     print('IntegrityError key: ' + hot_spot['key'])
@@ -159,13 +160,18 @@ def extract():
                 if vulnerability_type == 'VULNERABILITY':
                     try:
                         vulnerability = create_vulnerability(issue, dash4ast_application, vulnerability_type, now)
-                        add_vulnerability(db_session, vulnerability)
+                        UtilDb.add_vulnerability(db_session, vulnerability)
                         new_vulnerabilities += 1
                     except IntegrityError:
                         print('IntegrityError key: ' + issue['key'])
     db_session.remove()
     if not found_application:
         _abort_due_to_application_not_found({'messages': ['Sonarqube application not found']})
+
+    # update analysis table
+    analysis = UtilDb.create_analysis(dash4ast_application, 'sast', now)
+    UtilDb.add_analysis(db_session, analysis)
+
     print("successfully extraction")
     print('new_vulnerabilities ' + str(new_vulnerabilities))
     print('hot_spot_vulnerabilities ' + str(hot_spot_vulnerabilities))
@@ -174,18 +180,6 @@ def extract():
         'new_vulnerabilities': new_vulnerabilities,
         'hot_spot_vulnerabilities': hot_spot_vulnerabilities
     })
-
-
-def update_vulnerability(db_session, status, vulnerability):
-    setattr(vulnerability, 'status', status)
-    db_session.commit()
-    db_session.flush()
-
-
-def add_vulnerability(db_session, vulnerability):
-    db_session.add(vulnerability)
-    db_session.commit()
-    db_session.flush()
 
 
 def create_vulnerability(issue, application_name, vulnerability_type, now):

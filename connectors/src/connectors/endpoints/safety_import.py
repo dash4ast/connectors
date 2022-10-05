@@ -2,6 +2,8 @@ from flasgger import swag_from
 from flask import Blueprint, request, abort, jsonify, make_response
 from marshmallow import Schema, fields
 from sqlalchemy.exc import IntegrityError
+
+from connectors.db import UtilDb
 from connectors.db.PostgreDbClient import PostgreDbClient
 from connectors.persistence.Application import Application
 from connectors.persistence.Vulnerability import Vulnerability
@@ -91,7 +93,6 @@ def _abort_due_to_application_not_found(messages: Dict) -> None:
     }
 )
 def extract():
-
     parsed_body = _request_body_schema.load(request.get_json())
     dash4ast_application = parsed_body['dash4ast_application']
     report = parsed_body['report']
@@ -104,12 +105,16 @@ def extract():
     try:
         for issue in content['vulnerabilities']:
             vulnerability = create_vulnerability(issue, dash4ast_application, now)
-            add_vulnerability(db_session, vulnerability)
+            UtilDb.add_vulnerability(db_session, vulnerability)
     except IntegrityError:
         print('IntegrityError key: ' + issue['id'])
     db_session.remove()
 
     new_vulnerabilities = len(content['vulnerabilities'])
+
+    # update analysis table
+    analysis = UtilDb.create_analysis(dash4ast_application, 'sca', now)
+    UtilDb.add_analysis(db_session, analysis)
 
     print("successfully extraction")
 
@@ -122,16 +127,16 @@ def extract():
 def create_vulnerability(issue, application_name, now):
     vulnerability = Vulnerability()
     vulnerability.vulnerability_id = hashlib.md5(str(issue['vulnerability_id']).encode()).hexdigest()
-    vulnerability.description = issue['advisory'][0:511] ## TODO: No trunk
+    vulnerability.description = issue['advisory'][0:511]  ## TODO: No trunk
     vulnerability.tool = 'safety'
     vulnerability.analysis_type = 'sca'
     vulnerability.status = 'OPEN'
     vulnerability.name = issue['CVE']
     vulnerability.tags = "more_info_url: " + issue['more_info_url']
-    if (issue['severity'] is None): ## TODO: Get severity from CVE
-      vulnerability.severity = 'Medium'.upper()
+    if issue['severity'] is None:  # TODO: Get severity from CVE
+        vulnerability.severity = 'Medium'.upper()
     else:
-      vulnerability.severity = issue['severity'].upper()
+        vulnerability.severity = issue['severity'].upper()
     vulnerability.component = issue['package_name']
     vulnerability.location = issue['analyzed_version']
     vulnerability.application = application_name
@@ -139,12 +144,6 @@ def create_vulnerability(issue, application_name, now):
     vulnerability.extraction_date = now
     vulnerability.type = 'vulnerability'
     return vulnerability
-
-
-def add_vulnerability(db_session, vulnerability):
-    db_session.add(vulnerability)
-    db_session.commit()
-    db_session.flush()
 
 
 if __name__ == '__main__':

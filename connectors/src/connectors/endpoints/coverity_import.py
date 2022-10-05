@@ -3,6 +3,8 @@ from flasgger import swag_from
 from flask import Blueprint, request, abort, jsonify, make_response
 from marshmallow import Schema, fields
 from sqlalchemy.exc import IntegrityError
+
+from connectors.db import UtilDb
 from connectors.db.PostgreDbClient import PostgreDbClient
 from connectors.persistence.Application import Application
 from connectors.persistence.Vulnerability import Vulnerability
@@ -105,12 +107,16 @@ def extract():
     try:
         for issue in content['issues']:
             vulnerability = create_vulnerability(issue, dash4ast_application, now)
-            add_vulnerability(db_session, vulnerability)
+            UtilDb.add_vulnerability(db_session, vulnerability)
     except IntegrityError:
         print('IntegrityError key: ' + issue['mergeKey'])
     db_session.remove()
 
     new_vulnerabilities = len(content['issues'])
+
+    # update analysis table
+    analysis = UtilDb.create_analysis(dash4ast_application, 'sast', now)
+    UtilDb.add_analysis(db_session, analysis)
 
     print("successfully extraction")
 
@@ -138,12 +144,6 @@ def create_vulnerability(issue, application_name, now):
     vulnerability.extraction_date = now
     vulnerability.type = 'vulnerability'
     return vulnerability
-
-
-def add_vulnerability(db_session, vulnerability):
-    db_session.add(vulnerability)
-    db_session.commit()
-    db_session.flush()
 
 
 def test():
