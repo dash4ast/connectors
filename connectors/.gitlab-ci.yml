@@ -108,7 +108,6 @@ sca-snyk:
     - chmod +x snyk
     - mv snyk /usr/local/bin/
   script:
-    - echo ${SNYK_TOKEN}
     - snyk auth ${SNYK_TOKEN}
     - snyk test ${CI_PROJECT_DIR}/connectors/ --json > ${CI_PROJECT_DIR}/connectors/snyk-results.json
   artifacts:
