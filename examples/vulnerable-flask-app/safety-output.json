@@ -1,0 +1,860 @@
+{
+    "report_meta": {
+        "scan_target": "files",
+        "scanned": [
+            "requirements.txt"
+        ],
+        "policy_file": null,
+        "policy_file_source": "local",
+        "api_key": false,
+        "local_database_path": null,
+        "safety_version": "2.2.1",
+        "timestamp": "2022-10-05 12:05:42",
+        "packages_found": 28,
+        "vulnerabilities_found": 23,
+        "vulnerabilities_ignored": 0,
+        "remediations_recommended": 0,
+        "telemetry": {
+            "os_type": "Linux",
+            "os_release": "5.15.0-48-generic",
+            "os_description": "Linux-5.15.0-48-generic-x86_64-with-glibc2.35",
+            "python_version": "3.10.6",
+            "safety_command": "check",
+            "safety_options": {
+                "files": {
+                    "-r": 1
+                },
+                "json": {
+                    "--json": 1
+                }
+            },
+            "safety_version": "2.2.1",
+            "safety_source": "cli"
+        },
+        "git": {
+            "branch": "master",
+            "tag": "",
+            "commit": "b6a4f97afd466e83e1f60781494252dec1c37039",
+            "dirty": false,
+            "origin": "https://github.com/we45/Vulnerable-Flask-App"
+        },
+        "project": null,
+        "json_version": 1
+    },
+    "scanned_packages": {
+        "backports-abc": {
+            "name": "backports-abc",
+            "version": "0.5"
+        },
+        "certifi": {
+            "name": "certifi",
+            "version": "2017.4.17"
+        },
+        "chardet": {
+            "name": "chardet",
+            "version": "3.0.4"
+        },
+        "click": {
+            "name": "click",
+            "version": "6.7"
+        },
+        "Faker": {
+            "name": "Faker",
+            "version": "0.7.17"
+        },
+        "Flask": {
+            "name": "Flask",
+            "version": "0.12.2"
+        },
+        "Flask-SQLAlchemy": {
+            "name": "Flask-SQLAlchemy",
+            "version": "2.2"
+        },
+        "gevent": {
+            "name": "gevent",
+            "version": "1.2.2"
+        },
+        "greenlet": {
+            "name": "greenlet",
+            "version": "0.4.12"
+        },
+        "grequests": {
+            "name": "grequests",
+            "version": "0.3.0"
+        },
+        "idna": {
+            "name": "idna",
+            "version": "2.5"
+        },
+        "ipaddress": {
+            "name": "ipaddress",
+            "version": "1.0.18"
+        },
+        "itsdangerous": {
+            "name": "itsdangerous",
+            "version": "0.24"
+        },
+        "Jinja2": {
+            "name": "Jinja2",
+            "version": "2.9.6"
+        },
+        "lxml": {
+            "name": "lxml",
+            "version": "4.2.1"
+        },
+        "MarkupSafe": {
+            "name": "MarkupSafe",
+            "version": "1.0"
+        },
+        "MySQL-python": {
+            "name": "MySQL-python",
+            "version": "1.2.5"
+        },
+        "PyJWT": {
+            "name": "PyJWT",
+            "version": "1.5.2"
+        },
+        "python-dateutil": {
+            "name": "python-dateutil",
+            "version": "2.6.0"
+        },
+        "python-docx": {
+            "name": "python-docx",
+            "version": "0.8.5"
+        },
+        "PyYAML": {
+            "name": "PyYAML",
+            "version": "3.12"
+        },
+        "requests": {
+            "name": "requests",
+            "version": "2.18.1"
+        },
+        "singledispatch": {
+            "name": "singledispatch",
+            "version": "3.4.0.3"
+        },
+        "six": {
+            "name": "six",
+            "version": "1.10.0"
+        },
+        "SQLAlchemy": {
+            "name": "SQLAlchemy",
+            "version": "1.1.11"
+        },
+        "tornado": {
+            "name": "tornado",
+            "version": "4.5.1"
+        },
+        "urllib3": {
+            "name": "urllib3",
+            "version": "1.21.1"
+        },
+        "Werkzeug": {
+            "name": "Werkzeug",
+            "version": "0.14.1"
+        }
+    },
+    "affected_packages": {
+        "click": {
+            "name": "click",
+            "version": "6.7",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        },
+        "Flask": {
+            "name": "Flask",
+            "version": "0.12.2",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        },
+        "Jinja2": {
+            "name": "Jinja2",
+            "version": "2.9.6",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        },
+        "lxml": {
+            "name": "lxml",
+            "version": "4.2.1",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        },
+        "PyJWT": {
+            "name": "PyJWT",
+            "version": "1.5.2",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        },
+        "python-docx": {
+            "name": "python-docx",
+            "version": "0.8.5",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        },
+        "PyYAML": {
+            "name": "PyYAML",
+            "version": "3.12",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        },
+        "requests": {
+            "name": "requests",
+            "version": "2.18.1",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        },
+        "SQLAlchemy": {
+            "name": "SQLAlchemy",
+            "version": "1.1.11",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        },
+        "urllib3": {
+            "name": "urllib3",
+            "version": "1.21.1",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        },
+        "Werkzeug": {
+            "name": "Werkzeug",
+            "version": "0.14.1",
+            "found": "requirements.txt",
+            "insecure_versions": [],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": null,
+            "latest_version": null,
+            "more_info_url": "https://pyup.io"
+        }
+    },
+    "announcements": [],
+    "vulnerabilities": [
+        {
+            "vulnerability_id": "47833",
+            "package_name": "click",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<8.0.0",
+            "all_vulnerable_specs": [
+                "<8.0.0"
+            ],
+            "analyzed_version": "6.7",
+            "advisory": "Click 8.0.0 uses 'mkstemp()' instead of the deprecated & insecure 'mktemp()'.\r\nhttps://github.com/pallets/click/issues/1752",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": null,
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/vulnerabilities/PVE-2022-47833/47833/"
+        },
+        {
+            "vulnerability_id": "38654",
+            "package_name": "flask",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<0.12.3",
+            "all_vulnerable_specs": [
+                "<0.12.3"
+            ],
+            "analyzed_version": "0.12.2",
+            "advisory": "Flask 0.12.3 includes a fix for CVE-2019-1010083: Unexpected memory usage. The impact is denial of service. The attack vector is crafted encoded JSON data. NOTE: this may overlap CVE-2018-1000656.\r\nhttps://github.com/pallets/flask/pull/2695/commits/0e1e9a04aaf29ab78f721cfc79ac2a691f6e3929",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2019-1010083",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/vulnerabilities/CVE-2019-1010083/38654/"
+        },
+        {
+            "vulnerability_id": "36388",
+            "package_name": "flask",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<0.12.3",
+            "all_vulnerable_specs": [
+                "<0.12.3"
+            ],
+            "analyzed_version": "0.12.2",
+            "advisory": "flask version Before 0.12.3 contains a CWE-20: Improper Input Validation vulnerability in flask that can result in Large amount of memory usage possibly leading to denial of service. This attack appear to be exploitable via Attacker provides JSON data in incorrect encoding. This vulnerability appears to have been fixed in 0.12.3.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2018-1000656",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/vulnerabilities/CVE-2018-1000656/36388/"
+        },
+        {
+            "vulnerability_id": "39525",
+            "package_name": "jinja2",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<2.11.3",
+            "all_vulnerable_specs": [
+                "<2.11.3"
+            ],
+            "analyzed_version": "2.9.6",
+            "advisory": "This affects the package jinja2 from 0.0.0 and before 2.11.3. The ReDoS vulnerability is mainly due to the '_punctuation_re regex' operator and its use of multiple wildcards. The last wildcard is the most exploitable as it searches for trailing punctuation. This issue can be mitigated by Markdown to format user content instead of the urlize filter, or by implementing request timeouts and limiting process memory.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2020-28493",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/vulnerabilities/CVE-2020-28493/39525/"
+        },
+        {
+            "vulnerability_id": "50747",
+            "package_name": "lxml",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<4.2.5",
+            "all_vulnerable_specs": [
+                "<4.2.5"
+            ],
+            "analyzed_version": "4.2.1",
+            "advisory": "Lxml 4.2.5 includes a fix for CVE-2018-19787: lxml/html/clean.py in the lxml.html.clean module does not remove javascript: URLs that use escaping, allowing a remote attacker to conduct XSS attacks, as demonstrated by \"j a v a s c r i p t:\" in Internet Explorer. This is a similar issue to CVE-2014-3146.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2018-19787",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/vulnerabilities/CVE-2018-19787/50747/"
+        },
+        {
+            "vulnerability_id": "39195",
+            "package_name": "lxml",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<4.4.0",
+            "all_vulnerable_specs": [
+                "<4.4.0"
+            ],
+            "analyzed_version": "4.2.1",
+            "advisory": "In lxml before 4.4.0, when writing to file paths that contain the URL escape character '%', the file path could wrongly be mangled by URL unescaping and thus write to a different file or directory.  Code that writes to file paths that are provided by untrusted sources, but that must work with previous versions of lxml, should best either reject paths that contain '%' characters, or otherwise make sure that the path does not contain maliciously injected '%XX' URL hex escapes for paths like '../'.\r\nhttps://github.com/lxml/lxml/commit/0245aba002f069a0b157282707bdf77418d1b5be",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": null,
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/vulnerabilities/PVE-2021-39195/39195/"
+        },
+        {
+            "vulnerability_id": "39194",
+            "package_name": "lxml",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<4.6.2",
+            "all_vulnerable_specs": [
+                "<4.6.2"
+            ],
+            "analyzed_version": "4.2.1",
+            "advisory": "Lxml 4.6.2 includes a fix for CVE-2020-27783: A XSS vulnerability was discovered in python-lxml's clean module. The module's parser didn't properly imitate browsers, which caused different behaviors between the sanitizer and the user's page. A remote attacker could exploit this flaw to run arbitrary HTML/JS code.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2020-27783",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/vulnerabilities/CVE-2020-27783/39194/"
+        },
+        {
+            "vulnerability_id": "40072",
+            "package_name": "lxml",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<4.6.3",
+            "all_vulnerable_specs": [
+                "<4.6.3"
+            ],
+            "analyzed_version": "4.2.1",
+            "advisory": "Lxml version 4.6.3 includes a fix for CVE-2021-28957: An XSS vulnerability was discovered in python-lxml's clean module versions before 4.6.3. When disabling the safe_attrs_only and forms arguments, the Cleaner class does not remove the formation attribute allowing for JS to bypass the sanitizer. A remote attacker could exploit this flaw to run arbitrary JS code on users who interact with incorrectly sanitized HTML.\r\nhttps://bugs.launchpad.net/lxml/+bug/1888153",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2021-28957",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/vulnerabilities/CVE-2021-28957/40072/"
+        },
+        {
+            "vulnerability_id": "43366",
+            "package_name": "lxml",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<4.6.5",
+            "all_vulnerable_specs": [
+                "<4.6.5"
+            ],
+            "analyzed_version": "4.2.1",
+            "advisory": "Lxml 4.6.5 includes a fix for CVE-2021-43818: Prior to version 4.6.5, the HTML Cleaner in lxml.html lets certain crafted script content pass through, as well as script content in SVG files embedded using data URIs. Users that employ the HTML cleaner in a security relevant context should upgrade to lxml 4.6.5 to receive a patch.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2021-43818",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/vulnerabilities/CVE-2021-43818/43366/"
+        },
+        {
+            "vulnerability_id": "50748",
+            "package_name": "lxml",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<4.9.1",
+            "all_vulnerable_specs": [
+                "<4.9.1"
+            ],
+            "analyzed_version": "4.2.1",
+            "advisory": "Lxml 4.9.1 include a fix for CVE-2022-2309: NULL Pointer Dereference allows attackers to cause a denial of service (or application crash). This only applies when lxml is used together with libxml2 2.9.10 through 2.9.14. Libxml2 2.9.9 and earlier versions are not affected. It allows triggering crashes through forged input data, given a vulnerable code sequence in the application. The vulnerability is caused by the iterwalk function (also used by the canonicalize function). Such code shouldn't be in wide-spread use, given that parsing + iterwalk would usually be replaced with the more efficient iterparse function. However, an XML converter that serializes to C14N would also be vulnerable, for example, and there are legitimate use cases for this code sequence. If untrusted input is received (also remotely) and processed via iterwalk function, a crash can be triggered.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-2309",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/vulnerabilities/CVE-2022-2309/50748/"
+        },
+        {
+            "vulnerability_id": "48542",
+            "package_name": "pyjwt",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": ">=1.5.0,<2.4.0",
+            "all_vulnerable_specs": [
+                ">=1.5.0,<2.4.0"
+            ],
+            "analyzed_version": "1.5.2",
+            "advisory": "PyJWT 2.4.0 includes a fix for CVE-2022-29217: An attacker submitting the JWT token can choose the used signing algorithm. The PyJWT library requires that the application chooses what algorithms are supported. The application can specify 'jwt.algorithms.get_default_algorithms()' to get support for all algorithms, or specify a single algorithm. The issue is not that big as 'algorithms=jwt.algorithms.get_default_algorithms()' has to be used. As a workaround, always be explicit with the algorithms that are accepted and expected when decoding.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2022-29217",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/vulnerabilities/CVE-2022-29217/48542/"
+        },
+        {
+            "vulnerability_id": "26081",
+            "package_name": "python-docx",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<0.8.6",
+            "all_vulnerable_specs": [
+                "<0.8.6"
+            ],
+            "analyzed_version": "0.8.5",
+            "advisory": "Python-docx 0.8.6 includes a fix for CVE-2016-5851:\r\nPython-docx before 0.8.6 allows context-dependent attackers to conduct XML External Entity (XXE) attacks via a crafted document.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2016-5851",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/vulnerabilities/CVE-2016-5851/26081/"
+        },
+        {
+            "vulnerability_id": "36333",
+            "package_name": "pyyaml",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<4",
+            "all_vulnerable_specs": [
+                "<4"
+            ],
+            "analyzed_version": "3.12",
+            "advisory": "Pyyaml before 4 uses ``yaml.load`` which has been assigned CVE-2017-18342.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2017-18342",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/vulnerabilities/CVE-2017-18342/36333/"
+        },
+        {
+            "vulnerability_id": "38100",
+            "package_name": "pyyaml",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<5.3.1",
+            "all_vulnerable_specs": [
+                "<5.3.1"
+            ],
+            "analyzed_version": "3.12",
+            "advisory": "Pyyaml 5.3.1 includes a fix for CVE-2020-1747: A vulnerability was discovered in the PyYAML library in versions before 5.3.1, where it is susceptible to arbitrary code execution when it processes untrusted YAML files through the full_load method or with the FullLoader loader. Applications that use the library to process untrusted input may be vulnerable to this flaw. An attacker could use this flaw to execute arbitrary code on the system by abusing the python/object/new constructor.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2020-1747",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/vulnerabilities/CVE-2020-1747/38100/"
+        },
+        {
+            "vulnerability_id": "39611",
+            "package_name": "pyyaml",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<5.4",
+            "all_vulnerable_specs": [
+                "<5.4"
+            ],
+            "analyzed_version": "3.12",
+            "advisory": "Pyyaml version 5.4 includes a fix for CVE-2020-14343: A vulnerability was discovered in the PyYAML library in versions before 5.4, where it is susceptible to arbitrary code execution when it processes untrusted YAML files through the full_load method or with the FullLoader loader. Applications that use the library to process untrusted input may be vulnerable to this flaw. This flaw allows an attacker to execute arbitrary code on the system by abusing the python/object/new constructor. This flaw is due to an incomplete fix for CVE-2020-1747.\r\nhttps://bugzilla.redhat.com/show_bug.cgi?id=1860466",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2020-14343",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/vulnerabilities/CVE-2020-14343/39611/"
+        },
+        {
+            "vulnerability_id": "36546",
+            "package_name": "requests",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<=2.19.1",
+            "all_vulnerable_specs": [
+                "<=2.19.1"
+            ],
+            "analyzed_version": "2.18.1",
+            "advisory": "Requests before 2.20.0 sends an HTTP Authorization header to an http URI upon receiving a same-hostname https-to-http redirect, which makes it easier for remote attackers to discover credentials by sniffing the network.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2018-18074",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/vulnerabilities/CVE-2018-18074/36546/"
+        },
+        {
+            "vulnerability_id": "38497",
+            "package_name": "sqlalchemy",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<=1.2.17",
+            "all_vulnerable_specs": [
+                "<=1.2.17",
+                ">=1.3.0b1,<=1.3.0b2"
+            ],
+            "analyzed_version": "1.1.11",
+            "advisory": "SQLAlchemy through 1.2.17 and 1.3.x through 1.3.0b2 allows SQL Injection via the order_by parameter.\r\nhttps://github.com/sqlalchemy/sqlalchemy/issues/4481",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2019-7164",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/vulnerabilities/CVE-2019-7164/38497/"
+        },
+        {
+            "vulnerability_id": "36541",
+            "package_name": "urllib3",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<1.23",
+            "all_vulnerable_specs": [
+                "<1.23"
+            ],
+            "analyzed_version": "1.21.1",
+            "advisory": "urllib3 before version 1.23 does not remove the Authorization HTTP header when following a cross-origin redirect (i.e., a redirect that differs in host, port, or scheme). This can allow for credentials in the Authorization header to be exposed to unintended hosts or transmitted in cleartext.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2018-20060",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/vulnerabilities/CVE-2018-20060/36541/"
+        },
+        {
+            "vulnerability_id": "37071",
+            "package_name": "urllib3",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<1.24.2",
+            "all_vulnerable_specs": [
+                "<1.24.2"
+            ],
+            "analyzed_version": "1.21.1",
+            "advisory": "The urllib3 library before 1.24.2 for Python mishandles certain cases where the desired set of CA certificates is different from the OS store of CA certificates, which results in SSL connections succeeding in situations where a verification failure is the correct outcome. This is related to use of the ssl_context, ca_certs, or ca_certs_dir argument.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2019-11324",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/vulnerabilities/CVE-2019-11324/37071/"
+        },
+        {
+            "vulnerability_id": "38834",
+            "package_name": "urllib3",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<1.25.9",
+            "all_vulnerable_specs": [
+                "<1.25.9"
+            ],
+            "analyzed_version": "1.21.1",
+            "advisory": "Urllib3 before 1.25.9 allows CRLF injection if the attacker controls the HTTP request method, as demonstrated by inserting CR and LF control characters in the first argument of putrequest(). NOTE: this is similar to CVE-2020-26116.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2020-26137",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/vulnerabilities/CVE-2020-26137/38834/"
+        },
+        {
+            "vulnerability_id": "43975",
+            "package_name": "urllib3",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<1.26.5",
+            "all_vulnerable_specs": [
+                "<1.26.5"
+            ],
+            "analyzed_version": "1.21.1",
+            "advisory": "Urllib3 1.26.5 includes a fix for CVE-2021-33503: An issue was discovered in urllib3 before 1.26.5. When provided with a URL containing many @ characters in the authority component, the authority regular expression exhibits catastrophic backtracking, causing a denial of service if a URL were passed as a parameter or redirected to via an HTTP redirect.\r\nhttps://github.com/advisories/GHSA-q2q7-5pp4-w6pg",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2021-33503",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/vulnerabilities/CVE-2021-33503/43975/"
+        },
+        {
+            "vulnerability_id": "37055",
+            "package_name": "urllib3",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<=1.24.1",
+            "all_vulnerable_specs": [
+                "<=1.24.1"
+            ],
+            "analyzed_version": "1.21.1",
+            "advisory": "In the urllib3 library through 1.24.1 for Python, CRLF injection is possible if the attacker controls the request parameter.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2019-11236",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/vulnerabilities/CVE-2019-11236/37055/"
+        },
+        {
+            "vulnerability_id": "36967",
+            "package_name": "werkzeug",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": "<0.15.0",
+            "all_vulnerable_specs": [
+                "<0.15.0"
+            ],
+            "analyzed_version": "0.14.1",
+            "advisory": "Werkzeug 0.15.0 refactors class:`~middleware.proxy_fix.ProxyFix` to support more headers, multiple values, and a more secure configuration.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": null,
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://pyup.io/vulnerabilities/PVE-2021-36967/36967/"
+        }
+    ],
+    "ignored_vulnerabilities": [],
+    "remediations": {
+        "click": {
+            "current_version": "6.7",
+            "vulnerabilities_found": 1,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io"
+        },
+        "flask": {
+            "current_version": "0.12.2",
+            "vulnerabilities_found": 2,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io"
+        },
+        "jinja2": {
+            "current_version": "2.9.6",
+            "vulnerabilities_found": 1,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io"
+        },
+        "lxml": {
+            "current_version": "4.2.1",
+            "vulnerabilities_found": 6,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io"
+        },
+        "pyjwt": {
+            "current_version": "1.5.2",
+            "vulnerabilities_found": 1,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io"
+        },
+        "python-docx": {
+            "current_version": "0.8.5",
+            "vulnerabilities_found": 1,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io"
+        },
+        "pyyaml": {
+            "current_version": "3.12",
+            "vulnerabilities_found": 3,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io"
+        },
+        "requests": {
+            "current_version": "2.18.1",
+            "vulnerabilities_found": 1,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io"
+        },
+        "sqlalchemy": {
+            "current_version": "1.1.11",
+            "vulnerabilities_found": 1,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io"
+        },
+        "urllib3": {
+            "current_version": "1.21.1",
+            "vulnerabilities_found": 5,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io"
+        },
+        "werkzeug": {
+            "current_version": "0.14.1",
+            "vulnerabilities_found": 1,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": "https://pyup.io"
+        }
+    }
+}

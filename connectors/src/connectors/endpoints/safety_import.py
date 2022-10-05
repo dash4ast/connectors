@@ -131,7 +131,10 @@ def create_vulnerability(issue, application_name, now):
     vulnerability.tool = 'safety'
     vulnerability.analysis_type = 'sca'
     vulnerability.status = 'OPEN'
-    vulnerability.name = issue['CVE']
+    if issue['CVE'] is None:
+        vulnerability.name = issue['vulnerability_id']
+    else:
+        vulnerability.name = issue['CVE']
     vulnerability.tags = "more_info_url: " + issue['more_info_url']
     if issue['severity'] is None:  # TODO: Get severity from CVE
         vulnerability.severity = 'Medium'.upper()
@@ -140,7 +143,10 @@ def create_vulnerability(issue, application_name, now):
     vulnerability.component = issue['package_name']
     vulnerability.location = issue['analyzed_version']
     vulnerability.application = application_name
-    vulnerability.detected_date = now
+    if issue['published_date'] is None:
+        vulnerability.detected_date = now
+    else:
+        vulnerability.detected_date = issue['published_date']
     vulnerability.extraction_date = now
     vulnerability.type = 'vulnerability'
     return vulnerability
