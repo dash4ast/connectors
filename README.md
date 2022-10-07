@@ -61,16 +61,28 @@ python3 client/dash4ast-cli-import-sonarqube-report.py --host ${DASH4AST_ENDPOIN
 ## Connectors
 
 Full list of available connectors:
-* bandit (json report)
-* owaszap (xml report)
-* checkov (json report)
-* coverity (json report)
-* safety (json report)
+* bandit (json report). API and interface.
+* owaszap (xml report). API and interface.
+* checkov (json report). API and interface.
+* coverity (json report). API and interface.
+* safety (json report). API and interface.
+* semgrep (json report). API and interface.
+* kiuwan (csv mport). Interface.
+* snyk (json import). Interface.
+* trivy (json import). Interface.
+* checkmarx (csv import). Interface.
 * sonarqube (direct connection)
 * blackduck (direct connection)
+
+Coming soon:
+* hcl scan
+* owasp dependency check
+
+## How to develop new connectors
+See guide here:
+https://gitlab.com/dash4ast-community1/support/-/wikis/How-to-develop-a-new-connector
 
 ## Authors & Contact
 
 Please contact:
 Sebastian Revuelta -> https://www.linkedin.com/in/sebasrevuelta/
-
