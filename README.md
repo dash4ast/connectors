@@ -67,7 +67,7 @@ Full list of available connectors:
 * coverity (json report). API and interface.
 * safety (json report). API and interface.
 * semgrep (json report). API and interface.
-* kiuwan (csv mport). Interface.
+* kiuwan (csv import). Interface.
 * snyk (json import). Interface.
 * trivy (json import). Interface.
 * checkmarx (csv import). Interface.
