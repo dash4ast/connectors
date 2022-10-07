@@ -103,14 +103,14 @@ def extract():
     db_session()
     db_session.flush()
     try:
-        for issue in content['issues']:
+        for issue in content['results']:
             vulnerability = create_vulnerability(issue, dash4ast_application, now)
             UtilDb.add_vulnerability(db_session, vulnerability)
     except IntegrityError:
         print('IntegrityError key: ' + issue['check_id'])
     db_session.remove()
 
-    new_vulnerabilities = len(content['issues'])
+    new_vulnerabilities = len(content['results'])
 
     # update analysis table
     analysis = UtilDb.create_analysis(dash4ast_application, 'sast', now)
@@ -134,7 +134,7 @@ def create_vulnerability(issue, application_name, now):
     vulnerability.name = issue['check_id']
     vulnerability.severity = get_severity(issue['extra']['severity'])
     if "cwe" in issue['extra']['metadata']:
-        vulnerability.tags = "CWE: " + issue['extra']['metadata']['cwe']
+        vulnerability.tags = "CWE: " + str(issue['extra']['metadata']['cwe'])
     else:
         vulnerability.tags = "CWE: ---"
     vulnerability.component = issue['path']
@@ -176,7 +176,7 @@ def print_vulnerability(issue, application_name, now):
     print(issue['check_id'])
     print(get_severity(issue['extra']['severity']))
     if "cwe" in issue['extra']['metadata']:
-        print("CWE: " + issue['extra']['metadata']['cwe'])
+        print("CWE: " + str(issue['extra']['metadata']['cwe']))
     else:
         print("CWE: ---")
     print(issue['path'])

@@ -1,4 +1,10 @@
 python3 ./client/dash4ast-cli-import-local-report.py --host http://localhost:5000 --application vulnerable-flask-app --report ./reports/vulnerable-flask-app/bandit-report.json --scan bandit
 python3 ./client/dash4ast-cli-import-local-report.py --host http://localhost:5000 --application vulnerable-flask-app --report ./reports/vulnerable-flask-app/safety-report.json --scan safety
-python3 ./client/dash4ast-cli-import-local-report.py --host http://localhost:5000 --application juice-shop --report ./reports/juice-shop/owaspzap-report.json --scan owaspzap
-
+python3 ./client/dash4ast-cli-import-local-report.py --host http://localhost:5000 --application vulnerable-flask-app --report ./reports/vulnerable-flask-app/semgrep-report.json --scan semgrep
+python3 ./client/dash4ast-cli-import-local-report.py --host http://localhost:5000 --application webgoat --report ./reports/webgoat/semgrep-report.json --scan semgrep
+python3 ./client/dash4ast-cli-import-local-report.py --host http://localhost:5000 --application dash4ast --report ./reports/dash4ast/owaspzap-report.xml --scan owaspzap
+python3 ./client/dash4ast-cli-import-local-report.py --host http://localhost:5000 --application test --report ./reports/test_projects/safety-report.json --scan safety
+python3 ./client/dash4ast-cli-import-local-report.py --host http://localhost:5000 --application test --report ./reports/test_projects/bandit-report.json --scan bandit
+python3 ./client/dash4ast-cli-import-local-report.py --host http://localhost:5000 --application test --report ./reports/test_projects/coverity-report.json --scan coverity
+python3 ./client/dash4ast-cli-import-local-report.py --host http://localhost:5000 --application juice-shop --report ./reports/juice-shop/semgrep-report.json --scan semgrep
+python3 ./client/dash4ast-cli-import-local-report.py --host http://localhost:5000 --application juice-shop --report ./reports/juice-shop/owaspzap-report.xml --scan owaspzap
