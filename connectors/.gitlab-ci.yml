@@ -5,7 +5,7 @@ build-connectors:
 
 sast-bandit:
   stage: test
-  image: 
+  image:
     name: python:3.9-bullseye
   before_script:
     - pip3 install bandit
@@ -13,15 +13,15 @@ sast-bandit:
     - cd ${CI_PROJECT_DIR}/connectors
     - bandit -r -f json -o bandit-output.json src/
   artifacts:
-    paths: 
+    paths:
       - ${CI_PROJECT_DIR}/connectors/bandit-output.json
-    when: always 
+    when: always
     expire_in: one week
   allow_failure: true
 
 sast-semgrep:
   stage: test
-  image: 
+  image:
     name: python:3.9-bullseye
   before_script:
     - pip3 install semgrep
@@ -29,9 +29,9 @@ sast-semgrep:
     - cd ${CI_PROJECT_DIR}/connectors
     - semgrep scan --config=auto src --json > ${CI_PROJECT_DIR}/connectors/semgrep-output.json
   artifacts:
-    paths: 
+    paths:
       - ${CI_PROJECT_DIR}/connectors/semgrep-output.json
-    when: always 
+    when: always
     expire_in: one week
   allow_failure: true
 
@@ -40,7 +40,7 @@ sast-sonarqube:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       when: manual
-  image: 
+  image:
     name: sonarsource/sonar-scanner-cli:latest
     entrypoint: [""]
   variables:
@@ -50,10 +50,10 @@ sast-sonarqube:
     key: "${CI_JOB_NAME}"
     paths:
       - .sonar/cache
-  script: 
+  script:
     - sonar-scanner -Dsonar.projectKey=dash4ast-connectors -Dsonar.sources="${CI_PROJECT_DIR}/connectors"
   allow_failure: true
-  tags: 
+  tags:
     - sast
 
 sast-git-secrets:
@@ -62,15 +62,15 @@ sast-git-secrets:
     - cd ${CI_PROJECT_DIR}/connectors/
     - docker run -v $(pwd):/src --rm trufflesecurity/trufflehog:latest filesystem --directory=/src --json | tee trufflehog-output.json
   artifacts:
-    paths: 
+    paths:
       - ${CI_PROJECT_DIR}/connectors/trufflehog-output.json
-    when: always 
+    when: always
     expire_in: one week
   allow_failure: true
 
 sca-safety:
   stage: test
-  image: 
+  image:
     name: python:3.9-bullseye
   before_script:
     - pip3 install safety
@@ -79,14 +79,14 @@ sca-safety:
     - safety check -r requirements.txt --json > safety-output.json
   allow_failure: true
   artifacts:
-    paths: 
+    paths:
       - ${CI_PROJECT_DIR}/connectors/safety-output.json
-    when: always 
+    when: always
     expire_in: one week
 
 sca-scanoss:
   stage: test
-  image: 
+  image:
     name: python:3.9-bullseye
   before_script:
     - pip3 install scanoss
@@ -95,9 +95,9 @@ sca-scanoss:
     - scanoss-py scan . > scanoss-output.json
   allow_failure: true
   artifacts:
-    paths: 
+    paths:
       - ${CI_PROJECT_DIR}/connectors/scanoss-output.json
-    when: always 
+    when: always
     expire_in: one week
 
 sca-snyk:
@@ -121,7 +121,7 @@ sast-bandit-import-dash4ast:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       when: manual
   stage: integration
-  image: 
+  image:
     name: python:3.9-bullseye
   script:
     - pip3 install requests
@@ -130,7 +130,7 @@ sast-bandit-import-dash4ast:
     - sha256sum -c sha256-import.tmp
     - python3 dash4ast-cli-import-local-report.py --host ${DASH4AST_ENDPOINT_QA} --application dash4ast-connectors --report ${CI_PROJECT_DIR}/connectors/bandit-output.json --scan bandit
   allow_failure: true
-  tags: 
+  tags:
     - sast
 
 sca-safety-import-dash4ast:
@@ -138,7 +138,7 @@ sca-safety-import-dash4ast:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       when: manual
   stage: integration
-  image: 
+  image:
     name: python:3.9-bullseye
   script:
     - pip3 install requests
@@ -147,7 +147,7 @@ sca-safety-import-dash4ast:
     - sha256sum -c sha256-import.tmp
     - python3 dash4ast-cli-import-local-report.py --host ${DASH4AST_ENDPOINT_QA} --application dash4ast-connectors --report ${CI_PROJECT_DIR}/connectors/safety-output.json --scan safety
   allow_failure: true
-  tags: 
+  tags:
     - sca
 
 sast-sonarqube-extract-dash4ast:
@@ -155,7 +155,7 @@ sast-sonarqube-extract-dash4ast:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       when: manual
   stage: integration
-  image: 
+  image:
     name: python:3.9-bullseye
   script:
     - pip3 install requests
@@ -164,7 +164,7 @@ sast-sonarqube-extract-dash4ast:
     - sha256sum -c sha256-sq-export.tmp
     - python3 dash4ast-cli-import-sonarqube-report.py --host ${DASH4AST_ENDPOINT_QA} --application-tool dash4ast-connectors --application-dash4ast dash4ast-connectors --url-tool ${SONAR_HOST_URL} --user-tool ${SONAR_USER} --pwd-tool ${SONAR_PWD}
   allow_failure: true
-  tags: 
+  tags:
     - sca
 
 sca-blackduck-extract-dash4ast:
@@ -172,7 +172,7 @@ sca-blackduck-extract-dash4ast:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       when: manual
   stage: integration
-  image: 
+  image:
     name: python:3.9-bullseye
   script:
     - pip3 install requests
@@ -181,7 +181,7 @@ sca-blackduck-extract-dash4ast:
     - sha256sum -c sha256-bd-export.tmp
     - python3 dash4ast-cli-import-blackduck-report.py --host ${DASH4AST_ENDPOINT_QA} --application-tool demo/dash4ast/connectors --application-dash4ast dash4ast-connectors --url-tool ${BLACKDUCK_URL} --api-key-tool ${BLACKDUCK_API_TOKEN}
   allow_failure: true
-  tags: 
+  tags:
     - sca
 
 connectors-push-images-docker-hub:
