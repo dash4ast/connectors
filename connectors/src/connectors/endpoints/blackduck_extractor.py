@@ -120,7 +120,6 @@ def extract():
     except RuntimeError:
         _abort_due_to_invalid_input({'messages': ['Possibly authentication failed']})
 
-    print(url_blackduck)
     now = datetime.now()
     for project in bd.get_items("/api/projects"):
         application_name = project['name']

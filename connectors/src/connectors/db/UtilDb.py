@@ -1,4 +1,5 @@
 from connectors.persistence.Analysis import Analysis
+from connectors.persistence.Application import Application
 
 
 def create_analysis(application_name, analysis_type, now):
@@ -11,6 +12,30 @@ def create_analysis(application_name, analysis_type, now):
 
 def add_vulnerability(db_session, vulnerability):
     db_session.add(vulnerability)
+    db_session.commit()
+    db_session.flush()
+
+
+def delete_application(db_session, app):
+    db_session.delete(app)
+    db_session.commit()
+    db_session.flush()
+
+
+def delete_analysis(db_session, analysis):
+    db_session.delete(analysis)
+    db_session.commit()
+    db_session.flush()
+
+
+def delete_vulnerability(db_session, vulnerability):
+    db_session.delete(vulnerability)
+    db_session.commit()
+    db_session.flush()
+
+
+def add_application(db_session, application):
+    db_session.add(application)
     db_session.commit()
     db_session.flush()
 
