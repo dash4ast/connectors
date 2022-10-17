@@ -11,6 +11,7 @@ import connectors.endpoints.safety_import
 import connectors.endpoints.checkov_import
 import connectors.endpoints.owaspzap_import
 import connectors.endpoints.semgrep_import
+import connectors.endpoints.create_app
 import connectors.endpoints.health
 
 # Logging
@@ -31,6 +32,7 @@ app.register_blueprint(connectors.endpoints.checkov_import.extract_blueprint)
 app.register_blueprint(connectors.endpoints.safety_import.extract_blueprint)
 app.register_blueprint(connectors.endpoints.owaspzap_import.extract_blueprint)
 app.register_blueprint(connectors.endpoints.semgrep_import.extract_blueprint)
+app.register_blueprint(connectors.endpoints.create_app.extract_blueprint)
 app.register_blueprint(connectors.endpoints.health.health_blueprint)
 
 # CORS config

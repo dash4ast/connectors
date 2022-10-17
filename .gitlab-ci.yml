@@ -4,7 +4,7 @@ services:
   - docker:dind       # To run all jobs in this pipeline, use a docker image which contains a docker daemon running inside (dind - docker in docker). Reference: https://forum.gitlab.com/t/why-services-docker-dind-is-needed-while-already-having-image-docker/43534
 
 variables:
-  VERSION: 6.4.1
+  VERSION: 6.5.1
 
 stages:
 - build

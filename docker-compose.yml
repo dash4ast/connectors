@@ -12,7 +12,7 @@ services:
       - '5433:5432'
 
   connectors:
-    image: dash4ast/connectors:6.4.1
+    image: dash4ast/connectors:6.5.1
     container_name: connectors
     ports:
       - 5000:5000
