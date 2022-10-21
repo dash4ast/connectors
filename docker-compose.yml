@@ -26,7 +26,7 @@ services:
       - db
 
   dashboard:
-    image: dash4ast/frontend-shiny:6.5.4
+    image: dash4ast/frontend-shiny:6.5.7
     container_name: dashboard
     ports:
       - 3838:3838
