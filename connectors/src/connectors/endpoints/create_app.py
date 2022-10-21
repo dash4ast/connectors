@@ -101,7 +101,6 @@ def create():
 
     db_session = PostgreDbClient().get_client()
     db_session()
-    db_session.flush()
 
     # check if application already exists...
     app: Application = db_session.query(Application) \

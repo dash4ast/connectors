@@ -97,7 +97,6 @@ def delete():
 
     db_session = PostgreDbClient().get_client()
     db_session()
-    db_session.flush()
 
     # check if application exists...
     app: Application = db_session.query(Application) \
@@ -107,17 +106,17 @@ def delete():
         return _abort_due_to_application_not_found({'messages': ['application ' + application + ' does not exist']})
 
     try:
-        UtilDb.delete_application(db_session, app)
         analysis_list: Analysis = db_session.query(Analysis) \
             .filter_by(application=application)
         vulnerability_list: Vulnerability = db_session.query(Vulnerability) \
             .filter_by(application=application)
-        if analysis_list is not None:
-            for analysis in analysis_list:
-                UtilDb.delete_analysis(db_session, analysis)
         if vulnerability_list is not None:
             for vulnerability in vulnerability_list:
                 UtilDb.delete_vulnerability(db_session, vulnerability)
+        if analysis_list is not None:
+            for analysis in analysis_list:
+                UtilDb.delete_analysis(db_session, analysis)
+        UtilDb.delete_application(db_session, app)
     except IntegrityError:
         print('Error deleting an application')
     db_session.remove()
