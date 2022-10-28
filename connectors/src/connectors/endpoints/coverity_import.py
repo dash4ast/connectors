@@ -129,10 +129,10 @@ def extract():
 
 def extract_test():
 
-    report = open('../../../test/webgoat-report-coverity.json', 'r').read()
+    report = open('../../../test/coverity-report.json', 'r').read()
     content = json.loads(report)
 
-    dash4ast_application = 'test33'
+    dash4ast_application = 'sg-nms-be'
     now = datetime.now()
 
     db_session = PostgreDbClient().get_client()
@@ -148,8 +148,6 @@ def extract_test():
     except OperationalError:
         print('OperationalError key: ' + issue['mergeKey'])
     db_session.remove()
-
-    new_vulnerabilities = len(content['issues'])
 
     # update analysis table
     analysis = UtilDb.create_analysis(dash4ast_application, 'sast', now)
@@ -180,7 +178,7 @@ def create_vulnerability(issue, application_name, now):
 
 
 def test():
-    report = open('../../../test/webgoat-report-coverity.json', 'r').read()
+    report = open('../../../test/coverity-report.json', 'r').read()
     content = json.loads(report)
     print(len(content['issues']))
     now = datetime.now()
