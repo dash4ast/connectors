@@ -191,7 +191,6 @@ def test():
 
 
 def print_vulnerability(issue, application_name, now):
-    vulnerability = Vulnerability()
     print(hashlib.md5(str(issue['mergeKey'] + issue['strippedMainEventFilePathname'] +
                                                      str(issue['mainEventLineNumber']) +
                                                      str(issue['occurrenceNumberInMK'])).encode()).hexdigest())
@@ -215,7 +214,6 @@ def print_vulnerability(issue, application_name, now):
     print("CWE: " + str(issue['checkerProperties']['cweCategory']))
     print(issue['strippedMainEventFilePathname'])
     print(issue['mainEventLineNumber'])
-    return vulnerability
 
 
 if __name__ == '__main__':

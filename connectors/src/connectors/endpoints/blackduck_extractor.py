@@ -36,7 +36,7 @@ class PostInstanceSegmentationRequestBody(Schema):
     blackduck_api_key = fields.String(required=True, description='blackduck_api_key')
     blackduck_application = fields.String(required=True, description='blackduck_application')
     dash4ast_application = fields.String(required=True, description='dash4ast_application')
-
+    analysis_type = fields.String(required=False, description='analysis type: sca or images')
 
 _response_schema = ExtractionSuccessResponse()
 _auth_invalid_input_response_schema = AuthInvalidResponse()
@@ -98,11 +98,20 @@ def _abort_due_to_application_not_found(messages: Dict) -> None:
     }
 )
 def extract():
+    DEFAULT_BUSINESS_RISK_VALUE = 5
+    DEFAULT_THRESHOLD = 75
+    DEFAULT_BLACKDUCK_ANALYSIS_TYPE = 'sca'
+
     parsed_body = _request_body_schema.load(request.get_json())
     url_blackduck = parsed_body['blackduck_url']
     apikey = parsed_body['blackduck_api_key']
     blackduck_application = parsed_body['blackduck_application']
     dash4ast_application = parsed_body['dash4ast_application']
+
+    if parsed_body['analysis_type'] is not None:
+        analysis_type = parsed_body['analysis_type']
+    else:
+        analysis_type = DEFAULT_BLACKDUCK_ANALYSIS_TYPE
 
     new_vulnerabilities = 0
     new_components = 0
@@ -134,8 +143,8 @@ def extract():
                 application.application_name = dash4ast_application
                 application.domain_name = 'default'
                 application.description = 'write description here'
-                application.business_risk = 2
-                application.threshold = 70
+                application.business_risk = DEFAULT_BUSINESS_RISK_VALUE
+                application.threshold = DEFAULT_THRESHOLD
                 db_session.add(application)
                 db_session.commit()
                 db_session.flush()
@@ -152,7 +161,7 @@ def extract():
                         .filter_by(extraction_date=now).first()
                     if vulnerability is None:
                         new_components += 1
-                        vulnerability = create_license_issue(component, dash4ast_application, 'license', now, vuln_id)
+                        vulnerability = create_license_issue(component, dash4ast_application, 'license', now, vuln_id, analysis_type)
                         UtilDb.add_vulnerability(db_session, vulnerability)
                     for link in links:
                         type_link = link['rel']
@@ -165,7 +174,7 @@ def extract():
                                     .filter_by(extraction_date=now).first()
                                 if vulnerability is None:
                                     new_vulnerabilities += 1
-                                    vulnerability = create_vulnerability(component, vuln, dash4ast_application, 'vulnerability', now, vuln_id)
+                                    vulnerability = create_vulnerability(component, vuln, dash4ast_application, 'vulnerability', now, vuln_id, analysis_type)
                                     UtilDb.add_vulnerability(db_session, vulnerability)
                 except IntegrityError:
                     message = 'IntegrityError inserting component: ' + component['componentName']
@@ -176,7 +185,7 @@ def extract():
     db_session.remove()
 
     # update analysis table
-    analysis = UtilDb.create_analysis(dash4ast_application, 'sca', now)
+    analysis = UtilDb.create_analysis(dash4ast_application, analysis_type, now)
     UtilDb.add_analysis(db_session, analysis)
 
     print("successfully extraction")
@@ -203,7 +212,7 @@ def get_component_id(component, issue_name, application_name):
     return key
 
 
-def create_vulnerability(component, issue, application_name, vulnerability_type, extraction_date, key):
+def create_vulnerability(component, issue, application_name, vulnerability_type, extraction_date, key, analysis_type):
     vulnerability = Vulnerability()
     component_name = component['componentName']
     if "componentVersionName" in component:
@@ -213,7 +222,7 @@ def create_vulnerability(component, issue, application_name, vulnerability_type,
     vulnerability.vulnerability_id = key
     vulnerability.description = issue['description'][0:511]
     vulnerability.tool = 'blackduck'
-    vulnerability.analysis_type = 'sca'
+    vulnerability.analysis_type = analysis_type
     vulnerability.name = issue['name']
     vulnerability.status = 'OPEN'
     vulnerability.severity = get_vulnerability_risk(issue)
@@ -227,7 +236,7 @@ def create_vulnerability(component, issue, application_name, vulnerability_type,
     return vulnerability
 
 
-def create_license_issue(component, application_name, vulnerability_type, extraction_date, key):
+def create_license_issue(component, application_name, vulnerability_type, extraction_date, key, analysis_type):
     vulnerability = Vulnerability()
     component_name = component['componentName']
     if "componentVersionName" in component:
@@ -237,7 +246,7 @@ def create_license_issue(component, application_name, vulnerability_type, extrac
     vulnerability.vulnerability_id = key
     vulnerability.description = get_license_name(component['licenses'])[0:511]
     vulnerability.tool = 'blackduck'
-    vulnerability.analysis_type = 'sca'
+    vulnerability.analysis_type = analysis_type
     vulnerability.name = get_license_name(component['licenses'])[0:63]
     vulnerability.status = get_status(component['approvalStatus'])
     vulnerability.severity = get_license_risk(component['licenseRiskProfile'])
