@@ -71,7 +71,7 @@ sast-git-secrets:
   artifacts:
     paths:
       - ${CI_PROJECT_DIR}/connectors/trufflehog-output.json
-    when: manual
+    when: always
     expire_in: one week
   allow_failure: true
 
