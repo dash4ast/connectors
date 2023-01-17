@@ -12,7 +12,7 @@ from datetime import datetime
 import hashlib
 import xml.etree.ElementTree as ET
 
-extract_blueprint = Blueprint('owaspzap_import', __name__)
+extract_blueprint = Blueprint('hclscan_import', __name__)
 
 
 class ExtractionSuccessResponse(Schema):
@@ -51,11 +51,11 @@ def _abort_due_to_application_not_found(messages: Dict) -> None:
     abort(make_response(jsonify(_auth_invalid_input_response_schema.dump({'messages': messages})), 404))
 
 
-@extract_blueprint.route("/owaspzap_import", methods=["POST"])
+@extract_blueprint.route("/hclscan_import", methods=["POST"])
 @swag_from(
     {
-        'summary': 'Import vulnerabilities from Owasp ZAP',
-        'description': 'Import vulnerabilities from Owasp ZAP',
+        'summary': 'Import vulnerabilities from HCL Scan',
+        'description': 'Import vulnerabilities from HCL Scan',
         'responses': {
             '200': {
                 'description': 'Extraction successfully fetched',
@@ -96,18 +96,17 @@ def extract():
     parsed_body = _request_body_schema.load(request.get_json())
     dash4ast_application = parsed_body['dash4ast_application']
     report = parsed_body['report']
-    xml_report = ET.fromstring(report)
+    root = ET.fromstring(report)
     now = datetime.now()
     new_vulnerabilities = 0
 
     db_session = PostgreDbClient().get_client()
     db_session()
     db_session.flush()
-
     try:
-        for issue in xml_report.find('site/alerts'):
-            for location in issue.find('instances'):
-                vulnerability = create_vulnerability(issue, location, dash4ast_application, now)
+        for issue_group in root.iter('issue-group'):
+            for issue in issue_group:
+                vulnerability = create_vulnerability(issue, dash4ast_application, now)
                 UtilDb.add_vulnerability(db_session, vulnerability)
                 new_vulnerabilities = new_vulnerabilities + 1
     except IntegrityError:
@@ -115,7 +114,7 @@ def extract():
     db_session.remove()
 
     # update analysis table
-    analysis = UtilDb.create_analysis(dash4ast_application, 'dast', now)
+    analysis = UtilDb.create_analysis(dash4ast_application, 'sast', now)
     UtilDb.add_analysis(db_session, analysis)
 
     print("successfully extraction")
@@ -127,59 +126,43 @@ def extract():
 
 
 def test():
-    report = open('../../../test/dast-report.xml', 'r').read()
-    my_data = ET.fromstring(report)
+    report = open('../../../test/hclscan-report.xml', 'r').read()
+    root = ET.fromstring(report)
     now = datetime.now()
-    for issue in my_data.find('site/alerts'):
-        for location in issue.find('instances'):
-            print_vulnerability(issue, location, 'test', now)
+    print(root)
+    for issue_group in root.iter('issue-group'):
+        for issue in issue_group:
+            print_vulnerability(issue, 'test', now)
 
 
-def print_vulnerability(issue, location, application_name, now):
-    print(hashlib.md5(get_id(issue, location).encode()).hexdigest())
-    print(issue.find('desc').text)
-    print('owaspzap')
-    print('dast')
+def print_vulnerability(issue, application_name, now):
+    print(issue.find('asoc-issue-id').text)
+    print('hclscan')
+    print(issue.find('issue-type/ref').text)
+    print(issue.find('technology').text.lower())
     print('OPEN')
-    print(issue.find('name').text)
-    print("CWE: " + issue.find('cweid').text)
-    print(issue.find('confidencedesc').text.upper())
-    print(location.find('uri').text)
-    print(location.find('method').text)
+    print(issue.find('severity').text)
+    print("CWE: " + issue.find('cwe/ref').text)
+    print(issue.find('source-file').text)
+    print(issue.find('line').text)
     print(application_name)
     print(now)
     print(now)
     print('vulnerability')
 
 
-def get_id(issue, location):
-
-    plugin_id = str(issue.find('pluginid').text)
-    param = location.find('param').text
-    evidence = location.find('evidence').text
-    uri = location.find('uri').text
-    method = location.find('method').text
-
-    if param is None:
-        param = '-'
-    if evidence is None:
-        evidence = '-'
-
-    return plugin_id + param + evidence + uri + method
-
-
-def create_vulnerability(issue, location, application_name, now):
+def create_vulnerability(issue, application_name, now):
     vulnerability = Vulnerability()
-    vulnerability.vulnerability_id = hashlib.md5(get_id(issue, location).encode()).hexdigest()
-    vulnerability.description = issue.find('desc').text[0:511]
-    vulnerability.tool = 'owaspzap'
-    vulnerability.analysis_type = 'dast'
+    vulnerability.vulnerability_id = hashlib.md5(issue.find('asoc-issue-id').text.encode()).hexdigest()
+    vulnerability.description = issue.find('issue-type/ref').text
+    vulnerability.tool = 'hclscan'
+    vulnerability.analysis_type = issue.find('technology').text.lower()
     vulnerability.status = 'OPEN'
-    vulnerability.name = issue.find('name').text
-    vulnerability.tags = "CWE: " + issue.find('cweid').text
-    vulnerability.severity = issue.find('confidencedesc').text.upper()
-    vulnerability.component = location.find('uri').text[0:255]
-    vulnerability.location = location.find('method').text
+    vulnerability.name = issue.find('issue-type/ref').text
+    vulnerability.tags = "CWE: " + issue.find('cwe/ref').text
+    vulnerability.severity = issue.find('severity').text
+    vulnerability.component = issue.find('source-file').text
+    vulnerability.location = issue.find('line').text
     vulnerability.application = application_name
     vulnerability.detected_date = now
     vulnerability.extraction_date = now
