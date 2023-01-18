@@ -26,7 +26,7 @@ Use demo/dash4ast
 * Docker -> https://docs.docker.com/engine/install/
 * Docker-compose -> https://docs.docker.com/compose/install/
 * Git
-* Open Ports: 3838, 5000
+* Open Ports: 3838, 5001, 5433
 
 ## Integration with your security tools in a CI/CD pipeline
 
@@ -73,9 +73,9 @@ Full list of available connectors:
 * checkmarx (csv import). Interface.
 * sonarqube (direct connection)
 * blackduck (direct connection)
+* hclscan (xml report). API and interface.
 
 Coming soon:
-* hcl scan
 * owasp dependency check
 
 ## How to develop new connectors

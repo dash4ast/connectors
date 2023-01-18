@@ -42,6 +42,14 @@ sast-semgrep-standalone:
     expire_in: one week
   allow_failure: true
 
+sast-semgrep-app-push:
+  stage: test
+  image: returntocorp/semgrep
+  script:
+    - semgrep ci
+  variables:
+    SEMGREP_APP_TOKEN: $SEMGREP_APP_TOKEN
+
 sast-semgrep-app:
   stage: test
   image: returntocorp/semgrep
