@@ -2,7 +2,6 @@ build-connectors:
   stage: build
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      when: manual
   script:
     - echo "Setup python connectors projects"
 
@@ -28,8 +27,7 @@ sast-bandit:
 sast-semgrep-standalone:
   stage: test
   rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      when: manual
+    - if: $CI_MERGE_REQUEST_IID
   image:
     name: python:3.9-bullseye
   before_script:
@@ -47,7 +45,9 @@ sast-semgrep-standalone:
 sast-semgrep-app:
   stage: test
   image: returntocorp/semgrep
-  script: 
+  script:
+    - semgrep logout
+    - semgrep login
     - semgrep ci
   rules:
     - if: $CI_MERGE_REQUEST_IID
