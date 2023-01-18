@@ -39,6 +39,7 @@ sast-semgrep-app:
   stage: test
   image: returntocorp/semgrep
   script: 
+    - semgrep login
     - semgrep ci
   rules:
     - if: $CI_MERGE_REQUEST_IID
