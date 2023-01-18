@@ -1,4 +1,3 @@
-import sqlalchemy
 from flasgger import swag_from
 from flask import Blueprint, request, abort, jsonify, make_response
 from marshmallow import Schema, fields
@@ -10,7 +9,8 @@ from connectors.persistence.Vulnerability import Vulnerability
 from typing import Dict
 from datetime import datetime
 import hashlib
-import xml.etree.ElementTree as ET ## replace that library to avoid XXE 
+import defusedxml.ElementTree as ET
+
 
 extract_blueprint = Blueprint('hclscan_import', __name__)
 
@@ -126,10 +126,9 @@ def extract():
 
 
 def test():
-    report = open('../../../test/hclscan-report.xml', 'r').read()
-    root = ET.fromstring(report)
+    file_name = '../../../test/hclscan-report.xml'
+    root = ET.parse(file_name)
     now = datetime.now()
-    print(root)
     for issue_group in root.iter('issue-group'):
         for issue in issue_group:
             print_vulnerability(issue, 'test', now)
@@ -172,4 +171,4 @@ def create_vulnerability(issue, application_name, now):
 
 if __name__ == '__main__':
     extract()
-    # test()
+    ## test()
