@@ -10,7 +10,7 @@ from connectors.persistence.Vulnerability import Vulnerability
 from typing import Dict
 from datetime import datetime
 import hashlib
-import xml.etree.ElementTree as ET
+import xml.etree.ElementTree as ET ## replace that library to avoid XXE 
 
 extract_blueprint = Blueprint('hclscan_import', __name__)
 
