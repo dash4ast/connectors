@@ -46,14 +46,17 @@ sast-semgrep-app:
   stage: test
   image: returntocorp/semgrep
   script:
-    - semgrep logout
-    - semgrep login
-    - semgrep ci
+    - semgrep ci --config p/ci
   rules:
     - if: $CI_MERGE_REQUEST_IID
   variables:
     SEMGREP_APP_TOKEN: $SEMGREP_APP_TOKEN
     GITLAB_TOKEN: $PAT
+  artifacts:
+    paths:
+      - ~/.semgrep/last.log
+    when: always
+    expire_in: one week
 
 sast-sonarqube:
   stage: test
