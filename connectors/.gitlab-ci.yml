@@ -19,7 +19,7 @@ sast-bandit:
     expire_in: one week
   allow_failure: true
 
-sast-semgrep:
+sast-semgrep-standalone:
   stage: test
   image:
     name: python:3.9-bullseye
@@ -38,9 +38,13 @@ sast-semgrep:
 sast-semgrep-app:
   stage: test
   image: returntocorp/semgrep
-  script: semgrep ci
+  script: 
+    - semgrep ci
+  rules:
+    - if: $CI_MERGE_REQUEST_IID
   variables:
     SEMGREP_APP_TOKEN: $SEMGREP_APP_TOKEN
+    GITLAB_TOKEN: $PAT
 
 sast-sonarqube:
   stage: test
