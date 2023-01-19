@@ -45,13 +45,26 @@ sast-semgrep-standalone:
 sast-semgrep-app:
   stage: test
   image: returntocorp/semgrep
+  # Run the "semgrep ci" command on the command line of the docker image and send findings
+  # to GitLab SAST.
   script:
-    - semgrep ci --error
+    - echo $CI_COMMIT_BRANCH
+    - echo $CI_DEFAULT_BRANCH
+    - semgrep ci --gitlab-sast > gl-sast-report.json || true
   rules:
-    - if: $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "merge_request_event"
+    # Scan changed files in MRs, (diff-aware scanning):
+    - if: $CI_MERGE_REQUEST_IID
+    # Scan mainline (default) branches and report all findings.
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   variables:
+    # Upload findings to GitLab SAST Dashboard:
+    SEMGREP_GITLAB_JSON: "1"
     SEMGREP_APP_TOKEN: $SEMGREP_APP_TOKEN
     GITLAB_TOKEN: $PAT
+  artifacts:
+    reports:
+      sast: gl-sast-report.json
+
 
 sast-sonarqube:
   stage: test
