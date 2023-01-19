@@ -1,10 +1,15 @@
 build-connectors:
   stage: build
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
   script:
     - echo "Setup python connectors projects"
 
 sast-bandit:
-  stage: test
+  stage: 
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
   image:
     name: python:3.9-bullseye
   before_script:
@@ -19,8 +24,10 @@ sast-bandit:
     expire_in: one week
   allow_failure: true
 
-sast-semgrep:
+sast-semgrep-standalone:
   stage: test
+  rules:
+    - if: $CI_MERGE_REQUEST_IID
   image:
     name: python:3.9-bullseye
   before_script:
@@ -34,6 +41,25 @@ sast-semgrep:
     when: always
     expire_in: one week
   allow_failure: true
+
+sast-semgrep-app-push:
+  stage: test
+  image: returntocorp/semgrep
+  script:
+    - semgrep ci
+  variables:
+    SEMGREP_APP_TOKEN: $SEMGREP_APP_TOKEN
+
+sast-semgrep-app:
+  stage: test
+  image: returntocorp/semgrep
+  script:
+    - semgrep ci
+  rules:
+    - if: $CI_MERGE_REQUEST_IID
+  variables:
+    SEMGREP_APP_TOKEN: $SEMGREP_APP_TOKEN
+    GITLAB_TOKEN: $PAT
 
 sast-sonarqube:
   stage: test
@@ -58,6 +84,9 @@ sast-sonarqube:
 
 sast-git-secrets:
   stage: test
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
   script:
     - cd ${CI_PROJECT_DIR}/connectors/
     - docker run -v $(pwd):/src --rm trufflesecurity/trufflehog:latest filesystem --directory=/src --json | tee trufflehog-output.json
@@ -70,6 +99,9 @@ sast-git-secrets:
 
 sca-safety:
   stage: test
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
   image:
     name: python:3.9-bullseye
   before_script:
@@ -86,6 +118,9 @@ sca-safety:
 
 sca-scanoss:
   stage: test
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
   image:
     name: python:3.9-bullseye
   before_script:
@@ -102,6 +137,9 @@ sca-scanoss:
 
 sca-snyk:
   stage: test
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
   image: node:latest
   before_script:
     - wget -O snyk https://github.com/snyk/cli/releases/download/v1.984.0/snyk-linux
@@ -186,6 +224,9 @@ sca-blackduck-extract-dash4ast:
 
 connectors-push-images-docker-hub:
   stage: deploy
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
   script:
     - echo "Pushing connectors docker images to docker hub"
     - cd ${CI_PROJECT_DIR}/connectors
