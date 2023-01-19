@@ -42,19 +42,11 @@ sast-semgrep-standalone:
     expire_in: one week
   allow_failure: true
 
-#sast-semgrep-app-push:
-#  stage: test
-#  image: returntocorp/semgrep
-#  script:
-#    - semgrep ci
-#  variables:
-#    SEMGREP_APP_TOKEN: $SEMGREP_APP_TOKEN
-
 sast-semgrep-app:
   stage: test
   image: returntocorp/semgrep
   script:
-    - semgrep ci
+    - semgrep ci --error
   rules:
     - if: $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "merge_request_event"
   variables:
