@@ -10,7 +10,7 @@ from connectors.persistence.Vulnerability import Vulnerability
 from typing import Dict
 from datetime import datetime
 import hashlib
-import xml.etree.ElementTree as ET
+import xml.etree.ElementTree as ET  # It must be replaced due to possible XXE attacks
 
 extract_blueprint = Blueprint('owaspzap_import', __name__)
 

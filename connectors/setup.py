@@ -25,6 +25,7 @@ setup(
         'flask-deprecate',
         'waitress',
         'marshmallow==3.12.*',
-        'psycopg2'
+        'psycopg2==2.9.5',
+        'defusedxml==0.7.1'
     ]
 )

@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: "q1w2e3r4"
     ports:
       - '5433:5432'
-
+      
   connectors:
     image: dash4ast/connectors:6.9.0
     container_name: connectors
