@@ -8,6 +8,7 @@ python3 ./client/dash4ast-cli-import-local-report.py --host http://localhost:500
 python3 ./client/dash4ast-cli-import-local-report.py --host http://localhost:5001 --application test --report ./reports/test_projects/coverity-report.json --scan coverity
 python3 ./client/dash4ast-cli-import-local-report.py --host http://localhost:5001 --application juice-shop --report ./reports/juice-shop/semgrep-report.json --scan semgrep
 python3 ./client/dash4ast-cli-import-local-report.py --host http://localhost:5001 --application juice-shop --report ./reports/juice-shop/owaspzap-report.xml --scan owaspzap
+python3 ./client/dash4ast-cli-import-local-report.py --host http://localhost:5001 --application webgoat --report ./reports/webgoat/hclscan-report.xml --scan hclscan
 
 ## Just in case you have Blackduck, please, configure URL and API_TOKEN
 

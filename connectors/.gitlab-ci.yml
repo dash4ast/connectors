@@ -64,7 +64,7 @@ sast-semgrep-app:
     GITLAB_TOKEN: $PAT
     # Never fail the build due to findings on pushes.
     # Instead, just collect findings for semgrep.dev/manage/findings
-    SEMGREP_AUDIT_ON: push
+    # SEMGREP_AUDIT_ON: push
   artifacts:
     reports:
       sast: gl-sast-report.json
