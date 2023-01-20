@@ -11,7 +11,7 @@ from datetime import datetime
 import hashlib
 import defusedxml.ElementTree as ET
 
-
+ 
 extract_blueprint = Blueprint('hclscan_import', __name__)
 
 
@@ -97,6 +97,7 @@ def extract():
     dash4ast_application = parsed_body['dash4ast_application']
     report = parsed_body['report']
     root = ET.fromstring(report)
+
     now = datetime.now()
     new_vulnerabilities = 0
 
@@ -163,7 +164,7 @@ def create_vulnerability(issue, application_name, now):
     vulnerability.status = 'OPEN'
     vulnerability.name = issue.find('issue-type/ref').text
     vulnerability.tags = "CWE: " + issue.find('cwe/ref').text
-    vulnerability.severity = issue.find('severity').text
+    vulnerability.severity = issue.find('severity').text.upper()
     vulnerability.component = issue.find('source-file').text
     if issue.find('line') is None:
         vulnerability.location = 0
