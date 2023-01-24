@@ -1,3 +1,6 @@
+import sys
+import traceback
+
 from flasgger import swag_from
 from flask import Blueprint, request, abort, jsonify, make_response
 from marshmallow import Schema, fields
@@ -9,7 +12,7 @@ from connectors.persistence.Vulnerability import Vulnerability
 from typing import Dict
 from datetime import datetime
 import hashlib
-import defusedxml.ElementTree as ET
+import defusedxml.ElementTree as Et
 
  
 extract_blueprint = Blueprint('hclscan_import', __name__)
@@ -93,10 +96,18 @@ def _abort_due_to_application_not_found(messages: Dict) -> None:
     }
 )
 def extract():
-    parsed_body = _request_body_schema.load(request.get_json())
-    dash4ast_application = parsed_body['dash4ast_application']
-    report = parsed_body['report']
-    root = ET.fromstring(report)
+    try:
+        parsed_body = _request_body_schema.load(request.get_json())
+        dash4ast_application = parsed_body['dash4ast_application']
+        report = parsed_body['report']
+        root = Et.fromstring(report)
+    except:
+        # printing stack trace
+        traceback.print_exception(*sys.exc_info())
+        return _response_schema.dump({
+            'status': 'error',
+            'new_vulnerabilities': 0
+        })
 
     now = datetime.now()
     new_vulnerabilities = 0
@@ -111,7 +122,7 @@ def extract():
                 UtilDb.add_vulnerability(db_session, vulnerability)
                 new_vulnerabilities = new_vulnerabilities + 1
     except IntegrityError:
-        print('IntegrityError key: ' + issue['id'])
+        print('IntegrityError key: ' + root)
     db_session.remove()
 
     # update analysis table
@@ -128,7 +139,7 @@ def extract():
 
 def test():
     file_name = '../../../test/hclscan-report.xml'
-    root = ET.parse(file_name)
+    root = Et.parse(file_name)
     now = datetime.now()
     for issue_group in root.iter('issue-group'):
         for issue in issue_group:
@@ -179,4 +190,4 @@ def create_vulnerability(issue, application_name, now):
 
 if __name__ == '__main__':
     extract()
-    #test()
+    # test()
