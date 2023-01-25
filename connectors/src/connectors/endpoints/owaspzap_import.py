@@ -1,4 +1,7 @@
-import sqlalchemy
+import sys
+import traceback
+from xml.etree.ElementTree import ParseError
+
 from flasgger import swag_from
 from flask import Blueprint, request, abort, jsonify, make_response
 from marshmallow import Schema, fields
@@ -10,7 +13,7 @@ from connectors.persistence.Vulnerability import Vulnerability
 from typing import Dict
 from datetime import datetime
 import hashlib
-import xml.etree.ElementTree as ET  # It must be replaced due to possible XXE attacks
+import defusedxml.ElementTree as Et
 
 extract_blueprint = Blueprint('owaspzap_import', __name__)
 
@@ -93,10 +96,19 @@ def _abort_due_to_application_not_found(messages: Dict) -> None:
     }
 )
 def extract():
-    parsed_body = _request_body_schema.load(request.get_json())
-    dash4ast_application = parsed_body['dash4ast_application']
-    report = parsed_body['report']
-    xml_report = ET.fromstring(report)
+    try:
+        parsed_body = _request_body_schema.load(request.get_json())
+        dash4ast_application = parsed_body['dash4ast_application']
+        report = parsed_body['report']
+        root = Et.fromstring(report)
+    except ParseError: 
+        # printing stack trace
+        traceback.print_exception(*sys.exc_info())
+        return _response_schema.dump({
+            'status': 'error',
+            'new_vulnerabilities': 0
+        })
+
     now = datetime.now()
     new_vulnerabilities = 0
 
@@ -105,13 +117,13 @@ def extract():
     db_session.flush()
 
     try:
-        for issue in xml_report.find('site/alerts'):
+        for issue in root.find('site/alerts'):
             for location in issue.find('instances'):
                 vulnerability = create_vulnerability(issue, location, dash4ast_application, now)
                 UtilDb.add_vulnerability(db_session, vulnerability)
                 new_vulnerabilities = new_vulnerabilities + 1
     except IntegrityError:
-        print('IntegrityError key: ' + issue['id'])
+        print('IntegrityError key: ' + root)
     db_session.remove()
 
     # update analysis table
@@ -128,7 +140,7 @@ def extract():
 
 def test():
     report = open('../../../test/dast-report.xml', 'r').read()
-    my_data = ET.fromstring(report)
+    my_data = Et.fromstring(report)
     now = datetime.now()
     for issue in my_data.find('site/alerts'):
         for location in issue.find('instances'):
@@ -153,7 +165,6 @@ def print_vulnerability(issue, location, application_name, now):
 
 
 def get_id(issue, location):
-
     plugin_id = str(issue.find('pluginid').text)
     param = location.find('param').text
     evidence = location.find('evidence').text

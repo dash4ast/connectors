@@ -102,7 +102,7 @@ def create():
     db_session = PostgreDbClient().get_client()
     db_session()
 
-    # check if application already exists...
+    # check if application already exists..
     app: Application = db_session.query(Application) \
         .filter_by(application_name=application) \
         .filter_by(domain_name=domain).first()
