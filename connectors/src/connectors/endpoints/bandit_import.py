@@ -10,7 +10,7 @@ from connectors.persistence.Vulnerability import Vulnerability
 from typing import Dict
 from datetime import datetime
 import hashlib
-import json
+import json 
 
 extract_blueprint = Blueprint('bandit_import', __name__)
 

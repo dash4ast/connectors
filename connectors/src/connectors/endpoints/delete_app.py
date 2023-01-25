@@ -12,7 +12,7 @@ from connectors.persistence.Vulnerability import Vulnerability
 from typing import Dict
 
 extract_blueprint = Blueprint('delete_app', __name__)
-
+ 
 
 class ExtractionSuccessResponse(Schema):
     status = fields.String(required=True, description='Service status')

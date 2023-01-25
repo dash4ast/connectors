@@ -11,7 +11,7 @@ from typing import Dict
 from datetime import datetime
 import hashlib
 import json
-
+ 
 extract_blueprint = Blueprint('safety_import', __name__)
 
 
@@ -115,8 +115,6 @@ def extract():
     # update analysis table
     analysis = UtilDb.create_analysis(dash4ast_application, 'sca', now)
     UtilDb.add_analysis(db_session, analysis)
-
-    print("successfully extraction")
 
     return _response_schema.dump({
         'status': 'ok',

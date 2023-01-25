@@ -1,5 +1,6 @@
 import sys
 import traceback
+from xml.etree.ElementTree import ParseError
 
 from flasgger import swag_from
 from flask import Blueprint, request, abort, jsonify, make_response
@@ -13,8 +14,8 @@ from typing import Dict
 from datetime import datetime
 import hashlib
 import defusedxml.ElementTree as Et
-
  
+      
 extract_blueprint = Blueprint('hclscan_import', __name__)
 
 
@@ -101,7 +102,7 @@ def extract():
         dash4ast_application = parsed_body['dash4ast_application']
         report = parsed_body['report']
         root = Et.fromstring(report)
-    except:
+    except ParseError:
         # printing stack trace
         traceback.print_exception(*sys.exc_info())
         return _response_schema.dump({

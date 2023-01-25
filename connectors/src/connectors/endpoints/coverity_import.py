@@ -7,7 +7,6 @@ from sqlalchemy.exc import IntegrityError
 
 from connectors.db import UtilDb
 from connectors.db.PostgreDbClient import PostgreDbClient
-from connectors.persistence.Application import Application
 from connectors.persistence.Vulnerability import Vulnerability
 from typing import Dict
 from datetime import datetime
@@ -189,7 +188,7 @@ def test():
         print(counter)
         print_vulnerability(issue, 'test-app', now)
 
-
+ 
 def print_vulnerability(issue, application_name, now):
     print(hashlib.md5(str(issue['mergeKey'] + issue['strippedMainEventFilePathname'] +
                                                      str(issue['mainEventLineNumber']) +
