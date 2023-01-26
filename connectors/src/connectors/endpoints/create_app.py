@@ -1,3 +1,4 @@
+import logging
 import sqlalchemy
 from flasgger import swag_from
 from flask import Blueprint, request, abort, jsonify, make_response
@@ -124,10 +125,10 @@ def create():
         application = create_application(application, description, domain, threshold, business_value)
         UtilDb.add_application(db_session, application)
     except IntegrityError:
-        print('Error creating an application')
+        logging.info('Error creating an application')
     db_session.remove()
 
-    print("successfully extraction")
+    logging.info("successfully extraction")
 
     return _response_schema.dump({
         'status': 'ok'

@@ -1,3 +1,4 @@
+import logging
 from flasgger import swag_from
 from flask import Blueprint, request, abort, jsonify, make_response
 from marshmallow import Schema, fields
@@ -107,7 +108,7 @@ def extract():
             vulnerability = create_vulnerability(issue, dash4ast_application, now)
             UtilDb.add_vulnerability(db_session, vulnerability)
     except IntegrityError:
-        print('IntegrityError key: ' + issue['id'])
+        logging.info(('IntegrityError key: ' + issue['id']))
     db_session.remove()
 
     new_vulnerabilities = len(content['vulnerabilities'])

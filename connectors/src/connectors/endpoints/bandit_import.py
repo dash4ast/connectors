@@ -1,3 +1,4 @@
+import logging
 import sqlalchemy
 from flasgger import swag_from
 from flask import Blueprint, request, abort, jsonify, make_response
@@ -108,7 +109,7 @@ def extract():
             vulnerability = create_vulnerability(issue, dash4ast_application, now)
             UtilDb.add_vulnerability(db_session, vulnerability)
     except IntegrityError:
-        print('IntegrityError key: ' + issue['id'])
+        logging.info(('IntegrityError key: ' + issue['id']))
     db_session.remove()
 
     # update analysis table
@@ -117,7 +118,7 @@ def extract():
 
     new_vulnerabilities = len(content['results'])
 
-    print("successfully extraction")
+    logging.info("successfully extraction")
 
     return _response_schema.dump({
         'status': 'ok',

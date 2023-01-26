@@ -1,3 +1,4 @@
+import logging
 import sqlalchemy
 from flasgger import swag_from
 from flask import Blueprint, request, abort, jsonify, make_response
@@ -118,10 +119,10 @@ def delete():
                 UtilDb.delete_analysis(db_session, analysis)
         UtilDb.delete_application(db_session, app)
     except IntegrityError:
-        print('Error deleting an application')
+        logging.info('Error deleting an application')
     db_session.remove()
 
-    print("successfully deletion")
+    logging.info("successfully deletion")
 
     return _response_schema.dump({
         'status': 'ok'

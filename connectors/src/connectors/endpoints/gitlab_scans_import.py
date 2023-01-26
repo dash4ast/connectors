@@ -1,3 +1,4 @@
+import logging
 from flasgger import swag_from
 from flask import Blueprint, request, abort, jsonify, make_response
 from marshmallow import Schema, fields
@@ -105,7 +106,7 @@ def extract():
     db_session.flush()
 
     # update analysis table
-    print("Insert new analysis")
+    logging.info("Insert new analysis")
     analysis = UtilDb.create_analysis(dash4ast_application, 'sast', now)
     UtilDb.add_analysis(db_session, analysis)
 
@@ -113,16 +114,16 @@ def extract():
     for issue in content['vulnerabilities']:
         try:
             vulnerability = create_vulnerability(issue, dash4ast_application, detected_date, now)
-            print("Inserting vulnerability: " + vulnerability.vulnerability_id)
+            logging.info(("Inserting vulnerability: " + vulnerability.vulnerability_id))
             UtilDb.add_vulnerability(db_session, vulnerability)
         except IntegrityError:
-            print('IntegrityError key: ' + issue['id'])
+            logging.info(('IntegrityError key: ' + issue['id']))
             db_session.rollback()
     db_session.remove()
 
     new_vulnerabilities = len(content['vulnerabilities'])
 
-    print("successfully extraction")
+    logging.info("successfully extraction")
 
     return _response_schema.dump({
         'status': 'ok',
@@ -153,32 +154,32 @@ def create_vulnerability(issue, application_name, detected_date, extracted_date)
 def test():
     report = open('../../../test/gl-semgrep-sast-report.json', 'r').read()
     content = json.loads(report)
-    print(len(content['vulnerabilities']))
+    logging.info(len(content['vulnerabilities']))
     now = datetime.now()
     detected_date = content['scan']['start_time']
     counter = 0
     for issue in content['vulnerabilities']:
         counter = counter + 1
-        print('----------------------')
-        print(counter)
+        logging.info('----------------------')
+        logging.info(counter)
         print_vulnerability(issue, 'test-app', detected_date, now)
 
 
 def print_vulnerability(issue, application_name, detected_date, extracted_date):
-    print(hashlib.md5(str(issue['id']).encode()).hexdigest())
-    print(issue['description'])
-    print(issue['scanner']['id'])
-    print('sast')
-    print('OPEN')
-    print(issue['message'])
-    print(issue['severity'].upper())
+    logging.info(hashlib.md5(str(issue['id']).encode()).hexdigest())
+    logging.info(issue['description'])
+    logging.info(issue['scanner']['id'])
+    logging.info('sast')
+    logging.info('OPEN')
+    logging.info(issue['message'])
+    logging.info(issue['severity'].upper())
     if issue['cve'] is not None:
-        print("CVE: " + str(issue['cve']))
-    print(issue['location']['file'])
-    print(issue['location']['start_line'])
-    print(application_name)
-    print(detected_date)
-    print(extracted_date)
+        logging.info(("CVE: " + str(issue['cve'])))
+    logging.info(issue['location']['file'])
+    logging.info(issue['location']['start_line'])
+    logging.info(application_name)
+    logging.info(detected_date)
+    logging.info(extracted_date)
 
 
 if __name__ == '__main__':

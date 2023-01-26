@@ -1,3 +1,4 @@
+import logging
 import sqlalchemy
 from flasgger import swag_from
 from flask import Blueprint, request, abort, jsonify, make_response
@@ -109,7 +110,7 @@ def extract():
             vulnerability = create_vulnerability(issue, dash4ast_application, now)
             UtilDb.add_vulnerability(db_session, vulnerability)
     except IntegrityError:
-        print('IntegrityError key: ' + issue['mergeKey'])
+        logging.info(('IntegrityError key: ' + issue['mergeKey']))
     db_session.remove()
 
     new_vulnerabilities = len(content['issues'])
@@ -118,7 +119,7 @@ def extract():
     analysis = UtilDb.create_analysis(dash4ast_application, 'sast', now)
     UtilDb.add_analysis(db_session, analysis)
 
-    print("successfully extraction")
+    logging.info("successfully extraction")
 
     return _response_schema.dump({
         'status': 'ok',
@@ -139,20 +140,20 @@ def extract_test():
     db_session.flush()
     try:
         for issue in content['issues']:
-            print(issue['mergeKey'])
+            logging.info(issue['mergeKey'])
             vulnerability = create_vulnerability(issue, dash4ast_application, now)
             UtilDb.add_vulnerability(db_session, vulnerability)
     except IntegrityError:
-        print('IntegrityError key: ' + issue['mergeKey'])
+        logging.info(('IntegrityError key: ' + issue['mergeKey']))
     except OperationalError:
-        print('OperationalError key: ' + issue['mergeKey'])
+        logging.info(('OperationalError key: ' + issue['mergeKey']))
     db_session.remove()
 
     # update analysis table
     analysis = UtilDb.create_analysis(dash4ast_application, 'sast', now)
     UtilDb.add_analysis(db_session, analysis)
 
-    print("successfully extraction")
+    logging.info("successfully extraction")
 
 
 def create_vulnerability(issue, application_name, now):
@@ -179,40 +180,40 @@ def create_vulnerability(issue, application_name, now):
 def test():
     report = open('../../../test/coverity-report.json', 'r').read()
     content = json.loads(report)
-    print(len(content['issues']))
+    logging.info(len(content['issues']))
     now = datetime.now()
     counter = 0
     for issue in content['issues']:
         counter = counter + 1
-        print('----------------------')
-        print(counter)
+        logging.info('----------------------')
+        logging.info(counter)
         print_vulnerability(issue, 'test-app', now)
 
  
 def print_vulnerability(issue, application_name, now):
-    print(hashlib.md5(str(issue['mergeKey'] + issue['strippedMainEventFilePathname'] +
+    logging.info(hashlib.md5(str(issue['mergeKey'] + issue['strippedMainEventFilePathname'] +
                                                      str(issue['mainEventLineNumber']) +
                                                      str(issue['occurrenceNumberInMK'])).encode()).hexdigest())
-    print(issue['checkerProperties']['subcategoryShortDescription'])
-    print('coverity')
-    print('sast')
-    print('OPEN')
-    print(issue['checkerName'])
-    print(issue['checkerProperties']['impact'].upper())
-    print("CWE: " + str(issue['checkerProperties']['cweCategory']))
-    print(issue['strippedMainEventFilePathname'])
-    print(issue['mainEventLineNumber'])
-    print(application_name)
-    print(now)
-    print(now)
-    print('vulnerability')
-    print(hashlib.md5(str(issue['mergeKey']).encode()).hexdigest())
-    print(issue['checkerProperties']['subcategoryShortDescription'])
-    print(issue['checkerName'])
-    print(issue['checkerProperties']['impact'].upper())
-    print("CWE: " + str(issue['checkerProperties']['cweCategory']))
-    print(issue['strippedMainEventFilePathname'])
-    print(issue['mainEventLineNumber'])
+    logging.info(issue['checkerProperties']['subcategoryShortDescription'])
+    logging.info('coverity')
+    logging.info('sast')
+    logging.info('OPEN')
+    logging.info(issue['checkerName'])
+    logging.info(issue['checkerProperties']['impact'].upper())
+    logging.info(("CWE: " + str(issue['checkerProperties']['cweCategory'])))
+    logging.info(issue['strippedMainEventFilePathname'])
+    logging.info(issue['mainEventLineNumber'])
+    logging.info(application_name)
+    logging.info(now)
+    logging.info(now)
+    logging.info('vulnerability')
+    logging.info(hashlib.md5(str(issue['mergeKey']).encode()).hexdigest())
+    logging.info(issue['checkerProperties']['subcategoryShortDescription'])
+    logging.info(issue['checkerName'])
+    logging.info(issue['checkerProperties']['impact'].upper())
+    logging.info(("CWE: " + str(issue['checkerProperties']['cweCategory'])))
+    logging.info(issue['strippedMainEventFilePathname'])
+    logging.info(issue['mainEventLineNumber'])
 
 
 if __name__ == '__main__':

@@ -1,4 +1,5 @@
 import datetime
+import logging
 
 import sonarqube
 from sonarqube import SonarQubeClient
@@ -127,7 +128,7 @@ def extract():
 
         if application_name == sonarqube_application:
             found_application = True
-            print('checking application: ' + application_name)
+            logging.info(('checking application: ' + application_name))
             # Avoid duplications
             application: Application = db_session.query(Application) \
                 .filter_by(application_name=dash4ast_application).first()
@@ -142,7 +143,7 @@ def extract():
                 db_session.commit()
                 db_session.flush()
 
-            print("Retrieving hot_spots for project: " + application_name)
+            logging.info(("Retrieving hot_spots for project: " + application_name))
             hot_spots = list(sonar.hotspots.search_hotspots(projectKey=project_key))
             now = datetime.now()
             for hot_spot in hot_spots:
@@ -151,9 +152,9 @@ def extract():
                     UtilDb.add_vulnerability(db_session, vulnerability)
                     hot_spot_vulnerabilities += 1
                 except IntegrityError:
-                    print('IntegrityError key: ' + hot_spot['key'])
+                    logging.info(('IntegrityError key: ' + hot_spot['key']))
 
-            print("Retrieving vulnerabilities for project: " + project_key)
+            logging.info(("Retrieving vulnerabilities for project: " + project_key))
             issues = list(sonar.issues.search_issues(componentKeys=project_key))
             for issue in issues:
                 vulnerability_type = issue['type']
@@ -163,7 +164,7 @@ def extract():
                         UtilDb.add_vulnerability(db_session, vulnerability)
                         new_vulnerabilities += 1
                     except IntegrityError:
-                        print('IntegrityError key: ' + issue['key'])
+                        logging.info(('IntegrityError key: ' + issue['key']))
     db_session.remove()
     if not found_application:
         _abort_due_to_application_not_found({'messages': ['Sonarqube application not found']})
@@ -172,9 +173,9 @@ def extract():
     analysis = UtilDb.create_analysis(dash4ast_application, 'sast', now)
     UtilDb.add_analysis(db_session, analysis)
 
-    print("successfully extraction")
-    print('new_vulnerabilities ' + str(new_vulnerabilities))
-    print('hot_spot_vulnerabilities ' + str(hot_spot_vulnerabilities))
+    logging.info("successfully extraction")
+    logging.info(('new_vulnerabilities ' + str(new_vulnerabilities)))
+    logging.info(('hot_spot_vulnerabilities ' + str(hot_spot_vulnerabilities)))
     return _response_schema.dump({
         'status': 'ok',
         'new_vulnerabilities': new_vulnerabilities,
