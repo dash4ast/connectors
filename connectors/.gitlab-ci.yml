@@ -9,7 +9,6 @@ sast-bandit:
   stage: 
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      when: manual
   image:
     name: python:3.9-bullseye
   before_script:
@@ -112,7 +111,6 @@ sca-safety:
   stage: test
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      when: manual
   image:
     name: python:3.9-bullseye
   before_script:
@@ -150,7 +148,6 @@ sca-snyk:
   stage: test
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      when: manual
   image: node:latest
   before_script:
     - wget -O snyk https://github.com/snyk/cli/releases/download/v1.984.0/snyk-linux
@@ -168,7 +165,6 @@ sca-snyk:
 sast-bandit-import-dash4ast:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      when: manual
   stage: integration
   image:
     name: python:3.9-bullseye
@@ -185,7 +181,6 @@ sast-bandit-import-dash4ast:
 sca-safety-import-dash4ast:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      when: manual
   stage: integration
   image:
     name: python:3.9-bullseye
