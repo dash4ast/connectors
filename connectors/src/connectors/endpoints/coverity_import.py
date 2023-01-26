@@ -1,5 +1,4 @@
 import logging
-import sqlalchemy
 from flasgger import swag_from
 from flask import Blueprint, request, abort, jsonify, make_response
 from marshmallow import Schema, fields
