@@ -1,3 +1,4 @@
+import logging
 import sys
 import traceback
 from xml.etree.ElementTree import ParseError
@@ -123,14 +124,14 @@ def extract():
                 UtilDb.add_vulnerability(db_session, vulnerability)
                 new_vulnerabilities = new_vulnerabilities + 1
     except IntegrityError:
-        print('IntegrityError key: ' + root)
+        logging.info(('IntegrityError key: ' + root))
     db_session.remove()
 
     # update analysis table
     analysis = UtilDb.create_analysis(dash4ast_application, 'dast', now)
     UtilDb.add_analysis(db_session, analysis)
 
-    print("successfully extraction")
+    logging.info("successfully extraction")
 
     return _response_schema.dump({
         'status': 'ok',
@@ -148,20 +149,20 @@ def test():
 
 
 def print_vulnerability(issue, location, application_name, now):
-    print(hashlib.md5(get_id(issue, location).encode()).hexdigest())
-    print(issue.find('desc').text)
-    print('owaspzap')
-    print('dast')
-    print('OPEN')
-    print(issue.find('name').text)
-    print("CWE: " + issue.find('cweid').text)
-    print(issue.find('confidencedesc').text.upper())
-    print(location.find('uri').text)
-    print(location.find('method').text)
-    print(application_name)
-    print(now)
-    print(now)
-    print('vulnerability')
+    logging.info(hashlib.sha256(get_id(issue, location).encode()).hexdigest())
+    logging.info(issue.find('desc').text)
+    logging.info('owaspzap')
+    logging.info('dast')
+    logging.info('OPEN')
+    logging.info(issue.find('name').text)
+    logging.info(("CWE: " + issue.find('cweid').text))
+    logging.info(issue.find('confidencedesc').text.upper())
+    logging.info(location.find('uri').text)
+    logging.info(location.find('method').text)
+    logging.info(application_name)
+    logging.info(now)
+    logging.info(now)
+    logging.info('vulnerability')
 
 
 def get_id(issue, location):
@@ -181,7 +182,7 @@ def get_id(issue, location):
 
 def create_vulnerability(issue, location, application_name, now):
     vulnerability = Vulnerability()
-    vulnerability.vulnerability_id = hashlib.md5(get_id(issue, location).encode()).hexdigest()
+    vulnerability.vulnerability_id = hashlib.sha256(get_id(issue, location).encode()).hexdigest()
     vulnerability.description = issue.find('desc').text[0:511]
     vulnerability.tool = 'owaspzap'
     vulnerability.analysis_type = 'dast'

@@ -1,4 +1,4 @@
-import sqlalchemy
+import logging
 from flasgger import swag_from
 from flask import Blueprint, request, abort, jsonify, make_response
 from marshmallow import Schema, fields
@@ -107,7 +107,7 @@ def extract():
             vulnerability = create_vulnerability(issue, dash4ast_application, now)
             UtilDb.add_vulnerability(db_session, vulnerability)
     except IntegrityError:
-        print('IntegrityError key: ' + issue['check_id'])
+        logging.info(('IntegrityError key: ' + issue['check_id']))
     db_session.remove()
 
     new_vulnerabilities = len(content['results'])
@@ -116,7 +116,7 @@ def extract():
     analysis = UtilDb.create_analysis(dash4ast_application, 'sast', now)
     UtilDb.add_analysis(db_session, analysis)
 
-    print("successfully extraction")
+    logging.info("successfully extraction")
 
     return _response_schema.dump({
         'status': 'ok',
@@ -126,7 +126,7 @@ def extract():
 
 def create_vulnerability(issue, application_name, now):
     vulnerability = Vulnerability()
-    vulnerability.vulnerability_id = hashlib.md5(str(issue['extra']['fingerprint'] + issue['path'] + str(issue['start']['line'])).encode()).hexdigest()
+    vulnerability.vulnerability_id = hashlib.sha256(str(issue['extra']['fingerprint'] + issue['path'] + str(issue['start']['line'])).encode()).hexdigest()
     vulnerability.description = issue['extra']['message']
     vulnerability.tool = 'semgrep'
     vulnerability.analysis_type = 'sast'
@@ -158,7 +158,7 @@ def get_severity(severity):
 def test():
     report = open('../../../test/semgrep-report.json', 'r').read()
     content = json.loads(report)
-    print(len(content['results']))
+    logging.info(len(content['results']))
     now = datetime.now()
     counter = 0
     for issue in content['results']:
@@ -168,23 +168,23 @@ def test():
 
 def print_vulnerability(issue, application_name, now):
     vulnerability = Vulnerability()
-    print(hashlib.md5(str(issue['extra']['fingerprint'] + issue['path'] + str(issue['start']['line'])).encode()).hexdigest())
-    print(issue['extra']['message'])
-    print('semgrep')
-    print('sast')
-    print('OPEN')
-    print(issue['check_id'])
-    print(get_severity(issue['extra']['severity']))
+    logging.info(hashlib.sha256(str(issue['extra']['fingerprint'] + issue['path'] + str(issue['start']['line'])).encode()).hexdigest())
+    logging.info(issue['extra']['message'])
+    logging.info('semgrep')
+    logging.info('sast')
+    logging.info('OPEN')
+    logging.info(issue['check_id'])
+    logging.info(get_severity(issue['extra']['severity']))
     if "cwe" in issue['extra']['metadata']:
-        print("CWE: " + str(issue['extra']['metadata']['cwe']))
+        logging.info(("CWE: " + str(issue['extra']['metadata']['cwe'])))
     else:
-        print("CWE: ---")
-    print(issue['path'])
-    print(issue['start']['line'])
-    print(application_name)
-    print(now)
-    print(now)
-    print('vulnerability')
+        logging.info("CWE: ---")
+    logging.info(issue['path'])
+    logging.info(issue['start']['line'])
+    logging.info(application_name)
+    logging.info(now)
+    logging.info(now)
+    logging.info('vulnerability')
     return vulnerability
 
 

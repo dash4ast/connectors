@@ -12,21 +12,21 @@ def post_request():
 
     data = {'dash4ast_application': application, 'report': report}
     r = requests.post(url, json=data, headers=headers)
-    print(r.text)
+    logging.info(r.text)
 
 
 def parse_report():
     report = open('coverity-report.json', 'r').read()
     content = json.loads(report)
-    print(len(content['issues']))
+    logging.info(len(content['issues']))
     for issue in content['issues']:
-        print(hashlib.md5(str(issue['mergeKey']).encode()).hexdigest())
-        print(issue['checkerProperties']['subcategoryShortDescription'])
-        print(issue['checkerName'])
-        print(issue['checkerProperties']['impact'].upper())
-        print("CWE: " + str(issue['checkerProperties']['cweCategory']))
-        print(issue['strippedMainEventFilePathname'])
-        print(issue['mainEventLineNumber'])
+        logging.info(hashlib.sha256(str(issue['mergeKey']).encode()).hexdigest())
+        logging.info(issue['checkerProperties']['subcategoryShortDescription'])
+        logging.info(issue['checkerName'])
+        logging.info(issue['checkerProperties']['impact'].upper())
+        logging.info(("CWE: " + str(issue['checkerProperties']['cweCategory'])))
+        logging.info(issue['strippedMainEventFilePathname'])
+        logging.info(issue['mainEventLineNumber'])
 
 
 if __name__ == "__main__":

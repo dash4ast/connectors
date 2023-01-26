@@ -1,3 +1,4 @@
+import logging
 import sys
 import traceback
 from xml.etree.ElementTree import ParseError
@@ -123,14 +124,14 @@ def extract():
                 UtilDb.add_vulnerability(db_session, vulnerability)
                 new_vulnerabilities = new_vulnerabilities + 1
     except IntegrityError:
-        print('IntegrityError key: ' + root)
+        logging.info(('IntegrityError key: ' + root))
     db_session.remove()
 
     # update analysis table
     analysis = UtilDb.create_analysis(dash4ast_application, 'sast', now)
     UtilDb.add_analysis(db_session, analysis)
 
-    print("successfully extraction")
+    logging.info("successfully extraction")
 
     return _response_schema.dump({
         'status': 'ok',
@@ -144,32 +145,32 @@ def test():
     now = datetime.now()
     for issue_group in root.iter('issue-group'):
         for issue in issue_group:
-            print(issue)
+            logging.info(issue)
             print_vulnerability(issue, 'test', now)
 
 
 def print_vulnerability(issue, application_name, now):
-    print(issue.find('asoc-issue-id').text)
-    print('hclscan')
-    print(issue.find('issue-type/ref').text)
-    print(issue.find('technology').text.lower())
-    print('OPEN')
-    print(issue.find('severity').text)
-    print("CWE: " + issue.find('cwe/ref').text)
-    print(issue.find('source-file').text)
+    logging.info(issue.find('asoc-issue-id').text)
+    logging.info('hclscan')
+    logging.info(issue.find('issue-type/ref').text)
+    logging.info(issue.find('technology').text.lower())
+    logging.info('OPEN')
+    logging.info(issue.find('severity').text)
+    logging.info(("CWE: " + issue.find('cwe/ref').text))
+    logging.info(issue.find('source-file').text)
     if issue.find('line') is None:
-        print('None')
+        logging.info('None')
     else:
-        print(issue.find('line').text)
-    print(application_name)
-    print(now)
-    print(now)
-    print('vulnerability')
+        logging.info(issue.find('line').text)
+    logging.info(application_name)
+    logging.info(now)
+    logging.info(now)
+    logging.info('vulnerability')
 
 
 def create_vulnerability(issue, application_name, now):
     vulnerability = Vulnerability()
-    vulnerability.vulnerability_id = hashlib.md5(issue.find('asoc-issue-id').text.encode()).hexdigest()
+    vulnerability.vulnerability_id = hashlib.sha256(issue.find('asoc-issue-id').text.encode()).hexdigest()
     vulnerability.description = issue.find('issue-type/ref').text
     vulnerability.tool = 'hclscan'
     vulnerability.analysis_type = issue.find('technology').text.lower()

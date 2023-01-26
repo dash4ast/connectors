@@ -1,3 +1,4 @@
+import logging
 import sqlalchemy
 from blackduck import Client
 from flasgger import swag_from
@@ -134,7 +135,7 @@ def extract():
         application_name = project['name']
         if blackduck_application == application_name:
             application_found = True
-            print("Extracting vulnerabilities for application: " + application_name)
+            logging.info(("Extracting vulnerabilities for application: " + application_name))
             # Avoid duplications
             application: Application = db_session.query(Application) \
                 .filter_by(application_name=dash4ast_application).first()
@@ -188,7 +189,7 @@ def extract():
     analysis = UtilDb.create_analysis(dash4ast_application, analysis_type, now)
     UtilDb.add_analysis(db_session, analysis)
 
-    print("successfully extraction")
+    logging.info("successfully extraction")
 
     if not application_found:
         _abort_due_to_application_not_found({'messages': ['Blackduck application not found']})
@@ -207,8 +208,7 @@ def get_component_id(component, issue_name, application_name):
         component_version_name = component['componentVersionName']
     else:
         component_version_name = 'unknown'
-    key = hashlib.md5(
-        str(issue_name + component_name + component_version_name + application_name).encode()).hexdigest()
+    key = hashlib.sha256(str(issue_name + component_name + component_version_name + application_name).encode()).hexdigest()
     return key
 
 

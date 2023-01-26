@@ -1,3 +1,4 @@
+import logging
 import sqlalchemy
 from flasgger import swag_from
 from flask import Blueprint, request, abort, jsonify, make_response
@@ -114,14 +115,14 @@ def extract():
                     UtilDb.add_vulnerability(db_session, vulnerability)
                     new_vulnerabilities = new_vulnerabilities + 1
     except IntegrityError:
-        print('IntegrityError key: ' + issue['check_id'])
+        logging.info(('IntegrityError key: ' + issue['check_id']))
     db_session.remove()
 
     # update analysis table
     analysis = UtilDb.create_analysis(dash4ast_application, 'iac', now)
     UtilDb.add_analysis(db_session, analysis)
 
-    print("successfully extraction")
+    logging.info("successfully extraction")
 
     return _response_schema.dump({
         'status': 'ok',
@@ -131,7 +132,7 @@ def extract():
 
 def create_vulnerability(issue, application_name, now):
     vulnerability = Vulnerability()
-    vulnerability.vulnerability_id = hashlib.md5(str(issue['check_id']+issue['file_abs_path']).encode()).hexdigest()
+    vulnerability.vulnerability_id = hashlib.sha256(str(issue['check_id']+issue['file_abs_path']).encode()).hexdigest()
     vulnerability.description = issue['check_name']
     vulnerability.tool = 'checkov'
     vulnerability.analysis_type = 'iac'
