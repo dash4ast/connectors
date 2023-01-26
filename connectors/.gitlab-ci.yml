@@ -175,8 +175,6 @@ sast-bandit-import-dash4ast:
     - sha256sum -c sha256-import.tmp
     - python3 dash4ast-cli-import-local-report.py --host ${DASH4AST_ENDPOINT_QA} --application dash4ast-connectors --report ${CI_PROJECT_DIR}/connectors/bandit-output.json --scan bandit
   allow_failure: true
-  tags:
-    - sast
 
 sca-safety-import-dash4ast:
   rules:
@@ -191,8 +189,6 @@ sca-safety-import-dash4ast:
     - sha256sum -c sha256-import.tmp
     - python3 dash4ast-cli-import-local-report.py --host ${DASH4AST_ENDPOINT_QA} --application dash4ast-connectors --report ${CI_PROJECT_DIR}/connectors/safety-output.json --scan safety
   allow_failure: true
-  tags:
-    - sca
 
 sast-sonarqube-extract-dash4ast:
   rules:
