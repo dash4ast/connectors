@@ -132,7 +132,7 @@ def extract():
 
 def create_vulnerability(issue, application_name, now):
     vulnerability = Vulnerability()
-    vulnerability.vulnerability_id = hashlib.md5(str(issue['check_id']+issue['file_abs_path']).encode()).hexdigest()
+    vulnerability.vulnerability_id = hashlib.sha256(str(issue['check_id']+issue['file_abs_path']).encode()).hexdigest()
     vulnerability.description = issue['check_name']
     vulnerability.tool = 'checkov'
     vulnerability.analysis_type = 'iac'

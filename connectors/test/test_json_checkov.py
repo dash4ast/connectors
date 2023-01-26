@@ -22,7 +22,7 @@ def parse_report():
     for check_types in content:
         for issue in check_types['results']['failed_checks']:
             if issue['check_result']['result'] == 'FAILED':
-                logging.info(hashlib.md5(str(issue['check_id']).encode()).hexdigest())
+                logging.info(hashlib.sha256(str(issue['check_id']).encode()).hexdigest())
                 logging.info(issue['check_id'])
                 logging.info(issue['check_name'])
                 logging.info(issue['file_abs_path'])

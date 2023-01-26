@@ -157,7 +157,7 @@ def extract_test():
 
 def create_vulnerability(issue, application_name, now):
     vulnerability = Vulnerability()
-    vulnerability.vulnerability_id = hashlib.md5(str(issue['mergeKey'] + issue['strippedMainEventFilePathname'] +
+    vulnerability.vulnerability_id = hashlib.sha256(str(issue['mergeKey'] + issue['strippedMainEventFilePathname'] +
                                                      str(issue['mainEventLineNumber']) +
                                                      str(issue['occurrenceNumberInMK'])).encode()).hexdigest()
     vulnerability.description = issue['checkerProperties']['subcategoryShortDescription']
@@ -190,7 +190,7 @@ def test():
 
  
 def print_vulnerability(issue, application_name, now):
-    logging.info(hashlib.md5(str(issue['mergeKey'] + issue['strippedMainEventFilePathname'] +
+    logging.info(hashlib.sha256(str(issue['mergeKey'] + issue['strippedMainEventFilePathname'] +
                                                      str(issue['mainEventLineNumber']) +
                                                      str(issue['occurrenceNumberInMK'])).encode()).hexdigest())
     logging.info(issue['checkerProperties']['subcategoryShortDescription'])
@@ -206,7 +206,7 @@ def print_vulnerability(issue, application_name, now):
     logging.info(now)
     logging.info(now)
     logging.info('vulnerability')
-    logging.info(hashlib.md5(str(issue['mergeKey']).encode()).hexdigest())
+    logging.info(hashlib.sha256(str(issue['mergeKey']).encode()).hexdigest())
     logging.info(issue['checkerProperties']['subcategoryShortDescription'])
     logging.info(issue['checkerName'])
     logging.info(issue['checkerProperties']['impact'].upper())

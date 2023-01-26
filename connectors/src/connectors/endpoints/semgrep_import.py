@@ -126,7 +126,7 @@ def extract():
 
 def create_vulnerability(issue, application_name, now):
     vulnerability = Vulnerability()
-    vulnerability.vulnerability_id = hashlib.md5(str(issue['extra']['fingerprint'] + issue['path'] + str(issue['start']['line'])).encode()).hexdigest()
+    vulnerability.vulnerability_id = hashlib.sha256(str(issue['extra']['fingerprint'] + issue['path'] + str(issue['start']['line'])).encode()).hexdigest()
     vulnerability.description = issue['extra']['message']
     vulnerability.tool = 'semgrep'
     vulnerability.analysis_type = 'sast'
@@ -168,7 +168,7 @@ def test():
 
 def print_vulnerability(issue, application_name, now):
     vulnerability = Vulnerability()
-    logging.info(hashlib.md5(str(issue['extra']['fingerprint'] + issue['path'] + str(issue['start']['line'])).encode()).hexdigest())
+    logging.info(hashlib.sha256(str(issue['extra']['fingerprint'] + issue['path'] + str(issue['start']['line'])).encode()).hexdigest())
     logging.info(issue['extra']['message'])
     logging.info('semgrep')
     logging.info('sast')

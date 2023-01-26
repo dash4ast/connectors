@@ -125,7 +125,7 @@ def extract():
 
 def create_vulnerability(issue, application_name, now):
     vulnerability = Vulnerability()
-    vulnerability.vulnerability_id = hashlib.md5(str(issue['vulnerability_id']).encode()).hexdigest()
+    vulnerability.vulnerability_id = hashlib.sha256(str(issue['vulnerability_id']).encode()).hexdigest()
     vulnerability.description = issue['advisory'][0:511]  ## TODO: No trunk
     vulnerability.tool = 'safety'
     vulnerability.analysis_type = 'sca'

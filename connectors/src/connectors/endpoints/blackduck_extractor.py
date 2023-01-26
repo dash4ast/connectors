@@ -208,8 +208,7 @@ def get_component_id(component, issue_name, application_name):
         component_version_name = component['componentVersionName']
     else:
         component_version_name = 'unknown'
-    key = hashlib.md5(
-        str(issue_name + component_name + component_version_name + application_name).encode()).hexdigest()
+    key = hashlib.sha256(str(issue_name + component_name + component_version_name + application_name).encode()).hexdigest()
     return key
 
 

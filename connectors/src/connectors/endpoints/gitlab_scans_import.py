@@ -133,7 +133,7 @@ def extract():
 
 def create_vulnerability(issue, application_name, detected_date, extracted_date):
     vulnerability = Vulnerability()
-    vulnerability.vulnerability_id = hashlib.md5(str(issue['id']).encode()).hexdigest()
+    vulnerability.vulnerability_id = hashlib.sha256(str(issue['id']).encode()).hexdigest()
     vulnerability.name = issue['message']
     vulnerability.description = issue['description']
     vulnerability.tool = issue['scanner']['id']
@@ -166,7 +166,7 @@ def test():
 
 
 def print_vulnerability(issue, application_name, detected_date, extracted_date):
-    logging.info(hashlib.md5(str(issue['id']).encode()).hexdigest())
+    logging.info(hashlib.sha256(str(issue['id']).encode()).hexdigest())
     logging.info(issue['description'])
     logging.info(issue['scanner']['id'])
     logging.info('sast')

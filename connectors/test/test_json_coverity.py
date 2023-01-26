@@ -20,7 +20,7 @@ def parse_report():
     content = json.loads(report)
     logging.info(len(content['issues']))
     for issue in content['issues']:
-        logging.info(hashlib.md5(str(issue['mergeKey']).encode()).hexdigest())
+        logging.info(hashlib.sha256(str(issue['mergeKey']).encode()).hexdigest())
         logging.info(issue['checkerProperties']['subcategoryShortDescription'])
         logging.info(issue['checkerName'])
         logging.info(issue['checkerProperties']['impact'].upper())

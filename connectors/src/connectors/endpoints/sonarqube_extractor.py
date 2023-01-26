@@ -185,7 +185,7 @@ def extract():
 
 def create_vulnerability(issue, application_name, vulnerability_type, now):
     vulnerability = Vulnerability()
-    vulnerability.vulnerability_id = hashlib.md5(str(issue['key']).encode()).hexdigest()
+    vulnerability.vulnerability_id = hashlib.sha256(str(issue['key']).encode()).hexdigest()
     vulnerability.description = issue['message']
     vulnerability.tool = 'sonarqube'
     vulnerability.analysis_type = 'sast'

@@ -170,7 +170,7 @@ def print_vulnerability(issue, application_name, now):
 
 def create_vulnerability(issue, application_name, now):
     vulnerability = Vulnerability()
-    vulnerability.vulnerability_id = hashlib.md5(issue.find('asoc-issue-id').text.encode()).hexdigest()
+    vulnerability.vulnerability_id = hashlib.sha256(issue.find('asoc-issue-id').text.encode()).hexdigest()
     vulnerability.description = issue.find('issue-type/ref').text
     vulnerability.tool = 'hclscan'
     vulnerability.analysis_type = issue.find('technology').text.lower()

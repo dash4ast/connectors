@@ -149,7 +149,7 @@ def test():
 
 
 def print_vulnerability(issue, location, application_name, now):
-    logging.info(hashlib.md5(get_id(issue, location).encode()).hexdigest())
+    logging.info(hashlib.sha256(get_id(issue, location).encode()).hexdigest())
     logging.info(issue.find('desc').text)
     logging.info('owaspzap')
     logging.info('dast')
@@ -182,7 +182,7 @@ def get_id(issue, location):
 
 def create_vulnerability(issue, location, application_name, now):
     vulnerability = Vulnerability()
-    vulnerability.vulnerability_id = hashlib.md5(get_id(issue, location).encode()).hexdigest()
+    vulnerability.vulnerability_id = hashlib.sha256(get_id(issue, location).encode()).hexdigest()
     vulnerability.description = issue.find('desc').text[0:511]
     vulnerability.tool = 'owaspzap'
     vulnerability.analysis_type = 'dast'
