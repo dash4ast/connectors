@@ -37,11 +37,11 @@ sast-semgrep-standalone:
   before_script:
     - pip3 install semgrep
   script:
-    - cd ${CI_PROJECT_DIR}/connectors
+    - cd $CI_PROJECT_DIR/connectors
     - semgrep scan --config=auto --error src --json > ${CI_PROJECT_DIR}/connectors/semgrep-output.json
   artifacts:
     paths:
-      - ${CI_PROJECT_DIR}/connectors/semgrep-output.json
+      - $CI_PROJECT_DIR/connectors/semgrep-output.json
     when: always
     expire_in: one week
   allow_failure: true
@@ -155,8 +155,8 @@ sca-snyk:
     - chmod +x snyk
     - mv snyk /usr/local/bin/
   script:
-    - snyk auth ${SNYK_TOKEN}
-    - snyk test ${CI_PROJECT_DIR}/connectors/ --json > ${CI_PROJECT_DIR}/connectors/snyk-results.json
+    - snyk auth SNYK_TOKEN
+    - snyk test CI_PROJECT_DIR/connectors/ --json > ${CI_PROJECT_DIR}/connectors/snyk-results.json
   artifacts:
     paths:
       - ${CI_PROJECT_DIR}/connectors/snyk-results.json
@@ -175,7 +175,7 @@ sast-bandit-import-dash4ast:
     - echo ${DASH4AST_CLI_IMPORT_LOCAL_REPORT_SHA256_CHECKSUM}
     - echo ${DASH4AST_CLI_IMPORT_LOCAL_REPORT_SHA256_CHECKSUM} > sha256-import.tmp
     #- sha256sum -c sha256-import.tmp
-    - python3 dash4ast-cli-import-local-report.py --host ${DASH4AST_ENDPOINT_QA} --application dash4ast-connectors --report ${CI_PROJECT_DIR}/connectors/bandit-output.json --scan bandit
+    - python3 dash4ast-cli-import-local-report.py --host $DASH4AST_ENDPOINT_QA --application dash4ast-connectors --report $CI_PROJECT_DIR/connectors/bandit-output.json --scan bandit
   allow_failure: true
 
 sca-safety-import-dash4ast:
@@ -187,9 +187,10 @@ sca-safety-import-dash4ast:
   script:
     - pip3 install requests
     - wget https://gitlab.com/dash4ast-community1/support/-/raw/main/client/dash4ast-cli-import-local-report.py
-    - echo ${DASH4AST_CLI_IMPORT_LOCAL_REPORT_SHA256_CHECKSUM} > sha256-import.tmp
+    - echo $DASH4AST_CLI_IMPORT_LOCAL_REPORT_SHA256_CHECKSUM
+    - echo $DASH4AST_CLI_IMPORT_SONARQUBE_REPORT_SHA256_CHECKSUM > sha256-sq-export.tmp
     #- sha256sum -c sha256-import.tmp
-    - python3 dash4ast-cli-import-local-report.py --host ${DASH4AST_ENDPOINT_QA} --application dash4ast-connectors --report ${CI_PROJECT_DIR}/connectors/safety-output.json --scan safety
+    - python3 dash4ast-cli-import-local-report.py --host $DASH4AST_ENDPOINT_QA --application dash4ast-connectors --report $CI_PROJECT_DIR/connectors/safety-output.json --scan safety
   allow_failure: true
 
 sast-sonarqube-extract-dash4ast:
