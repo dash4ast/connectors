@@ -2,6 +2,7 @@ build-connectors:
   stage: build
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
   script:
     - echo "Setup python connectors projects"
 
@@ -9,6 +10,7 @@ sast-bandit:
   stage: 
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
   image:
     name: python:3.9-bullseye
   before_script:
@@ -28,7 +30,7 @@ sast-semgrep-standalone:
   rules:
     # Scan changed files in MRs, (diff-aware scanning):
     - if: $CI_MERGE_REQUEST_IID
-    #  when: manual
+      when: manual
     # Scan mainline (default) branches and report all findings.
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: manual
@@ -55,8 +57,8 @@ sast-semgrep-app:
     # - semgrep ci --gitlab-sast > gl-sast-report.json || true
     - echo $PAT
     - echo $SEMGREP_APP_TOKEN
-    - semgrep ci --supply-chain --debug > semgrep-debug.log
-    # - semgrep ci
+    # - semgrep ci --supply-chain --debug > semgrep-debug.log
+    - semgrep ci
   rules:
     # Scan changed files in MRs, (diff-aware scanning):
     - if: $CI_MERGE_REQUEST_IID
@@ -115,6 +117,7 @@ sca-safety:
   stage: test
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
   image:
     name: python:3.9-bullseye
   before_script:
@@ -152,6 +155,7 @@ sca-snyk:
   stage: test
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
   image: node:latest
   before_script:
     - wget -O snyk https://github.com/snyk/cli/releases/download/v1.984.0/snyk-linux
@@ -169,6 +173,7 @@ sca-snyk:
 sast-bandit-import-dash4ast:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
   stage: integration
   image:
     name: python:3.9-bullseye
@@ -184,6 +189,7 @@ sast-bandit-import-dash4ast:
 sast-semgrep-import-dash4ast:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
   stage: integration
   image:  
     name: python:3.9-bullseye
@@ -199,6 +205,7 @@ sast-semgrep-import-dash4ast:
 sca-safety-import-dash4ast:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
   stage: integration
   image:
     name: python:3.9-bullseye
