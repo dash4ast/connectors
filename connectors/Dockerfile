@@ -1,5 +1,6 @@
 FROM python:3.9.6 AS builder
 WORKDIR /build
+
 COPY setup.py /build/
 COPY src /build/src
 

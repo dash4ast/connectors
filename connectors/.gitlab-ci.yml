@@ -53,7 +53,10 @@ sast-semgrep-app:
   # to GitLab SAST.
   script:
     # - semgrep ci --gitlab-sast > gl-sast-report.json || true
-    - semgrep ci
+    - echo $PAT
+    - echo $SEMGREP_APP_TOKEN
+    - semgrep ci --supply-chain --debug > semgrep-debug.log
+    # - semgrep ci
   rules:
     # Scan changed files in MRs, (diff-aware scanning):
     - if: $CI_MERGE_REQUEST_IID
