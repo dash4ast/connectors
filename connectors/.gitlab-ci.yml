@@ -9,6 +9,7 @@ sast-bandit:
   stage: 
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
   image:
     name: python:3.9-bullseye
   before_script:
@@ -38,7 +39,7 @@ sast-semgrep-standalone:
     - pip3 install semgrep
   script:
     - cd $CI_PROJECT_DIR/connectors
-    - semgrep scan --config=auto --error src --json > ${CI_PROJECT_DIR}/connectors/semgrep-output.json
+    - semgrep scan --config=auto --error src --json > $CI_PROJECT_DIR/connectors/semgrep-output.json
   artifacts:
     paths:
       - $CI_PROJECT_DIR/connectors/semgrep-output.json
@@ -53,6 +54,9 @@ sast-semgrep-app:
   # to GitLab SAST.
   script:
     # - semgrep ci --gitlab-sast > gl-sast-report.json || true
+    - echo $PAT
+    - echo $SEMGREP_APP_TOKEN
+    # - semgrep ci --supply-chain --debug > semgrep-debug.log
     - semgrep ci
   rules:
     # Scan changed files in MRs, (diff-aware scanning):
@@ -112,17 +116,18 @@ sca-safety:
   stage: test
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
   image:
     name: python:3.9-bullseye
   before_script:
     - pip3 install safety
   script:
-    - cd ${CI_PROJECT_DIR}/connectors/
+    - cd $CI_PROJECT_DIR/connectors/
     - safety check -r requirements.txt --json > safety-output.json
   allow_failure: true
   artifacts:
     paths:
-      - ${CI_PROJECT_DIR}/connectors/safety-output.json
+      - $CI_PROJECT_DIR/connectors/safety-output.json
     when: always
     expire_in: one week
 
@@ -136,12 +141,12 @@ sca-scanoss:
   before_script:
     - pip3 install scanoss
   script:
-    - cd ${CI_PROJECT_DIR}/connectors/
+    - cd $CI_PROJECT_DIR/connectors/
     - scanoss-py scan . > scanoss-output.json
   allow_failure: true
   artifacts:
     paths:
-      - ${CI_PROJECT_DIR}/connectors/scanoss-output.json
+      - $CI_PROJECT_DIR/connectors/scanoss-output.json
     when: always
     expire_in: one week
 
@@ -149,14 +154,15 @@ sca-snyk:
   stage: test
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
   image: node:latest
   before_script:
     - wget -O snyk https://github.com/snyk/cli/releases/download/v1.984.0/snyk-linux
     - chmod +x snyk
     - mv snyk /usr/local/bin/
   script:
-    - snyk auth SNYK_TOKEN
-    - snyk test CI_PROJECT_DIR/connectors/ --json > ${CI_PROJECT_DIR}/connectors/snyk-results.json
+    - snyk auth $SNYK_TOKEN
+    - snyk test $CI_PROJECT_DIR/connectors/ --json > $CI_PROJECT_DIR/connectors/snyk-results.json
   artifacts:
     paths:
       - ${CI_PROJECT_DIR}/connectors/snyk-results.json
@@ -166,6 +172,7 @@ sca-snyk:
 sast-bandit-import-dash4ast:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
   stage: integration
   image:
     name: python:3.9-bullseye
@@ -178,9 +185,26 @@ sast-bandit-import-dash4ast:
     - python3 dash4ast-cli-import-local-report.py --host $DASH4AST_ENDPOINT_QA --application dash4ast-connectors --report $CI_PROJECT_DIR/connectors/bandit-output.json --scan bandit
   allow_failure: true
 
+sast-semgrep-import-dash4ast:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
+  stage: integration
+  image:  
+    name: python:3.9-bullseye
+  script:
+    - pip3 install requests
+    - wget https://gitlab.com/dash4ast-community1/support/-/raw/main/client/dash4ast-cli-import-local-report.py
+    - echo ${DASH4AST_CLI_IMPORT_LOCAL_REPORT_SHA256_CHECKSUM}
+    - echo ${DASH4AST_CLI_IMPORT_LOCAL_REPORT_SHA256_CHECKSUM} > sha256-import.tmp
+    #- sha256sum -c sha256-import.tmp
+    - python3 dash4ast-cli-import-local-report.py --host $DASH4AST_ENDPOINT_QA --application dash4ast-connectors --report $CI_PROJECT_DIR/connectors/semgrep-output.json --scan semgrep
+  allow_failure: true
+
 sca-safety-import-dash4ast:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
   stage: integration
   image:
     name: python:3.9-bullseye
