@@ -13,6 +13,7 @@ services:
 
   connectors:
     image: dash4ast/connectors:6.9.4
+    read_only: true
     container_name: connectors
     ports:
       - 5001:5000

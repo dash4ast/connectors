@@ -1,5 +1,6 @@
 import requests
 import sys
+import logging
 
 
 def post_request(url_dash4ast, app_in_sonar, app_in_dash4ast, url_sonarqube, user_sonarqube, pwd_sonarqube):
@@ -24,9 +25,9 @@ if __name__ == "__main__":
         user_tool = sys.argv[10]
         pwd_tool = sys.argv[12]
     else:
-        print(
+        logging.info(
             'Usage: python3 dash4ast-cli-import-sonarqube-report.py --host HOST --application-tool APPLICATION_NAME --application-dash4ast APPLICATION_NAME --url-tool URL --user-tool USER --pwd-tool PWD')
-        print(
+        logging.info(
             'Example: python3 dash4ast-cli-import-sonarqube-report.py --host http://localhost:5000 --application-tool dash4ast-connectors --application-dash4ast connectors --url-tool http://172.17.0.1:9000/ --user-tool xxxx --pwd-tool xxxx')
         sys.exit()
 
