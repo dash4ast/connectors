@@ -1,16 +1,16 @@
 import logging
 import sys
 import traceback
-from xml.etree.ElementTree import ParseError
+from defusedxml.ElementTree import ParseError
 
 from flasgger import swag_from
 from flask import Blueprint, request, abort, jsonify, make_response
 from marshmallow import Schema, fields
 from sqlalchemy.exc import IntegrityError
 
-from connectors.db import UtilDb
-from connectors.db.PostgreDbClient import PostgreDbClient
-from connectors.persistence.Vulnerability import Vulnerability
+from connectors.src.connectors.db import UtilDb
+from connectors.src.connectors.db.PostgreDbClient import PostgreDbClient
+from connectors.src.connectors.persistence.Vulnerability import Vulnerability
 from typing import Dict
 from datetime import datetime
 import hashlib
@@ -110,8 +110,9 @@ def extract():
             'status': 'error',
             'new_vulnerabilities': 0
         })
-
-    now = datetime.now()
+    date_report = root.find('scan-information/scan-date-and-time-iso').text
+    date_report = date_report[0:19]
+    date_report = datetime.strptime(date_report, '%Y-%m-%dT%H:%M:%S')
     new_vulnerabilities = 0
 
     db_session = PostgreDbClient().get_client()
@@ -120,7 +121,7 @@ def extract():
     try:
         for issue_group in root.iter('issue-group'):
             for issue in issue_group:
-                vulnerability = create_vulnerability(issue, dash4ast_application, now)
+                vulnerability = create_vulnerability(issue, dash4ast_application, date_report)
                 UtilDb.add_vulnerability(db_session, vulnerability)
                 new_vulnerabilities = new_vulnerabilities + 1
     except IntegrityError:
@@ -128,7 +129,7 @@ def extract():
     db_session.remove()
 
     # update analysis table
-    analysis = UtilDb.create_analysis(dash4ast_application, 'sast', now)
+    analysis = UtilDb.create_analysis(dash4ast_application, 'sast', date_report)
     UtilDb.add_analysis(db_session, analysis)
 
     logging.info("successfully extraction")
@@ -142,11 +143,14 @@ def extract():
 def test():
     file_name = '../../../test/hclscan-report.xml'
     root = Et.parse(file_name)
-    now = datetime.now()
+    date_report = root.find('scan-information/scan-date-and-time-iso').text
+    date_report = date_report[0:19]
+    date_report = datetime.strptime(date_report, '%Y-%m-%dT%H:%M:%S')
+
     for issue_group in root.iter('issue-group'):
         for issue in issue_group:
             logging.info(issue)
-            print_vulnerability(issue, 'test', now)
+            print_vulnerability(issue, 'test', date_report)
 
 
 def print_vulnerability(issue, application_name, now):

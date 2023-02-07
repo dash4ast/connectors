@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, DateTime, Integer
 
-from connectors.persistence.Base import Base
+from connectors.src.connectors.persistence.Base import Base
 
 
 class Analysis(Base):

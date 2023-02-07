@@ -1,16 +1,16 @@
 import logging
 import sys
 import traceback
-from xml.etree.ElementTree import ParseError
+from defusedxml.ElementTree import ParseError
 
 from flasgger import swag_from
 from flask import Blueprint, request, abort, jsonify, make_response
 from marshmallow import Schema, fields
 from sqlalchemy.exc import IntegrityError
 
-from connectors.db import UtilDb
-from connectors.db.PostgreDbClient import PostgreDbClient
-from connectors.persistence.Vulnerability import Vulnerability
+from connectors.src.connectors.db import UtilDb
+from connectors.src.connectors.db.PostgreDbClient import PostgreDbClient
+from connectors.src.connectors.persistence.Vulnerability import Vulnerability
 from typing import Dict
 from datetime import datetime
 import hashlib

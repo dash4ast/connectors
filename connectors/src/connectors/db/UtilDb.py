@@ -1,5 +1,4 @@
-from connectors.persistence.Analysis import Analysis
-from connectors.persistence.Application import Application
+from connectors.src.connectors.persistence.Analysis import Analysis
 
 
 def create_analysis(application_name, analysis_type, now):
