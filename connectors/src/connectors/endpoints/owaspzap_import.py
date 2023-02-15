@@ -1,7 +1,7 @@
 import logging
 import sys
 import traceback
-from xml.etree.ElementTree import ParseError
+from defusedxml.ElementTree import ParseError
 
 from flasgger import swag_from
 from flask import Blueprint, request, abort, jsonify, make_response
