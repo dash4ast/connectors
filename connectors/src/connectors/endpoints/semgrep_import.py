@@ -96,6 +96,7 @@ def extract():
     parsed_body = _request_body_schema.load(request.get_json())
     dash4ast_application = parsed_body['dash4ast_application']
     report = parsed_body['report']
+    # TODO: Limiting the size of data to be parsed is recommended.
     content = json.loads(report)
     now = datetime.now()
 
