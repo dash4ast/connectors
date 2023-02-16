@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   db:
-    image: dash4ast/db:6.9.4
+    image: dash4ast/db:6.9.5
     security_opt:
       - no-new-privileges:true
     container_name: dash4ast_db
@@ -14,7 +14,7 @@ services:
       - '5433:5432'
 
   connectors:
-    image: dash4ast/connectors:6.9.4
+    image: dash4ast/connectors:6.9.5
     security_opt:
       - no-new-privileges:true
     read_only: true
@@ -31,7 +31,7 @@ services:
       - db
 
   dashboard:
-    image: dash4ast/frontend-shiny:6.9.4
+    image: dash4ast/frontend-shiny:6.9.5
     security_opt:
       - no-new-privileges:true    
     container_name: dashboard
