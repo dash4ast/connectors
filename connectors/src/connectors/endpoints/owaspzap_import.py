@@ -102,6 +102,10 @@ def extract():
         dash4ast_application = parsed_body['dash4ast_application']
         report = parsed_body['report']
         root = Et.fromstring(report)
+        date_report = root.get("generated") #"Fri, 7 Oct 2022 13:39:43"
+        date_report = date_report[5:24]
+        date_report = datetime.strptime(date_report, '%d %M %Y %H:%M:%S')
+
     except ParseError: 
         # printing stack trace
         traceback.print_exception(*sys.exc_info())
@@ -110,7 +114,6 @@ def extract():
             'new_vulnerabilities': 0
         })
 
-    now = datetime.now()
     new_vulnerabilities = 0
 
     db_session = PostgreDbClient().get_client()
@@ -120,7 +123,7 @@ def extract():
     try:
         for issue in root.find('site/alerts'):
             for location in issue.find('instances'):
-                vulnerability = create_vulnerability(issue, location, dash4ast_application, now)
+                vulnerability = create_vulnerability(issue, location, dash4ast_application, date_report)
                 UtilDb.add_vulnerability(db_session, vulnerability)
                 new_vulnerabilities = new_vulnerabilities + 1
     except IntegrityError:
@@ -128,7 +131,7 @@ def extract():
     db_session.remove()
 
     # update analysis table
-    analysis = UtilDb.create_analysis(dash4ast_application, 'dast', now)
+    analysis = UtilDb.create_analysis(dash4ast_application, 'dast', date_report)
     UtilDb.add_analysis(db_session, analysis)
 
     logging.info("successfully extraction")
@@ -142,10 +145,15 @@ def extract():
 def test():
     report = open('../../../test/dast-report.xml', 'r').read()
     my_data = Et.fromstring(report)
-    now = datetime.now()
+    date_report = my_data.get("generated") #"Fri, 7 Oct 2022 13:39:43"
+    print(date_report)
+    date_report = date_report[5:24]
+    print(date_report)
+    date_report = datetime.strptime(date_report, '%d %M %Y %H:%M:%S')
+    print(date_report)
     for issue in my_data.find('site/alerts'):
         for location in issue.find('instances'):
-            print_vulnerability(issue, location, 'test', now)
+            print_vulnerability(issue, location, 'test', date_report)
 
 
 def print_vulnerability(issue, location, application_name, now):
