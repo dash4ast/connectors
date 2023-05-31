@@ -18,7 +18,7 @@ jobs:
       - name: Generate requirements txt
         run: |
           pip3 install pip-tools
-          pip-compile
+          pip-compile -o requirements.txt connectors/requirements.in
       - name: Upload Requirements File as Artifact
         uses: actions/upload-artifact@v3
         with:
