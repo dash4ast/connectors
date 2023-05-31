@@ -99,21 +99,23 @@ def extract():
     dash4ast_application = parsed_body['dash4ast_application']
     report = parsed_body['report']
     content = json.loads(report)
-    now = datetime.now()
+    date_report = content['generated_at'] ## 2022-10-05T10:02:37Z
+    date_report = date_report[0:19]
+    date_report = datetime.strptime(date_report, '%Y-%m-%dT%H:%M:%S')
 
     db_session = PostgreDbClient().get_client()
     db_session()
     db_session.flush()
     try:
         for issue in content['results']:
-            vulnerability = create_vulnerability(issue, dash4ast_application, now)
+            vulnerability = create_vulnerability(issue, dash4ast_application, date_report)
             UtilDb.add_vulnerability(db_session, vulnerability)
     except IntegrityError:
         logging.info(('IntegrityError key: ' + issue['id']))
     db_session.remove()
 
     # update analysis table
-    analysis = UtilDb.create_analysis(dash4ast_application, 'sast', now)
+    analysis = UtilDb.create_analysis(dash4ast_application, 'sast', date_report)
     UtilDb.add_analysis(db_session, analysis)
 
     new_vulnerabilities = len(content['results'])
