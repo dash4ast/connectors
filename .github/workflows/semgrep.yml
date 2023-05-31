@@ -1,23 +1,41 @@
 on:
-  workflow_dispatch: {}
   pull_request: {}
+  workflow_dispatch: {}
   push:
     branches:
     - main
     paths:
     - .github/workflows/semgrep.yml
   schedule:
-  # random HH:MM to avoid a load spike on GitHub Actions at 00:00
-  - cron: 37 11 * * *
+    - cron: '0 1 * * 0'
 name: Semgrep
 jobs:
-  semgrep:
-    name: semgrep/ci
+  my_first_job: 
+    name: requirementsGeneration
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Generate requirements txt
+        run: |
+          pip3 install pip-tools
+          pip-compile
+      - name: Upload Requirements File as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: requirementstxt
+          path: requirements.txt
+  my_second_job:
+    needs: my_first_job
+    name: Scan
     runs-on: ubuntu-20.04
     env:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
     container:
       image: returntocorp/semgrep
     steps:
-    - uses: actions/checkout@v3
-    - run: semgrep ci
+      - uses: actions/checkout@v3
+      - name: Download artifact from previous job
+        uses: actions/download-artifact@v3
+        with:
+          name: requirementstxt
+      - run: semgrep ci --supply-chain
