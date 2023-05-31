@@ -3,7 +3,7 @@ on:
   workflow_dispatch: {}
   push:
     branches:
-    - master
+    - main
     paths:
     - .github/workflows/semgrep.yml
   schedule:
@@ -16,7 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Generate requirements txt
-        run: pip-compile
+        run: |
+          pip3 install pip-tools
+          pip-compile
       - name: Upload Requirements File as Artifact
         uses: actions/upload-artifact@v3
         with:
