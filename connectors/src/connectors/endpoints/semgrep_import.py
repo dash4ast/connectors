@@ -4,6 +4,7 @@ from flask import Blueprint, request, abort, jsonify, make_response
 from marshmallow import Schema, fields
 from sqlalchemy.exc import IntegrityError
 
+from connectors.util import utilities
 from connectors.db import UtilDb
 from connectors.db.PostgreDbClient import PostgreDbClient
 from connectors.persistence.Vulnerability import Vulnerability
@@ -97,6 +98,9 @@ def extract():
     dash4ast_application = parsed_body['dash4ast_application']
     report = parsed_body['report']
     # TODO: Limiting the size of data to be parsed is recommended.
+    if utilities.verify_size(report) == False:
+        logging.info(('Report is too big'))
+        return _auth_invalid_input_response_schema.dump({})
     content = json.loads(report)
     now = datetime.now()
 

@@ -1,5 +1,5 @@
 import logging
-import sqlalchemy
+
 from flasgger import swag_from
 from flask import Blueprint, request, abort, jsonify, make_response
 from marshmallow import Schema, fields
@@ -8,6 +8,7 @@ from sqlalchemy.exc import IntegrityError
 from connectors.db import UtilDb
 from connectors.db.PostgreDbClient import PostgreDbClient
 from connectors.persistence.Vulnerability import Vulnerability
+from connectors.util import utilities
 from typing import Dict
 from datetime import datetime
 import hashlib
@@ -98,7 +99,11 @@ def extract():
     parsed_body = _request_body_schema.load(request.get_json())
     dash4ast_application = parsed_body['dash4ast_application']
     report = parsed_body['report']
+    if utilities.verify_size(report) == False:
+        logging.info(('Report is too big'))
+        return _auth_invalid_input_response_schema.dump({})
     content = json.loads(report)
+    
     now = datetime.now()
 
     db_session = PostgreDbClient().get_client()
