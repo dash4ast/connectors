@@ -9,8 +9,8 @@ dash4ast automatically consolidates, de-duplicates and manages results from comm
 To install dash4ast in your environment, execute next commands:
 
 ```
-git clone https://gitlab.com/dash4ast-community1/support.git
-cd support
+git clone https://github.com/dash4ast/connectors.git
+cd connectors
 sudo docker-compose up -d (or sudo docker compose up -d)
 ```
 To populate with some data, execute the script:
