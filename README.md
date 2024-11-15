@@ -8,11 +8,22 @@ dash4ast automatically consolidates, de-duplicates and manages results from comm
 
 To install dash4ast in your environment, execute next commands:
 
+### Deploy dash4ast with docker-compose
 ```
 git clone https://github.com/dash4ast/connectors.git
 cd connectors
 sudo docker-compose up -d (or sudo docker compose up -d)
 ```
+
+### Deploy dash4ast with Kubernetes
+```
+git clone https://github.com/dash4ast/connectors.git
+cd connectors
+kubectl apply -f kubernetes-deployment.yaml
+minikube tunnel
+```
+
+### Populate demo data
 To populate with some data, execute the script:
 ```
 ./load-demo-data.sh
@@ -29,8 +40,9 @@ Use dash4ast/demo
 
 * Docker -> https://docs.docker.com/engine/install/
 * Docker-compose -> https://docs.docker.com/compose/install/
+* (Optional) A Kubernetes cluster
 * Git
-* Open Ports: 3838, 5001, 5433
+* Open Ports: 3838, 5001, 5432
 
 ## Integration with your security tools in a CI/CD pipeline
 

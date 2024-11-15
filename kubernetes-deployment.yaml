@@ -1,0 +1,166 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - name: db
+        image: dash4ast/db:6.9.5
+        securityContext:
+          allowPrivilegeEscalation: false
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_PASSWORD
+          value: "q1w2e3r4"
+        volumeMounts:
+        - name: postgres-data
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: postgres-data
+        persistentVolumeClaim:
+          claimName: postgres-data-pvc
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-data-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: connectors-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: connectors
+  template:
+    metadata:
+      labels:
+        app: connectors
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - name: connectors
+        image: dash4ast/connectors:6.9.5
+        securityContext:
+          allowPrivilegeEscalation: false
+        ports:
+        - containerPort: 5000
+        env:
+        - name: DASH4AST_DB_HOST
+          value: "db"
+        - name: DASH4AST_DB_PORT
+          value: "5432"
+        - name: DASH4AST_DB_USER
+          value: "root"
+        - name: DASH4AST_DB_PASSWORD
+          value: "q1w2e3r4"
+        - name: DASH4AST_DB
+          value: "dash4ast"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashboard-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dashboard
+  template:
+    metadata:
+      labels:
+        app: dashboard
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - name: dashboard
+        image: dash4ast/frontend-shiny:6.9.5
+        securityContext:
+          allowPrivilegeEscalation: false
+        ports:
+        - containerPort: 3838
+        env:
+        - name: DASH4AST_DB_HOST
+          value: "db"
+        - name: DASH4AST_DB_PORT
+          value: "5432"
+        - name: DASH4AST_DB_USER
+          value: "root"
+        - name: DASH4AST_DB_PASSWORD
+          value: "q1w2e3r4"
+        - name: DASH4AST_DB
+          value: "dash4ast"
+        - name: DASH4AST_HOST_CONNECTORS
+          value: "connectors"
+        - name: DASH4AST_PORT_CONNECTORS
+          value: "5000"
+        volumeMounts:
+        - name: logs-volume
+          mountPath: /var/log/
+      volumes:
+      - name: logs-volume
+        emptyDir: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+spec:
+  selector:
+    app: db
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: connectors
+spec:
+  selector:
+    app: connectors
+  ports:
+    - protocol: TCP
+      port: 5001
+      targetPort: 5000
+  type: LoadBalancer
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dashboard
+spec:
+  selector:
+    app: dashboard
+  ports:
+    - protocol: TCP
+      port: 3838
+      targetPort: 3838
+  type: LoadBalancer
