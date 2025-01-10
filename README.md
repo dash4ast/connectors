@@ -12,7 +12,7 @@ To install dash4ast in your environment, execute next commands:
 ```
 git clone https://github.com/dash4ast/connectors.git
 cd connectors
-sudo docker-compose up -d (or sudo docker compose up -d)
+sudo docker compose up -d
 ```
 
 ### Deploy dash4ast with Kubernetes
